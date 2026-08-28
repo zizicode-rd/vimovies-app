@@ -433,7 +433,8 @@ export default async function ComparisonView({ slug, locale }: { slug: string; l
           <h2 className="section-title" style={{ textAlign: 'center', margin: '50px 0 30px' }}>
             {t(translations, 'comparisons.specsTable', 'Comparativa de especificaciones')}
           </h2>
-          <table className={styles.compareTable}>
+          <div className={styles.tableWrap}>
+            <table className={styles.compareTable}>
             <thead>
               <tr>
                 <th>{t(translations, 'comparisons.spec', 'Especificación')}</th>
@@ -475,6 +476,7 @@ export default async function ComparisonView({ slug, locale }: { slug: string; l
               })}
             </tbody>
           </table>
+          </div>
 
           <div className={styles.bottomSection}>
             <div className={styles.insightCard}>

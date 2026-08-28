@@ -111,7 +111,7 @@ export default async function Hero({ locale }: { locale: 'es' | 'en' }) {
             <span className="eyebrow">{t(translations, 'hero.eyebrow')}</span>
             <h1 className={styles.title}>
               {t(translations, 'hero.titleStart')}{' '}
-              <em className={styles.emphasis}>{t(translations, 'hero.titleEmphasis')}</em>{' '}
+              <em className={styles.emphasis}>{t(translations, 'hero.titleEmphasis')}</em>
               {t(translations, 'hero.titleEnd')}
             </h1>
             <p className={styles.lead}>{t(translations, 'hero.lead')}</p>

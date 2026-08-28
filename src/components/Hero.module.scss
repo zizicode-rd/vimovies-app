@@ -26,8 +26,8 @@
 
 .grid {
   display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
-  gap: 60px;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
   align-items: center;
   position: relative;
   z-index: 1;
@@ -39,11 +39,14 @@
 
 .title {
   font-family: var(--font-display);
-  font-size: 54px;
+  font-size: clamp(2rem, 5vw, 3.375rem);
   font-weight: 700;
-  line-height: 1.05;
+  line-height: 1.08;
   margin: 0 0 22px;
   letter-spacing: -0.02em;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .emphasis {
@@ -53,10 +56,12 @@
 
 .lead {
   color: rgba(255, 255, 255, 0.62);
-  font-size: 17px;
+  font-size: clamp(0.9375rem, 2.2vw, 1.0625rem);
   line-height: 1.65;
   max-width: 460px;
   margin: 0 0 28px;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .search {
@@ -244,7 +249,6 @@
   }
 
   .title {
-    font-size: 40px;
     max-width: 520px;
   }
 
@@ -291,12 +295,12 @@
     padding: 52px 0 52px;
   }
 
-  .title {
-    font-size: 32px;
+  .title,
+  .lead {
+    max-width: 100%;
   }
 
   .lead {
-    font-size: 15.5px;
     margin-bottom: 24px;
   }
 
@@ -344,5 +348,24 @@
 
   .panelSpecs {
     justify-content: center;
+  }
+}
+
+@media (max-width: 380px) {
+  .title {
+    line-height: 1.1;
+  }
+
+  .search {
+    padding: 6px 6px 6px 12px;
+  }
+
+  .chips {
+    gap: 7px;
+  }
+
+  .chips a {
+    padding: 6px 10px;
+    font-size: 11px;
   }
 }

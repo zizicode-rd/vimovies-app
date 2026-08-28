@@ -38,6 +38,11 @@ export const metadata: Metadata = {
     description: "Comparador de monitores con especificaciones verificadas y puntuaciones reales por uso. Encuentra el mejor monitor para gaming, oficina o edición.",
     images: ["/twitter-image.png"],
   },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "Vimovies",
+  },
   robots: { index: true, follow: true },
   alternates: {
     canonical: "https://vimovies.com",
@@ -48,6 +53,15 @@ export const metadata: Metadata = {
     },
   },
 };
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+};
+
+export const themeColor = "#000000";
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (

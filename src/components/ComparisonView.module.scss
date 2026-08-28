@@ -350,8 +350,16 @@
   font-family: var(--font-mono);
 }
 
+.tableWrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: var(--radius-m);
+}
+
 .compareTable {
   width: 100%;
+  min-width: 560px;
   border-collapse: collapse;
 }
 
