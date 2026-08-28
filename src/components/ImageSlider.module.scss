@@ -39,10 +39,12 @@
   gap: 0.75rem;
   width: 100%;
   max-width: 100%;
+  min-width: 0;
   overflow-x: auto;
+  scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  padding: 0.25rem 1.25rem 0.25rem 0;
+  padding: 0.25rem 0;
   box-sizing: border-box;
 }
 
@@ -62,6 +64,7 @@
   cursor: pointer;
   box-sizing: border-box;
   transition: all .15s var(--ease);
+  scroll-snap-align: start;
 }
 
 .thumb img {
