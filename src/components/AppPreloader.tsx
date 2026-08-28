@@ -40,7 +40,7 @@ export default function AppPreloader() {
   return (
     <div className={`${styles.overlay} ${ready ? styles.fadeOut : ''}`} aria-busy="true" aria-live="polite">
       <div className={styles.inner}>
-        <div className={styles.brand}>Vimovies</div>
+        <div className={styles.brand} translate="no">Vimovies</div>
         <div className={styles.spinner} aria-hidden="true" />
       </div>
     </div>

@@ -86,7 +86,7 @@ export default function HeaderClient({
           </div>
 
           <div className={styles.main}>
-            <Link href={`${base}/`} className={styles.logo}>
+            <Link href={`${base}/`} className={styles.logo} translate="no">
               {translations.brand ?? 'vimovies'}
             </Link>
 
@@ -138,7 +138,7 @@ export default function HeaderClient({
       <div className={`${styles.drawer} ${menuOpen ? styles.drawerOpen : ''}`} aria-hidden={!menuOpen}>
         <div className={styles.drawerInner}>
           <div className={styles.drawerHead}>
-            <Link href={`${base}/`} className={styles.logo} onClick={() => setMenuOpen(false)}>
+            <Link href={`${base}/`} className={styles.logo} onClick={() => setMenuOpen(false)} translate="no">
               {translations.brand ?? 'vimovies'}
             </Link>
             <button className={styles.drawerClose} onClick={() => setMenuOpen(false)} aria-label="Close">&times;</button>
