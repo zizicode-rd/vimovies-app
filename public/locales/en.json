@@ -1,7 +1,7 @@
 {
   "brand": "vimovies",
   "topBar": {
-    "text": "{monitors} monitors analyzed · {comparisons} comparisons · verified data every week",
+    "text": "{monitors} monitors · {comparisons} comparisons · Verified data",
     "cta": "View catalog"
   },
   "nav": {
@@ -10,6 +10,15 @@
     "comparisons": "Comparisons",
     "blog": "Blog",
     "compare": "Compare"
+  },
+  "metadata": {
+    "title": "Monitor Comparison & Tech Specs | Vimovies",
+    "description": "Compare real specs, benchmarks, and find the best monitor for gaming, office, or editing.",
+    "og_title": "The Ultimate Monitor Comparison Tool | Vimovies",
+    "og_description": "Real technical specs, side-by-side VS comparisons, and unbiased monitor data."
+  },
+  "home": {
+    "brand_tagline": "Real data, no marketing fluff."
   },
   "footer": {
     "tagline": "Monitor comparisons with verified specs and real usage scores, so you choose with criteria instead of marketing.",
@@ -20,7 +29,7 @@
     "titleStart": "Choose your monitor with",
     "titleEmphasis": "data",
     "titleEnd": ", not marketing.",
-    "lead": "Verified tech specs, usage-profile scores and head-to-head comparisons — so you pick the right monitor the first time.",
+    "lead": "Verified tech specs, performance tests and VS comparisons to find the right monitor without wasting time.",
     "searchPlaceholder": "Ex. LG UltraGear, 27 inches, 165Hz…",
     "searchCta": "Search",
     "chips": [
@@ -34,7 +43,7 @@
     ],
     "statMonitors": "Monitors in database",
     "statVerified": "Specs verified this month",
-    "statComparisons": "Head-to-head comparisons",
+    "statComparisons": "VS comparisons",
     "calibrated": "Calibrated",
     "meters": {
       "gaming": "Gaming",
@@ -51,7 +60,7 @@
     "empty": "No featured monitors found"
   },
   "comparisons": {
-    "eyebrow": "Head-to-head",
+    "eyebrow": "VS comparisons",
     "title": "Popular comparisons",
     "seeAll": "See all",
     "empty": "No comparisons available",
@@ -69,7 +78,7 @@
     "aiSummary": "Comparative analysis",
     "noSummary": "No summary available.",
     "technical": "TECHNICAL & INSIGHTS",
-    "recommendationTitle": "Which one should you buy?",
+    "recommendationTitle": "Which one to choose?",
     "bestOverall": "Best overall choice",
     "forGaming": "For competitive / esports",
     "forEditing": "For content creation / editing",
@@ -83,7 +92,7 @@
     "same": "You cannot compare the same monitor.",
     "seeCompare": "See comparison",
     "verdict": "Verdict",
-    "heroTitle": "Head-to-head monitor comparison",
+    "heroTitle": "VS monitor comparison tool",
     "heroLead": "Select two models and compare their specs, performance and final verdict.",
     "latestPopular": "Recent and popular comparisons",
     "seeFull": "See full comparison →",
@@ -125,7 +134,7 @@
       "data": {
         "label": "DATA",
         "title": "Verified specs",
-        "text": "Every sheet is cross-checked against the manufacturer's official specs before publishing."
+        "text": "Specs validated directly against the manufacturer's official data."
       },
       "fair": {
         "label": "UNBIASED",

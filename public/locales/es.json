@@ -1,7 +1,7 @@
 {
   "brand": "vimovies",
   "topBar": {
-    "text": "{monitors} monitores analizados · {comparisons} comparativas · datos verificados cada semana",
+    "text": "{monitors} monitores · {comparisons} comparativas · Datos verificados",
     "cta": "Ver catálogo"
   },
   "nav": {
@@ -10,6 +10,15 @@
     "comparisons": "Comparativas",
     "blog": "Blog",
     "compare": "Comparar"
+  },
+  "metadata": {
+    "title": "Comparador de Monitores y Fichas Técnicas | Vimovies",
+    "description": "Compara specs reales, test de rendimiento y encuentra el mejor monitor para gaming, trabajo o edición.",
+    "og_title": "El Comparador de Monitores Definitivo | Vimovies",
+    "og_description": "Análisis técnico, comparativas VS y especificaciones verificadas en un solo lugar."
+  },
+  "home": {
+    "brand_tagline": "Datos reales, sin marketing."
   },
   "footer": {
     "tagline": "Comparamos monitores con especificaciones verificadas y puntuaciones reales por uso, para que elijas con criterio y no con marketing.",
@@ -20,7 +29,7 @@
     "titleStart": "Elige tu monitor con",
     "titleEmphasis": "datos",
     "titleEnd": ", no con marketing.",
-    "lead": "Fichas técnicas verificadas, puntuaciones por perfil de uso y comparativas cara a cara — para elegir el monitor correcto a la primera.",
+    "lead": "Fichas técnicas, tests de rendimiento y comparativas VS para elegir el monitor correcto sin perder tiempo.",
     "searchPlaceholder": "Ej. LG UltraGear, 27 pulgadas, 165Hz…",
     "searchCta": "Buscar",
     "chips": [
@@ -34,7 +43,7 @@
     ],
     "statMonitors": "Monitores en base de datos",
     "statVerified": "Fichas verificadas este mes",
-    "statComparisons": "Comparativas cara a cara",
+    "statComparisons": "Comparativas VS",
     "calibrated": "Calibrado",
     "meters": {
       "gaming": "Gaming",
@@ -51,7 +60,7 @@
     "empty": "No se encontraron monitores destacados"
   },
   "comparisons": {
-    "eyebrow": "Cara a cara",
+    "eyebrow": "Comparativas VS",
     "title": "Comparativas populares",
     "seeAll": "Ver todas",
     "empty": "No hay comparativas disponibles",
@@ -69,7 +78,7 @@
     "aiSummary": "Análisis comparativo",
     "noSummary": "No hay resumen disponible.",
     "technical": "TÉCNICO & INSIGHTS",
-    "recommendationTitle": "¿Cuál deberías comprar?",
+    "recommendationTitle": "¿Cuál elegir?",
     "bestOverall": "Mejor elección global",
     "forGaming": "Para competitivo / esports",
     "forEditing": "Para creación de contenido / edición",
@@ -83,7 +92,7 @@
     "same": "No puedes comparar el mismo monitor.",
     "seeCompare": "Ver comparativa",
     "verdict": "Veredicto",
-    "heroTitle": "Comparador cara a cara de monitores",
+    "heroTitle": "Comparador de monitores VS",
     "heroLead": "Selecciona dos modelos y compara sus especificaciones, rendimiento y veredicto final.",
     "latestPopular": "Comparativas recientes y populares",
     "seeFull": "Ver comparativa completa →",
@@ -125,7 +134,7 @@
       "data": {
         "label": "DATOS",
         "title": "Specs verificadas",
-        "text": "Cada ficha se contrasta contra la hoja técnica oficial del fabricante antes de publicarse."
+        "text": "Fichas validadas directamente con las especificaciones del fabricante."
       },
       "fair": {
         "label": "IMPARCIAL",
