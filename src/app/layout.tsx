@@ -25,16 +25,6 @@ export const metadata: Metadata = {
   title: "Vimovies — Elige monitor con datos, no con marketing",
   description: "Comparador de monitores con especificaciones verificadas y puntuaciones reales por uso. Encuentra el mejor monitor para gaming, oficina o edición.",
   metadataBase: new URL("https://vimovies.com"),
-  icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "32x32", type: "image/x-icon" },
-      { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/favicon-96x96.png", sizes: "96x96", type: "image/png" },
-      { url: "/favicon-192x192.png", sizes: "192x192", type: "image/png" },
-    ],
-    shortcut: { url: "/favicon.ico", type: "image/x-icon" },
-    apple: "/apple-touch-icon.png",
-  },
   openGraph: {
     type: "website",
     siteName: "Vimovies",
