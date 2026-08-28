@@ -33,18 +33,66 @@
   pointer-events: none;
 }
 
+.wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--color-line);
+  background: #fff;
+  color: var(--color-ink);
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.nav:hover {
+  color: var(--color-red);
+  border-color: var(--color-red);
+}
+
+.navLeft {
+  left: 0;
+}
+
+.navRight {
+  right: 0;
+}
+
 .inner {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   gap: 24px;
+  width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  padding: 0 48px;
+}
+
+.inner::-webkit-scrollbar {
+  display: none;
 }
 
 .brand {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex: 1;
+  flex: none;
   padding: 10px 18px;
   color: var(--color-gray-500);
   font-family: var(--font-display);
@@ -80,6 +128,7 @@
 .label {
   position: relative;
   z-index: 1;
+  white-space: nowrap;
 }
 
 @media (max-width: #{vars.$bp-xl}) {
@@ -101,7 +150,6 @@
   }
 
   .brand {
-    flex: none;
     scroll-snap-align: start;
     font-size: 20px;
     padding: 28px 22px;
@@ -110,6 +158,10 @@
   .brandStrip::before,
   .brandStrip::after {
     width: 60px;
+  }
+
+  .nav {
+    display: none;
   }
 }
 

@@ -29,7 +29,7 @@ export default async function Footer({ locale = 'es' }: { locale?: 'es' | 'en' }
       <div className="container">
         <div className={styles.grid}>
           <div className={styles.brand}>
-            <div className={styles.logo}>{t(translations, 'brand')}</div>
+            <div className={styles.logo} translate="no">{t(translations, 'brand')}</div>
             <p className={styles.tagline}>{t(translations, 'footer.tagline')}</p>
           </div>
 
@@ -68,7 +68,7 @@ export default async function Footer({ locale = 'es' }: { locale?: 'es' | 'en' }
         </div>
 
         <div className={styles.bottom}>
-          <span>© {thisYear} {t(translations, 'brand')}. {t(translations, 'footer.rights', 'All rights reserved.')}</span>
+          <span>© {thisYear} <span translate="no">{t(translations, 'brand')}</span>. {t(translations, 'footer.rights', 'All rights reserved.')}</span>
           <div className={styles.langSwitch}>
             <Link href="/es" className={`${styles.langLink} ${locale === 'es' ? styles.langActive : ''}`}>
               {t(translations, 'i18n.lang.es', 'ES')}

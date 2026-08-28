@@ -1,5 +1,4 @@
-import Link from 'next/link';
-import styles from './BrandStrip.module.scss';
+import BrandStripClient from './BrandStripClient';
 import { apiFetch } from '@/lib/api';
 import { pickI18n } from '@/lib/i18n-utils';
 import type { BrandPublic, PaginatedResponse } from '@/types/api';
@@ -38,22 +37,5 @@ export default async function BrandStrip({ locale }: { locale: 'es' | 'en' }) {
     console.error('BrandStrip fetch failed:', err);
   }
 
-  return (
-    <section className={styles.brandStrip}>
-      <div className="container">
-        <div className={styles.inner}>
-          {brands.map((brand, i) => (
-            <Link
-              key={brand.slug}
-              href={`${base}/monitores?brand=${brand.slug}`}
-              className={styles.brand}
-              style={{ '--i': i } as React.CSSProperties}
-            >
-              <span className={styles.label}>{brand.label}</span>
-            </Link>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
+  return <BrandStripClient brands={brands} base={base} />;
 }
