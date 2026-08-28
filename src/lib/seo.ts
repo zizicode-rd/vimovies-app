@@ -25,8 +25,7 @@ export function buildMetadata({
   const site = locale === 'en' ? 'Vimovies' : 'Vimovies';
   const fullTitle = title.toLowerCase().includes(site.toLowerCase()) ? title : `${title} — ${site}`;
   const canonical = `${baseUrl}${path}`;
-  const ogImage = image ?? `${baseUrl}/og.png`;
-  const hasImage = !!image;
+  const ogImage = image ?? `${baseUrl}/opengraph-image.png`;
 
   const alternates: Metadata['alternates'] = {
     canonical,
@@ -44,14 +43,14 @@ export function buildMetadata({
     siteName,
     title: fullTitle,
     description,
-    images: hasImage ? [{ url: ogImage, width: 1200, height: 630, alt: title }] : undefined,
+    images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
   };
 
   const twitter: Metadata['twitter'] = {
     card: 'summary_large_image',
     title: fullTitle,
     description,
-    images: hasImage ? [ogImage] : undefined,
+    images: [ogImage],
   };
 
   return {
