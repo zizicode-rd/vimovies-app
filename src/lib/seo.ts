@@ -8,6 +8,8 @@ export type SeoPage = {
   path: string;
   title: string;
   description: string;
+  ogTitle?: string;
+  ogDescription?: string;
   image?: string;
   type?: 'website' | 'article';
   noIndex?: boolean;
@@ -18,6 +20,8 @@ export function buildMetadata({
   path,
   title,
   description,
+  ogTitle,
+  ogDescription,
   image,
   type = 'website',
   noIndex,
@@ -41,15 +45,15 @@ export function buildMetadata({
     locale: locale === 'en' ? 'en_US' : 'es_ES',
     url: canonical,
     siteName,
-    title: fullTitle,
-    description,
+    title: ogTitle ?? fullTitle,
+    description: ogDescription ?? description,
     images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
   };
 
   const twitter: Metadata['twitter'] = {
     card: 'summary_large_image',
-    title: fullTitle,
-    description,
+    title: ogTitle ?? fullTitle,
+    description: ogDescription ?? description,
     images: [ogImage],
   };
 

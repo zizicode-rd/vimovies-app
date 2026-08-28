@@ -9,14 +9,20 @@ import PopularComparisons from '@/components/PopularComparisons';
 import LatestGuides from '@/components/LatestGuides';
 import WhyTrust from '@/components/WhyTrust';
 import { buildMetadata, jsonLdBreadcrumb } from '@/lib/seo';
+import { getTranslations, t } from '@/lib/i18n';
 
-export const metadata: Metadata = buildMetadata({
-  locale: 'es',
-  path: '/es',
-  title: 'Elige tu monitor ideal con datos reales y comparativas verificadas',
-  description: 'Comparador de monitores con especificaciones técnicas verificadas y puntuaciones reales por uso. Encuentra el mejor monitor gaming, oficina o edición en Vimovies.',
-  type: 'website',
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const translations = await getTranslations('es');
+  return buildMetadata({
+    locale: 'es',
+    path: '/es',
+    title: t(translations, 'metadata.title'),
+    description: t(translations, 'metadata.description'),
+    ogTitle: t(translations, 'metadata.og_title'),
+    ogDescription: t(translations, 'metadata.og_description'),
+    type: 'website',
+  });
+}
 
 export default function HomeES() {
   const breadcrumb = jsonLdBreadcrumb([{ name: 'Inicio', url: 'https://vimovies.com/es' }]);

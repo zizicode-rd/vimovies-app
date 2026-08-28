@@ -9,14 +9,20 @@ import PopularComparisons from '@/components/PopularComparisons';
 import LatestGuides from '@/components/LatestGuides';
 import WhyTrust from '@/components/WhyTrust';
 import { buildMetadata, jsonLdBreadcrumb } from '@/lib/seo';
+import { getTranslations, t } from '@/lib/i18n';
 
-export const metadata: Metadata = buildMetadata({
-  locale: 'en',
-  path: '/en',
-  title: 'Find the best monitor with verified data and comparisons',
-  description: 'Monitor comparison with verified technical specs and real usage scores. Find the best gaming, office or content creation monitor with Vimovies.',
-  type: 'website',
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const translations = await getTranslations('en');
+  return buildMetadata({
+    locale: 'en',
+    path: '/en',
+    title: t(translations, 'metadata.title'),
+    description: t(translations, 'metadata.description'),
+    ogTitle: t(translations, 'metadata.og_title'),
+    ogDescription: t(translations, 'metadata.og_description'),
+    type: 'website',
+  });
+}
 
 export default function HomeEN() {
   const breadcrumb = jsonLdBreadcrumb([{ name: 'Home', url: 'https://vimovies.com/en' }]);
