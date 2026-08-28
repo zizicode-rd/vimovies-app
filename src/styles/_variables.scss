@@ -1,0 +1,87 @@
+// Vimovies design tokens (replicado y reorganizado a partir de docs/example.html)
+// Uso: importar _variables.scss al inicio de tu globals.scss o componentes SCSS
+
+// Colors
+$white: #ffffff;
+$black: #0a0a0b;
+$ink: #111113;
+$paper: #f4f4f6;
+$line: #e3e3e7;
+$line-strong: #c9c9d0;
+$gray-500: #8c8c94;
+$gray-700: #54545c;
+
+$red: #ff2f37;
+$red-deep: #c8121f;
+$red-tint: #fff0ef;
+$red-line: #ffc7c5;
+
+// Fonts (these are font-family stacks; fonts must be loaded in app/layout or index)
+$font-display: 'Space Grotesk', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$font-body: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Segoe UI Mono", monospace;
+
+// Radii
+$radius-s: 6px;
+$radius-m: 12px;
+$radius-l: 22px;
+
+// Easing
+$ease: cubic-bezier(.16,.8,.24,1);
+
+// Shadows
+$shadow-s: 0 2px 6px -3px rgba(10,10,11,.12);
+$shadow-m: 0 14px 30px -18px rgba(10,10,11,.28);
+$shadow-l: 0 28px 60px -24px rgba(10,10,11,.38);
+$shadow-red: 0 14px 30px -14px rgba(255,47,55,.35);
+
+// Breakpoints (mobile-first)
+$bp-xs: 360px; // very small
+$bp-sm: 520px; // small (hero stat changes)
+$bp-md: 640px; // tablets / small desktops
+$bp-lg: 820px;
+$bp-xl: 980px; // main nav collapse
+$bp-2xl: 1240px; // container max width
+
+// Container
+$container-max: 1240px;
+$container-padding: 32px;
+
+// Utility
+$focus-ring-color: $red;
+
+// Export a map for programmatic access if needed
+$vimovies-tokens: (
+  colors: (
+    white: $white,
+    black: $black,
+    ink: $ink,
+    paper: $paper,
+    line: $line,
+    'line-strong': $line-strong,
+    'gray-500': $gray-500,
+    'gray-700': $gray-700,
+    red: $red,
+    'red-deep': $red-deep,
+    'red-tint': $red-tint,
+    'red-line': $red-line
+  ),
+  radii: (
+    s: $radius-s,
+    m: $radius-m,
+    l: $radius-l
+  ),
+  fonts: (
+    display: $font-display,
+    body: $font-body,
+    mono: $font-mono
+  ),
+  breakpoints: (
+    xs: $bp-xs,
+    sm: $bp-sm,
+    md: $bp-md,
+    lg: $bp-lg,
+    xl: $bp-xl,
+    '2xl': $bp-2xl
+  )
+);

@@ -1,0 +1,53 @@
+@use "sass:map";
+@use "./_variables.scss" as *;
+
+// Mixins y helpers responsivos
+
+// Mixin para media queries mobile-first
+@mixin up($bp) {
+  // obtener el mapa de breakpoints una vez
+  $bps: map.get($vimovies-tokens, breakpoints);
+
+  @if $bp == xs {
+    @media (min-width: #{map.get($bps, xs)}) { @content; }
+  } @else if $bp == sm {
+    @media (min-width: #{map.get($bps, sm)}) { @content; }
+  } @else if $bp == md {
+    @media (min-width: #{map.get($bps, md)}) { @content; }
+  } @else if $bp == lg {
+    @media (min-width: #{map.get($bps, lg)}) { @content; }
+  } @else if $bp == xl {
+    @media (min-width: #{map.get($bps, xl)}) { @content; }
+  } @else if $bp == 2xl {
+    // clave con número, usar string-safe
+    @media (min-width: #{map.get($bps, '2xl')}) { @content; }
+  }
+}
+
+// Mixin para container con padding responsivo
+@mixin container() {
+  max-width: $container-max;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: $container-padding;
+  padding-right: $container-padding;
+
+  @include up(md) {
+    padding-left: 28px;
+    padding-right: 28px;
+  }
+
+  @include up(2xl) {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+// Helper para visually-hidden (accesibilidad)
+%visually-hidden {
+  position: absolute !important;
+  height: 1px; width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap; /* added line */
+}

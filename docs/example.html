@@ -1,0 +1,1615 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vimovies — Mockup de diseño</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+/* =========================================================
+   VIMOVIES — DESIGN TOKENS
+   Concepto: la interfaz de calibración de un monitor.
+   Blanco/negro brillantes, tipografía técnica, y un rojo
+   señal usado como el punto en la mira: solo donde importa.
+   ========================================================= */
+:root{
+  --white:#ffffff;
+  --black:#0a0a0b;
+  --ink:#111113;
+  --paper:#f4f4f6;
+  --line:#e3e3e7;
+  --line-strong:#c9c9d0;
+  --gray-500:#8c8c94;
+  --gray-700:#54545c;
+
+  --red:#ff2f37;
+  --red-deep:#c8121f;
+  --red-tint:#fff0ef;
+  --red-line:#ffc7c5;
+
+  --font-display:'Space Grotesk', sans-serif;
+  --font-body:'Inter', sans-serif;
+  --font-mono:'JetBrains Mono', monospace;
+
+  --radius-s:6px;
+  --radius-m:12px;
+  --radius-l:22px;
+  --ease:cubic-bezier(.16,.8,.24,1);
+
+  --shadow-s:0 2px 6px -3px rgba(10,10,11,.12);
+  --shadow-m:0 14px 30px -18px rgba(10,10,11,.28);
+  --shadow-l:0 28px 60px -24px rgba(10,10,11,.38);
+  --shadow-red:0 14px 30px -14px rgba(255,47,55,.35);
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--white);
+  color:var(--ink);
+  font-family:var(--font-body);
+  -webkit-font-smoothing:antialiased;
+  font-size:15px;
+  line-height:1.55;
+}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+ul{margin:0;padding:0;list-style:none;}
+h1,h2,h3,h4{font-family:var(--font-display);margin:0;letter-spacing:-.01em;}
+p{margin:0;}
+button{font-family:inherit;cursor:pointer;}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px;}
+.mono{font-family:var(--font-mono);}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important;transition:none !important;}
+}
+
+.wrap{max-width:1240px;margin:0 auto;padding:0 32px;}
+@media (max-width:720px){.wrap{padding:0 20px;}}
+
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--font-mono);
+  font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--red);font-weight:600;
+}
+.eyebrow::before{content:"";width:7px;height:7px;background:var(--red);border-radius:1px;transform:rotate(45deg);}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:13px 22px;border-radius:999px;font-weight:600;font-size:14.5px;
+  border:1.5px solid transparent;transition:transform .18s var(--ease),background .18s,border-color .18s,color .18s;
+  white-space:nowrap;
+}
+.btn:active{transform:scale(.97);}
+.btn-red{background:var(--red);color:var(--white);}
+.btn-red:hover{background:var(--red-deep);}
+.btn-black{background:var(--black);color:var(--white);}
+.btn-black:hover{background:#000;}
+.btn-outline-w{border-color:rgba(255,255,255,.35);color:var(--white);}
+.btn-outline-w:hover{border-color:#fff;background:rgba(255,255,255,.08);}
+.btn-outline-k{border-color:var(--line-strong);color:var(--ink);}
+.btn-outline-k:hover{border-color:var(--black);}
+.btn-ghost{color:var(--ink);padding:13px 6px;}
+.btn-sm{padding:9px 16px;font-size:13px;}
+
+/* ---------- OSD bracket motif (signature element) ----------
+   Referencia directa al reticulo de calibracion de un monitor:
+   se usa para "enfocar" la pieza de informacion mas importante
+   de cada bloque (score, imagen principal, veredicto). */
+.bracket{position:relative;}
+.bracket::before,.bracket::after{
+  content:"";position:absolute;width:16px;height:16px;
+  border:2px solid var(--red);pointer-events:none;
+}
+.bracket::before{top:-1px;left:-1px;border-right:0;border-bottom:0;}
+.bracket::after{bottom:-1px;right:-1px;border-left:0;border-top:0;}
+.bracket.on-dark::before,.bracket.on-dark::after{border-color:#ff5f64;}
+
+/* ---------- chips ---------- */
+.chip{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:6px 12px;border-radius:999px;
+  background:var(--paper);border:1px solid var(--line);
+  font-family:var(--font-mono);font-size:12.5px;font-weight:500;color:var(--gray-700);
+}
+.chip b{color:var(--ink);font-weight:700;}
+.chip.chip-red{background:var(--red-tint);border-color:var(--red-line);color:var(--red-deep);}
+
+.tag{
+  display:inline-block;padding:5px 10px;border-radius:999px;
+  font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  border:1px solid currentColor;
+}
+.tag-guide{color:#1d6fd6;}
+.tag-review{color:var(--red-deep);}
+.tag-news{color:#0f8f5f;}
+.tag-faq{color:#8a5cf6;}
+
+/* ---------- OSD score meter ---------- */
+.meter{
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+}
+.meter .ring{
+  width:92px;height:92px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;position:relative;
+}
+.meter .ring::before{
+  content:"";position:absolute;inset:0;border-radius:50%;
+  background:conic-gradient(var(--red) calc(var(--pct) * 1%), var(--line) 0);
+  -webkit-mask:radial-gradient(farthest-side, transparent calc(100% - 9px), #000 calc(100% - 8px));
+          mask:radial-gradient(farthest-side, transparent calc(100% - 9px), #000 calc(100% - 8px));
+}
+.meter .ring span{font-family:var(--font-mono);font-weight:700;font-size:19px;z-index:1;}
+.meter .lbl{font-size:12px;color:var(--gray-700);font-weight:600;text-transform:uppercase;letter-spacing:.05em;}
+.meter.on-dark .ring::before{background:conic-gradient(var(--red) calc(var(--pct) * 1%), rgba(255,255,255,.14) 0);}
+.meter.on-dark .lbl{color:rgba(255,255,255,.6);}
+.meter.on-dark .ring span{color:#fff;}
+.meter.win .ring span{color:var(--red);}
+.meter.win .lbl{color:var(--red-deep);}
+
+/* ---------- scanline atmosphere for dark sections ---------- */
+.scanlines{position:relative;overflow:hidden;}
+.scanlines::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(to bottom, rgba(255,255,255,.035) 0px, rgba(255,255,255,.035) 1px, transparent 1px, transparent 3px);
+  mix-blend-mode:overlay;
+}
+
+/* =========================================================
+   PROTOTYPE SWITCHER (herramienta del mockup, no es del sitio)
+   ========================================================= */
+.proto-bar{
+  position:sticky;top:0;z-index:999;
+  background:var(--black);color:#fff;
+  padding:10px 18px;display:flex;align-items:center;gap:14px;
+  overflow-x:auto;
+}
+.proto-bar .proto-label{
+  font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,255,255,.45);flex:none;padding-right:4px;border-right:1px solid rgba(255,255,255,.15);margin-right:4px;
+}
+.proto-bar button{
+  flex:none;background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.75);
+  padding:7px 14px;border-radius:999px;font-size:12.5px;font-weight:600;font-family:var(--font-body);
+  transition:all .15s;
+}
+.proto-bar button:hover{border-color:rgba(255,255,255,.5);color:#fff;}
+.proto-bar button.active{background:var(--red);border-color:var(--red);color:#fff;}
+
+.screen{display:none;}
+.screen.active{display:block;animation:fade .35s var(--ease);}
+@keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+/* =========================================================
+   SITE HEADER / FOOTER (reutilizados en cada screen)
+   ========================================================= */
+.site-header{
+  position:sticky;top:41px;z-index:90;background:rgba(255,255,255,.9);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.site-header .bar{display:flex;align-items:center;gap:32px;height:74px;}
+.logo{display:flex;align-items:center;gap:9px;font-family:var(--font-display);font-weight:700;font-size:20px;flex:none;}
+.logo .dot{width:10px;height:10px;background:var(--red);border-radius:2px;transform:rotate(45deg);}
+.main-nav{display:flex;gap:26px;flex:1;}
+.main-nav a{font-size:14px;font-weight:600;color:var(--gray-700);padding:6px 0;position:relative;}
+.main-nav a:hover,.main-nav a.current{color:var(--ink);}
+.main-nav a.current::after{content:"";position:absolute;left:0;right:0;bottom:-27px;height:2px;background:var(--red);}
+.header-actions{display:flex;align-items:center;gap:14px;flex:none;}
+.search-pill{
+  display:flex;align-items:center;gap:8px;background:var(--paper);border:1px solid var(--line);
+  border-radius:999px;padding:9px 14px;font-size:13px;color:var(--gray-500);min-width:190px;
+}
+.lang-pill{font-family:var(--font-mono);font-size:12px;font-weight:700;border:1px solid var(--line-strong);border-radius:999px;padding:6px 10px;}
+.burger{display:none;}
+@media (max-width:980px){
+  .main-nav{display:none;}
+  .search-pill{display:none;}
+  .burger{display:flex;width:38px;height:38px;border:1px solid var(--line-strong);border-radius:8px;align-items:center;justify-content:center;}
+}
+
+.site-footer{background:var(--black);color:#fff;padding:64px 0 26px;}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1.2fr;gap:36px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.12);}
+.footer-grid h5{font-size:12px;text-transform:uppercase;letter-spacing:.09em;color:rgba(255,255,255,.45);margin-bottom:16px;font-family:var(--font-mono);font-weight:600;}
+.footer-grid li{margin-bottom:10px;}
+.footer-grid a{font-size:14px;color:rgba(255,255,255,.8);}
+.footer-grid a:hover{color:var(--red);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:22px;font-size:12.5px;color:rgba(255,255,255,.4);flex-wrap:wrap;gap:12px;}
+.footer-newsletter input{
+  width:100%;padding:12px 14px;border-radius:8px;border:1px solid rgba(255,255,255,.2);
+  background:rgba(255,255,255,.06);color:#fff;font-size:13.5px;margin-bottom:10px;
+}
+.footer-newsletter input::placeholder{color:rgba(255,255,255,.4);}
+@media (max-width:900px){.footer-grid{grid-template-columns:1fr 1fr;}}
+
+.section{padding:76px 0;}
+.section-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:36px;gap:20px;flex-wrap:wrap;}
+.section-head h2{font-size:30px;}
+.section-sub{color:var(--gray-700);font-size:15px;max-width:520px;margin-top:8px;}
+.see-all{font-weight:700;font-size:13.5px;display:inline-flex;align-items:center;gap:6px;}
+.see-all:hover{color:var(--red);}
+
+.card{
+  background:var(--white);border:1px solid var(--line);border-radius:var(--radius-m);
+  overflow:hidden;transition:border-color .2s var(--ease),transform .2s var(--ease),box-shadow .2s var(--ease);
+}
+.card:hover{border-color:var(--line-strong);transform:translateY(-4px);box-shadow:var(--shadow-l);}
+
+/* ---------- signature illustration: "calibration frame" placeholder ----------
+   Sustituye las cajas planas "Foto" por una retícula de calibración con un
+   monitor en silueta — la misma gramática visual del bracket/OSD, aplicada
+   a cada imagen de producto o portada ausente. Se activa sola vía .ph. */
+.ph{
+  position:relative;overflow:hidden;
+  background-color:var(--paper);
+  background-image:
+    linear-gradient(var(--line) 1px,transparent 1px),
+    linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:16px 16px;
+  display:flex;align-items:center;justify-content:center;
+}
+.ph::before{
+  content:"";position:absolute;width:46%;aspect-ratio:8/5;max-width:180px;
+  background:linear-gradient(150deg,#e4e6ea,#d3d5db);
+  border-radius:5px;box-shadow:0 0 0 1px var(--line-strong),0 10px 22px -12px rgba(20,20,24,.25);
+}
+.ph::after{
+  content:"";position:absolute;width:14%;max-width:34px;aspect-ratio:1.6;
+  background:#d3d5db;bottom:calc(27% - 6px);border-radius:0 0 3px 3px;
+  box-shadow:0 0 0 1px var(--line-strong);
+}
+.ph span.ph-label{
+  position:absolute;bottom:10px;right:12px;z-index:1;
+  font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--gray-500);background:rgba(255,255,255,.75);padding:2px 6px;border-radius:4px;
+}
+.ph.dark{background-color:#141416;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);}
+.ph.dark::before{background:linear-gradient(150deg,#232326,#0f0f11);box-shadow:0 0 0 1px rgba(255,255,255,.12),0 10px 26px -10px rgba(0,0,0,.6);}
+.ph.dark::after{background:#1c1c1f;box-shadow:0 0 0 1px rgba(255,255,255,.12);}
+.ph.accent::before{box-shadow:0 0 0 1px var(--red-line),0 0 0 4px var(--red-tint),0 10px 22px -12px rgba(200,18,31,.25);}
+
+/* breadcrumb */
+.crumb{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--gray-500);padding:22px 0 0;font-family:var(--font-mono);}
+.crumb a:hover{color:var(--red);}
+.crumb span{color:var(--line-strong);}
+
+/* =========================================================
+   HOME
+   ========================================================= */
+.hero{background:var(--black);color:#fff;position:relative;}
+.hero .wrap{padding-top:70px;padding-bottom:90px;display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center;}
+.hero h1{font-size:52px;line-height:1.05;margin:18px 0 22px;}
+.hero h1 em{font-style:normal;color:var(--red);}
+.hero p.lead{color:rgba(255,255,255,.62);font-size:16.5px;max-width:460px;margin-bottom:32px;}
+.hero-search{
+  display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:8px 8px 8px 20px;max-width:480px;
+}
+.hero-search input{flex:1;background:transparent;border:0;color:#fff;font-size:14.5px;outline:none;}
+.hero-search input::placeholder{color:rgba(255,255,255,.4);}
+.hero-chips{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px;}
+.hero-chips button{
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);color:rgba(255,255,255,.75);
+  border-radius:999px;padding:7px 13px;font-size:12.5px;font-family:var(--font-mono);
+}
+.hero-chips button:hover{border-color:var(--red);color:#fff;}
+
+.hero-panel{
+  background:#141416;border:1px solid rgba(255,255,255,.1);border-radius:var(--radius-l);padding:26px;
+}
+.hero-panel .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;}
+.hero-panel .top .name{font-weight:700;font-size:15px;}
+.hero-panel .top .brand{color:rgba(255,255,255,.5);font-size:12px;font-family:var(--font-mono);}
+.hero-panel .shot{height:150px;border-radius:12px;margin-bottom:20px;background:linear-gradient(140deg,#1c1c1f,#0c0c0d);position:relative;overflow:hidden;}
+.hero-panel .shot .grid-lines{position:absolute;inset:0;background-image:linear-gradient(rgba(255,47,55,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(255,47,55,.12) 1px,transparent 1px);background-size:22px 22px;}
+.hero-panel .meters{display:flex;justify-content:space-between;padding-top:6px;}
+.hero-panel .specs{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;}
+
+.hero-stats{display:flex;gap:0;margin-top:36px;border-top:1px solid rgba(255,255,255,.14);padding-top:22px;}
+.hero-stats .stat{padding-right:28px;margin-right:28px;border-right:1px solid rgba(255,255,255,.14);}
+.hero-stats .stat:last-child{border-right:0;margin-right:0;padding-right:0;}
+.hero-stats .stat b{display:block;font-family:var(--font-display);font-size:24px;font-weight:700;color:#fff;line-height:1;}
+.hero-stats .stat span{display:block;font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.06em;margin-top:6px;}
+@media (max-width:520px){.hero-stats{flex-wrap:wrap;row-gap:16px;}.hero-stats .stat{padding-right:20px;margin-right:20px;}}
+
+.hero-panel .top .live{
+  display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:10.5px;
+  color:#5fe38a;text-transform:uppercase;letter-spacing:.06em;
+}
+.hero-panel .top .live::before{content:"";width:6px;height:6px;border-radius:50%;background:#5fe38a;box-shadow:0 0 0 3px rgba(95,227,138,.2);}
+
+.brand-strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:26px 0;}
+.brand-strip .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;}
+.brand-strip span{font-family:var(--font-display);font-weight:700;font-size:19px;color:var(--gray-500);letter-spacing:-.02em;}
+.brand-strip span:hover{color:var(--ink);}
+
+.cat-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;}
+.cat-card{
+  border:1px solid var(--line);border-radius:var(--radius-m);padding:22px 18px;
+  transition:border-color .2s,transform .2s;
+}
+.cat-card:hover{border-color:var(--red);transform:translateY(-3px);}
+.cat-card .ic{width:38px;height:38px;border-radius:9px;background:var(--red-tint);color:var(--red);display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:17px;}
+.cat-card h4{font-size:15px;margin-bottom:4px;}
+.cat-card p{font-size:12.5px;color:var(--gray-500);font-family:var(--font-mono);}
+@media (max-width:980px){.cat-grid{grid-template-columns:repeat(3,1fr);}}
+@media (max-width:640px){.cat-grid{grid-template-columns:repeat(2,1fr);}}
+
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+@media (max-width:980px){.grid-3{grid-template-columns:repeat(2,1fr);}.grid-4{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:620px){.grid-3{grid-template-columns:1fr;}.grid-4{grid-template-columns:1fr;}}
+
+.prod-card{position:relative;}
+.prod-card .ph{height:170px;}
+.prod-card .rank{
+  position:absolute;top:12px;left:12px;z-index:2;
+  display:inline-flex;align-items:center;gap:5px;background:var(--black);color:#fff;
+  font-family:var(--font-mono);font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+  padding:6px 11px;border-radius:999px;
+}
+.prod-card .rank::before{content:"";width:6px;height:6px;background:var(--red);border-radius:1px;transform:rotate(45deg);}
+.prod-card .compare-add{
+  position:absolute;top:12px;right:12px;z-index:2;width:30px;height:30px;border-radius:50%;
+  background:rgba(255,255,255,.92);border:1px solid var(--line-strong);color:var(--ink);
+  display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600;
+  transition:all .18s var(--ease);
+}
+.prod-card .compare-add:hover{background:var(--black);color:#fff;border-color:var(--black);transform:scale(1.08);}
+.prod-card .body{padding:18px;}
+.prod-card .brand-r{font-family:var(--font-mono);font-size:11px;color:var(--gray-500);text-transform:uppercase;letter-spacing:.06em;}
+.prod-card h4{font-size:16px;margin:5px 0 12px;}
+.prod-card .specs-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+.prod-card .foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:14px;}
+.mini-meter{display:flex;flex-direction:column;align-items:center;gap:4px;}
+.mini-meter .bar{width:44px;height:5px;border-radius:99px;background:var(--line);overflow:hidden;}
+.mini-meter .bar i{display:block;height:100%;background:var(--red);border-radius:99px;}
+.mini-meter span{font-size:9.5px;color:var(--gray-500);font-family:var(--font-mono);text-transform:uppercase;}
+
+.vs-mini{display:flex;align-items:stretch;border:1px solid var(--line);border-radius:var(--radius-m);overflow:hidden;background:#fff;transition:border-color .18s,transform .18s,box-shadow .18s;}
+.vs-mini:hover{border-color:var(--line-strong);transform:translateY(-3px);box-shadow:var(--shadow-m);}
+.vs-mini .side{flex:1;padding:20px;}
+.vs-mini .side.b{text-align:right;}
+.vs-mini .side .ph{height:70px;border-radius:8px;margin-bottom:12px;}
+.vs-mini .mid{width:56px;flex:none;background:var(--black);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:13px;}
+.vs-mini h4{font-size:14px;}
+.vs-mini .brand-r{font-size:10.5px;color:var(--gray-500);font-family:var(--font-mono);}
+.vs-mini-add{align-items:center;justify-content:center;border-style:dashed;border-color:var(--line-strong);}
+.vs-mini-add:hover{border-color:var(--red);background:var(--red-tint);}
+.vs-mini-add:hover *{color:var(--red-deep) !important;}
+
+.post-card{position:relative;}
+.post-card .ph{height:150px;}
+.post-card .save{
+  position:absolute;top:120px;right:12px;z-index:2;width:30px;height:30px;border-radius:50%;
+  background:rgba(255,255,255,.92);border:1px solid var(--line-strong);color:var(--ink);
+  display:flex;align-items:center;justify-content:center;font-size:13px;
+  transition:all .18s var(--ease);
+}
+.post-card .save:hover,.post-card .save.saved{background:var(--black);color:#fff;border-color:var(--black);}
+.post-card .body{padding:18px;}
+.post-card h4{font-size:16px;margin:12px 0 10px;line-height:1.3;}
+.post-card p{font-size:13.5px;color:var(--gray-700);margin-bottom:14px;}
+.post-card .meta{display:flex;justify-content:space-between;font-size:12px;color:var(--gray-500);font-family:var(--font-mono);}
+.post-card[hidden]{display:none;}
+
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius-m);overflow:hidden;}
+.why-grid .cell{background:#fff;padding:34px 28px;}
+.why-grid .cell .num{font-family:var(--font-mono);color:var(--red);font-weight:700;font-size:12px;margin-bottom:14px;}
+.why-grid .cell h4{font-size:17px;margin-bottom:10px;}
+.why-grid .cell p{font-size:13.5px;color:var(--gray-700);}
+@media (max-width:820px){.why-grid{grid-template-columns:1fr;}}
+
+.section.paper{background:var(--paper);}
+
+/* =========================================================
+   CATALOG
+   ========================================================= */
+.page-head{padding:38px 0 30px;}
+.page-head h1{font-size:36px;margin-top:10px;}
+.page-head .count{color:var(--gray-500);font-size:14px;margin-top:8px;}
+
+.catalog-layout{display:grid;grid-template-columns:250px 1fr;gap:36px;padding-bottom:90px;}
+.filters{position:sticky;top:132px;align-self:start;}
+.filter-block{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:20px;}
+.filter-block h5{font-family:var(--font-mono);font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--gray-500);margin-bottom:14px;}
+.filter-opt{display:flex;align-items:center;gap:9px;font-size:13.5px;padding:6px 0;color:var(--gray-700);}
+.filter-opt input{accent-color:var(--red);width:15px;height:15px;}
+.filter-opt:hover{color:var(--ink);}
+.filter-opt .n{margin-left:auto;color:var(--gray-500);font-family:var(--font-mono);font-size:11.5px;}
+.range-track{height:4px;background:var(--line);border-radius:99px;position:relative;margin:18px 4px 8px;}
+.range-track i{position:absolute;left:20%;right:10%;top:0;bottom:0;background:var(--red);border-radius:99px;}
+.range-track b{position:absolute;top:50%;width:14px;height:14px;background:#fff;border:2.5px solid var(--red);border-radius:50%;transform:translate(-50%,-50%);}
+
+.toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px;}
+.sort-pill{display:flex;align-items:center;gap:8px;border:1px solid var(--line-strong);border-radius:999px;padding:9px 16px;font-size:13px;font-weight:600;}
+.catalog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+@media (max-width:980px){.catalog-layout{grid-template-columns:1fr;}.filters{display:none;}.catalog-grid{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:620px){.catalog-grid{grid-template-columns:1fr;}}
+
+.pagination{display:flex;justify-content:center;gap:8px;margin-top:44px;}
+.pagination a{width:38px;height:38px;border:1px solid var(--line);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;font-family:var(--font-mono);}
+.pagination a.active{background:var(--black);color:#fff;border-color:var(--black);}
+
+/* =========================================================
+   MONITOR DETAIL
+   ========================================================= */
+.pdp-hero{padding:34px 0 0;}
+.pdp-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;padding-bottom:40px;align-items:start;}
+.gallery-main{height:360px;border-radius:var(--radius-l);margin-bottom:14px;}
+.gallery-thumbs{display:flex;gap:10px;}
+.gallery-thumbs .t{width:70px;height:70px;border-radius:10px;border:1.5px solid var(--line);}
+.gallery-thumbs .t.active{border-color:var(--red);}
+
+.pdp-info .brand-r{font-family:var(--font-mono);font-size:12.5px;color:var(--red);text-transform:uppercase;letter-spacing:.08em;font-weight:700;}
+.pdp-info h1{font-size:32px;margin:10px 0 16px;}
+.pdp-info .specs-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px;}
+.pdp-meters{display:flex;gap:14px;padding:22px;background:var(--paper);border-radius:var(--radius-m);margin-bottom:24px;}
+.pdp-meters .meter{flex:1;}
+.pdp-cta{display:flex;gap:12px;margin-bottom:20px;}
+.updated-note{font-size:12.5px;color:var(--gray-500);font-family:var(--font-mono);}
+
+.subnav{position:sticky;top:132px;z-index:60;background:#fff;border-bottom:1px solid var(--line);}
+.subnav .wrap{display:flex;gap:30px;overflow-x:auto;}
+.subnav a{padding:16px 0;font-size:13.5px;font-weight:600;color:var(--gray-500);white-space:nowrap;border-bottom:2px solid transparent;transition:color .15s,border-color .15s;}
+.subnav a:hover{color:var(--ink);}
+.subnav a.current{color:var(--ink);border-color:var(--red);}
+
+/* ---------- sticky purchase bar (ficha) ---------- */
+.buy-bar{
+  position:fixed;left:0;right:0;bottom:0;z-index:120;
+  background:rgba(10,10,11,.92);backdrop-filter:blur(10px);color:#fff;
+  transform:translateY(100%);transition:transform .3s var(--ease);
+  border-top:1px solid rgba(255,255,255,.1);
+}
+.buy-bar.show{transform:translateY(0);}
+.buy-bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px 32px;}
+.buy-bar .who{display:flex;align-items:center;gap:14px;min-width:0;}
+.buy-bar .who .sc{
+  width:38px;height:38px;border-radius:50%;flex:none;
+  background:conic-gradient(var(--red) 92%, rgba(255,255,255,.15) 0);
+  -webkit-mask:radial-gradient(farthest-side, transparent calc(100% - 5px), #000 calc(100% - 4px));
+          mask:radial-gradient(farthest-side, transparent calc(100% - 5px), #000 calc(100% - 4px));
+}
+.buy-bar .who h6{font-size:14px;font-weight:700;font-family:var(--font-display);}
+.buy-bar .who span{font-size:12px;color:rgba(255,255,255,.5);font-family:var(--font-mono);}
+.buy-bar .actions{display:flex;gap:10px;flex:none;}
+@media (max-width:640px){.buy-bar .who span{display:none;}}
+
+/* ---------- FAQ accordion ---------- */
+.faq-list{max-width:760px;}
+.faq-item{border-bottom:1px solid var(--line);}
+.faq-item summary{
+  list-style:none;cursor:pointer;padding:20px 0;display:flex;justify-content:space-between;align-items:center;gap:16px;
+  font-family:var(--font-display);font-weight:600;font-size:15.5px;
+}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-item summary::after{content:"+";font-family:var(--font-mono);font-size:20px;color:var(--red);flex:none;transition:transform .2s var(--ease);}
+.faq-item[open] summary::after{transform:rotate(45deg);}
+.faq-item p{padding:0 0 20px;color:var(--gray-700);font-size:14.5px;max-width:640px;line-height:1.65;}
+
+.spec-groups{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+.spec-group{border:1px solid var(--line);border-radius:var(--radius-m);overflow:hidden;}
+.spec-group h5{padding:16px 20px;background:var(--paper);font-family:var(--font-mono);font-size:12px;text-transform:uppercase;letter-spacing:.07em;color:var(--gray-700);border-bottom:1px solid var(--line);}
+.spec-table{width:100%;border-collapse:collapse;}
+.spec-table tr:not(:last-child){border-bottom:1px solid var(--line);}
+.spec-table th{text-align:left;padding:12px 20px;font-weight:500;color:var(--gray-700);font-size:13.5px;width:52%;}
+.spec-table td{padding:12px 20px;font-family:var(--font-mono);font-size:13.5px;font-weight:600;text-align:right;}
+@media (max-width:900px){.pdp-grid{grid-template-columns:1fr;}.spec-groups{grid-template-columns:1fr;}}
+
+.hscroll{display:flex;gap:18px;overflow-x:auto;padding-bottom:6px;}
+.hscroll > *{flex:none;}
+
+/* =========================================================
+   COMPARISON (VS)
+   ========================================================= */
+.vs-hero{background:var(--black);color:#fff;padding:44px 0 56px;}
+.vs-title{text-align:center;margin-bottom:34px;}
+.vs-title h1{font-size:26px;font-weight:600;color:rgba(255,255,255,.6);}
+.vs-title h1 b{color:#fff;}
+.vs-stage{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:0;}
+.vs-monitor{padding:0 30px;}
+.vs-monitor.b{text-align:right;}
+.vs-monitor .ph{height:190px;border-radius:16px;margin-bottom:20px;background:linear-gradient(140deg,#1c1c1f,#101012);}
+.vs-monitor .brand-r{font-family:var(--font-mono);font-size:12px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.06em;}
+.vs-monitor h3{font-size:21px;margin:6px 0 16px;}
+.vs-monitor .specs-row{display:flex;gap:7px;flex-wrap:wrap;}
+.vs-monitor.b .specs-row{justify-content:flex-end;}
+.vs-chip{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.16);color:rgba(255,255,255,.75);}
+.vs-badge{
+  width:74px;height:74px;border-radius:50%;background:var(--red);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-family:var(--font-display);
+  font-weight:700;font-size:19px;flex:none;box-shadow:0 0 0 6px rgba(255,47,55,.15);
+}
+@media (max-width:760px){.vs-stage{grid-template-columns:1fr;text-align:center;}.vs-monitor.b{text-align:center;}.vs-monitor.b .specs-row{justify-content:center;}.vs-badge{margin:20px auto;}}
+
+/* ---------- sticky compact vs bar while scrolling the report ---------- */
+.vs-mini-bar{
+  position:sticky;top:115px;z-index:70;background:rgba(10,10,11,.94);backdrop-filter:blur(10px);color:#fff;
+  border-radius:999px;padding:10px 10px 10px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;
+  margin:0 auto 40px;max-width:640px;
+  opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .2s var(--ease),transform .2s var(--ease);
+}
+.vs-mini-bar.show{opacity:1;transform:translateY(0);pointer-events:auto;}
+.vs-mini-bar .nm{font-size:12.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.vs-mini-bar .sc{font-family:var(--font-mono);color:var(--red);font-weight:700;margin-left:6px;}
+.vs-mini-bar .x{font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,.4);flex:none;}
+@media (max-width:640px){.vs-mini-bar{border-radius:var(--radius-m);}}
+
+.profile-compare{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius-m);overflow:hidden;}
+.profile-cell{background:#fff;padding:30px 20px;text-align:center;}
+.profile-cell h5{font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.07em;font-size:12px;color:var(--gray-500);margin-bottom:20px;}
+.profile-cell .two-meters{display:flex;justify-content:center;gap:22px;}
+.profile-cell .delta{margin-top:16px;font-size:12px;color:var(--gray-500);font-family:var(--font-mono);}
+@media (max-width:760px){.profile-compare{grid-template-columns:1fr;}}
+
+.compare-table{width:100%;border-collapse:collapse;}
+.compare-table th{padding:16px 20px;font-size:13px;text-align:center;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.05em;background:var(--paper);border-bottom:1px solid var(--line);}
+.compare-table th:first-child{text-align:left;}
+.compare-table td{padding:14px 20px;font-size:13.5px;border-bottom:1px solid var(--line);text-align:center;}
+.compare-table td:first-child{text-align:left;color:var(--gray-700);}
+.compare-table td.win{font-weight:700;color:var(--red-deep);background:var(--red-tint);}
+
+.ai-card{border:1px solid var(--line);border-radius:var(--radius-m);padding:26px 28px;display:flex;gap:18px;}
+.ai-card .ic{width:36px;height:36px;border-radius:9px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;flex:none;font-size:15px;}
+.ai-card h5{font-size:14px;margin-bottom:8px;}
+.ai-card p{font-size:14.5px;color:var(--gray-700);}
+.verdict-box{border-left:3px solid var(--red);background:var(--red-tint);padding:22px 26px;border-radius:0 var(--radius-m) var(--radius-m) 0;}
+.verdict-box h5{font-size:13px;color:var(--red-deep);text-transform:uppercase;letter-spacing:.06em;font-family:var(--font-mono);margin-bottom:10px;}
+.verdict-box p{font-size:15px;line-height:1.6;}
+
+/* =========================================================
+   BLOG
+   ========================================================= */
+.blog-filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:34px;}
+.blog-filters button{padding:9px 16px;border-radius:999px;border:1px solid var(--line-strong);font-size:13px;font-weight:600;}
+.blog-filters button.active{background:var(--black);color:#fff;border-color:var(--black);}
+
+.featured-post{display:grid;grid-template-columns:1.1fr .9fr;border:1px solid var(--line);border-radius:var(--radius-l);overflow:hidden;margin-bottom:46px;}
+.featured-post .ph{height:100%;min-height:280px;}
+.featured-post .body{padding:38px;display:flex;flex-direction:column;justify-content:center;}
+.featured-post h2{font-size:26px;margin:14px 0 14px;line-height:1.25;}
+.featured-post p{color:var(--gray-700);font-size:14.5px;margin-bottom:20px;}
+@media (max-width:820px){.featured-post{grid-template-columns:1fr;}.featured-post .ph{min-height:200px;}}
+
+/* =========================================================
+   ARTICLE
+   ========================================================= */
+.read-progress{position:sticky;top:74px;z-index:80;height:3px;background:var(--line);}
+.read-progress i{display:block;height:100%;width:0%;background:var(--red);transition:width .1s linear;}
+.article-head{padding:30px 0 20px;max-width:760px;}
+.article-head h1{font-size:36px;margin:16px 0 18px;line-height:1.2;}
+.article-meta{display:flex;gap:16px;color:var(--gray-500);font-size:13px;font-family:var(--font-mono);flex-wrap:wrap;}
+.article-cover{height:340px;border-radius:var(--radius-l);margin:30px 0 10px;}
+
+.article-layout{display:grid;grid-template-columns:1fr 300px;gap:56px;padding:40px 0 90px;}
+.prose{max-width:680px;}
+.prose h2{font-size:23px;margin:38px 0 16px;}
+.prose p{font-size:16px;line-height:1.75;color:#232326;margin-bottom:18px;}
+.prose table{width:100%;border-collapse:collapse;margin:22px 0 30px;}
+.prose th{background:var(--paper);text-align:left;padding:12px 16px;font-size:12.5px;text-transform:uppercase;letter-spacing:.04em;font-family:var(--font-mono);border-bottom:1px solid var(--line);}
+.prose td{padding:12px 16px;border-bottom:1px solid var(--line);font-size:14px;}
+.pull-quote{border-left:3px solid var(--red);padding:4px 0 4px 22px;font-family:var(--font-display);font-size:19px;margin:30px 0;color:var(--ink);}
+
+.sidebar-box{border:1px solid var(--line);border-radius:var(--radius-m);padding:22px;margin-bottom:20px;}
+.sidebar-box h5{font-family:var(--font-mono);font-size:11.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--gray-500);margin-bottom:16px;}
+.toc a{display:block;font-size:13.5px;padding:7px 0;color:var(--gray-700);border-left:2px solid var(--line);padding-left:12px;}
+.toc a:hover{color:var(--red);border-color:var(--red);}
+.related-mini{display:flex;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);}
+.related-mini:last-child{border-bottom:0;}
+.related-mini .ph{width:52px;height:52px;border-radius:8px;flex:none;}
+.related-mini h6{font-size:12.5px;font-weight:700;line-height:1.3;margin-bottom:3px;}
+.related-mini span{font-size:11px;color:var(--gray-500);font-family:var(--font-mono);}
+@media (max-width:900px){.article-layout{grid-template-columns:1fr;}}
+
+</style>
+</head>
+<body>
+
+<!-- =========================================================
+     PROTOTYPE SWITCHER — solo para navegar el mockup
+     ========================================================= -->
+<div class="proto-bar">
+  <span class="proto-label">Vimovies · Mockup</span>
+  <button class="active" data-target="home">Home</button>
+  <button data-target="catalog">Catálogo</button>
+  <button data-target="pdp">Ficha de monitor</button>
+  <button data-target="vs">Comparativa VS</button>
+  <button data-target="blog">Blog</button>
+  <button data-target="article">Artículo</button>
+</div>
+
+<!-- =========================================================
+     HOME
+     ========================================================= -->
+<section class="screen active" id="home">
+
+  <header class="site-header">
+    <div class="wrap bar">
+      <a href="#" class="logo"><span class="dot"></span>vimovies</a>
+      <nav class="main-nav">
+        <a href="#" class="current" onclick="go('home');return false;">Inicio</a>
+        <a href="#" onclick="go('catalog');return false;">Monitores</a>
+        <a href="#" onclick="go('vs');return false;">Comparativas</a>
+        <a href="#" onclick="go('blog');return false;">Blog</a>
+        <a href="#">Marcas</a>
+      </nav>
+      <div class="header-actions">
+        <div class="search-pill">🔍 Busca un modelo, marca o Hz…</div>
+        <span class="lang-pill">ES</span>
+        <a href="#" class="btn btn-black btn-sm" onclick="go('vs');return false;">Comparar</a>
+      </div>
+      <div class="burger">☰</div>
+    </div>
+  </header>
+
+  <div class="hero scanlines">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">Base de datos independiente de monitores</span>
+        <h1>Elige tu monitor con <em>datos</em>, no con marketing.</h1>
+        <p class="lead">Fichas técnicas verificadas, puntuaciones por perfil de uso y comparativas cara a cara. Todo lo que necesitas antes de gastar tu dinero.</p>
+        <div class="hero-search">
+          <input type="text" placeholder="Ej. LG UltraGear, 27 pulgadas, 165Hz…">
+          <button class="btn btn-red btn-sm">Buscar</button>
+        </div>
+        <div class="hero-chips">
+          <button>144Hz+</button>
+          <button>OLED</button>
+          <button>4K</button>
+          <button>Ultrawide</button>
+          <button>Bajo presupuesto</button>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><b class="mono" data-count="1204">0</b><span>Monitores en base de datos</span></div>
+          <div class="stat"><b class="mono" data-count="412">0</b><span>Fichas verificadas este mes</span></div>
+          <div class="stat"><b class="mono" data-count="96">0</b><span>Comparativas cara a cara</span></div>
+        </div>
+      </div>
+
+      <div class="hero-panel bracket on-dark">
+        <div class="top">
+          <div>
+            <div class="name">UltraGear 27GP850-B</div>
+            <div class="brand">LG · FAST-IPS 165HZ</div>
+          </div>
+          <span class="live">Calibrado</span>
+        </div>
+        <div class="shot"><div class="grid-lines"></div></div>
+        <div class="meters">
+          <div class="meter on-dark win"><div class="ring" style="--pct:92"><span>92</span></div><div class="lbl">Gaming</div></div>
+          <div class="meter on-dark"><div class="ring" style="--pct:78"><span>78</span></div><div class="lbl">Oficina</div></div>
+          <div class="meter on-dark"><div class="ring" style="--pct:85"><span>85</span></div><div class="lbl">Edición</div></div>
+        </div>
+        <div class="specs">
+          <span class="chip" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.18);color:rgba(255,255,255,.75)">QHD 2560×1440</span>
+          <span class="chip" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.18);color:rgba(255,255,255,.75)">1ms GTG</span>
+          <span class="chip" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.18);color:rgba(255,255,255,.75)">HDR400</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="brand-strip">
+    <div class="wrap">
+      <span>LG</span><span>ASUS</span><span>BenQ</span><span>Samsung</span><span>Dell</span><span>MSI</span><span>AOC</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Explora</span>
+          <h2>¿Para qué vas a usar el monitor?</h2>
+        </div>
+      </div>
+      <div class="cat-grid">
+        <div class="cat-card"><div class="ic">🎮</div><h4>Gaming</h4><p>412 modelos</p></div>
+        <div class="cat-card"><div class="ic">🎨</div><h4>Diseño y edición</h4><p>168 modelos</p></div>
+        <div class="cat-card"><div class="ic">💼</div><h4>Oficina</h4><p>231 modelos</p></div>
+        <div class="cat-card"><div class="ic">↔</div><h4>Ultrawide</h4><p>97 modelos</p></div>
+        <div class="cat-card"><div class="ic">4K</div><h4>Alta resolución</h4><p>154 modelos</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section paper">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Puntuación por perfil</span>
+          <h2>Monitores destacados esta semana</h2>
+          <p class="section-sub">Ranking calculado a partir de specs verificadas: panel, respuesta, cobertura de color y ergonomía.</p>
+        </div>
+        <a href="#" class="see-all" onclick="go('catalog');return false;">Ver todos →</a>
+      </div>
+      <div class="grid-4">
+
+        <a href="#" class="card prod-card" onclick="go('pdp');return false;">
+          <span class="rank" style="--rank-n:'#1'">Nº1 gaming</span>
+          <button class="compare-add" title="Añadir a comparativa" onclick="event.preventDefault();event.stopPropagation();">+</button>
+          <div class="ph accent"><span class="ph-label">LG UltraGear</span></div>
+          <div class="body">
+            <div class="brand-r">LG</div>
+            <h4>UltraGear 27GP850-B</h4>
+            <div class="specs-row">
+              <span class="chip">27" QHD</span>
+              <span class="chip"><b>165</b>Hz</span>
+            </div>
+            <div class="foot">
+              <div class="mini-meter"><div class="bar"><i style="width:92%"></i></div><span>Gaming 92</span></div>
+              <span class="btn btn-outline-k btn-sm">Ver ficha</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="#" class="card prod-card" onclick="go('pdp');return false;">
+          <button class="compare-add" title="Añadir a comparativa" onclick="event.preventDefault();event.stopPropagation();">+</button>
+          <div class="ph"><span class="ph-label">ASUS ROG Swift</span></div>
+          <div class="body">
+            <div class="brand-r">ASUS</div>
+            <h4>ROG Swift PG27AQN</h4>
+            <div class="specs-row">
+              <span class="chip">27" QHD</span>
+              <span class="chip"><b>360</b>Hz</span>
+            </div>
+            <div class="foot">
+              <div class="mini-meter"><div class="bar"><i style="width:98%"></i></div><span>Gaming 98</span></div>
+              <span class="btn btn-outline-k btn-sm">Ver ficha</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="#" class="card prod-card" onclick="go('pdp');return false;">
+          <button class="compare-add" title="Añadir a comparativa" onclick="event.preventDefault();event.stopPropagation();">+</button>
+          <div class="ph"><span class="ph-label">BenQ PD2700U</span></div>
+          <div class="body">
+            <div class="brand-r">BENQ</div>
+            <h4>PD2700U</h4>
+            <div class="specs-row">
+              <span class="chip">27" 4K</span>
+              <span class="chip">IPS</span>
+            </div>
+            <div class="foot">
+              <div class="mini-meter"><div class="bar"><i style="width:88%"></i></div><span>Edición 88</span></div>
+              <span class="btn btn-outline-k btn-sm">Ver ficha</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="#" class="card prod-card" onclick="go('pdp');return false;">
+          <button class="compare-add" title="Añadir a comparativa" onclick="event.preventDefault();event.stopPropagation();">+</button>
+          <div class="ph"><span class="ph-label">Samsung Odyssey</span></div>
+          <div class="body">
+            <div class="brand-r">SAMSUNG</div>
+            <h4>Odyssey OLED G8</h4>
+            <div class="specs-row">
+              <span class="chip">34" Ultrawide</span>
+              <span class="chip">QD-OLED</span>
+            </div>
+            <div class="foot">
+              <div class="mini-meter"><div class="bar"><i style="width:95%"></i></div><span>Gaming 95</span></div>
+              <span class="btn btn-outline-k btn-sm">Ver ficha</span>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Cara a cara</span>
+          <h2>Comparativas populares</h2>
+        </div>
+        <a href="#" class="see-all" onclick="go('vs');return false;">Ver todas →</a>
+      </div>
+      <div class="grid-3">
+        <a href="#" class="vs-mini" onclick="go('vs');return false;">
+          <div class="side"><div class="ph"></div><h4>LG 27GP850-B</h4><div class="brand-r">LG</div></div>
+          <div class="mid">VS</div>
+          <div class="side b"><div class="ph"></div><h4>ROG Swift PG27AQN</h4><div class="brand-r">ASUS</div></div>
+        </a>
+        <a href="#" class="vs-mini" onclick="go('vs');return false;">
+          <div class="side"><div class="ph"></div><h4>Odyssey OLED G8</h4><div class="brand-r">SAMSUNG</div></div>
+          <div class="mid">VS</div>
+          <div class="side b"><div class="ph"></div><h4>PD2700U</h4><div class="brand-r">BENQ</div></div>
+        </a>
+        <a href="#" class="vs-mini" onclick="go('vs');return false;">
+          <div class="side"><div class="ph"></div><h4>UltraSharp U2723QE</h4><div class="brand-r">DELL</div></div>
+          <div class="mid">VS</div>
+          <div class="side b"><div class="ph"></div><h4>MPG 271QR</h4><div class="brand-r">MSI</div></div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section paper">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Aprende</span>
+          <h2>Últimas guías</h2>
+        </div>
+        <a href="#" class="see-all" onclick="go('blog');return false;">Ir al blog →</a>
+      </div>
+      <div class="grid-3">
+        <a href="#" class="card post-card" onclick="go('article');return false;">
+          <div class="ph"><span class="ph-label">Foto de guía</span></div>
+          <div class="body">
+            <span class="tag tag-guide">Guía</span>
+            <h4>¿Cuántos Hz necesitas para jugar competitivamente?</h4>
+            <p>De 60 Hz a 360 Hz: cuánta tasa de refresco necesitas según tu género de juego.</p>
+            <div class="meta"><span>5 min de lectura</span><span>01 Feb 2026</span></div>
+          </div>
+        </a>
+        <a href="#" class="card post-card">
+          <div class="ph"><span class="ph-label">Foto de guía</span></div>
+          <div class="body">
+            <span class="tag tag-review">Review</span>
+            <h4>Probamos el Samsung Odyssey OLED G8 durante 30 días</h4>
+            <p>Brillo, quemado de píxeles y rendimiento real en uso diario.</p>
+            <div class="meta"><span>8 min de lectura</span><span>22 Ene 2026</span></div>
+          </div>
+        </a>
+        <a href="#" class="card post-card">
+          <div class="ph"><span class="ph-label">Foto de guía</span></div>
+          <div class="body">
+            <span class="tag tag-faq">FAQ</span>
+            <h4>IPS vs VA vs OLED: diferencias que sí importan</h4>
+            <p>Tiempos de respuesta, contraste y ángulos de visión explicados sin tecnicismos.</p>
+            <div class="meta"><span>6 min de lectura</span><span>14 Ene 2026</span></div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="wrap">
+      <div class="section-head"><div><span class="eyebrow">Metodología</span><h2>Por qué confiar en Vimovies</h2></div></div>
+      <div class="why-grid">
+        <div class="cell"><div class="num">DATOS</div><h4>Specs verificadas</h4><p>Cada ficha se contrasta contra la hoja técnica oficial del fabricante antes de publicarse.</p></div>
+        <div class="cell"><div class="num">IMPARCIAL</div><h4>Sin marcas patrocinadas</h4><p>El ranking se calcula con la misma fórmula para todos los modelos, sin excepciones.</p></div>
+        <div class="cell"><div class="num">VIVO</div><h4>Actualizado semanalmente</h4><p>Precios, disponibilidad y nuevos lanzamientos se revisan cada semana.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer-home"></div>
+</section>
+
+<!-- =========================================================
+     CATALOG
+     ========================================================= -->
+<section class="screen" id="catalog">
+
+  <header class="site-header">
+    <div class="wrap bar">
+      <a href="#" class="logo" onclick="go('home');return false;"><span class="dot"></span>vimovies</a>
+      <nav class="main-nav">
+        <a href="#" onclick="go('home');return false;">Inicio</a>
+        <a href="#" class="current">Monitores</a>
+        <a href="#" onclick="go('vs');return false;">Comparativas</a>
+        <a href="#" onclick="go('blog');return false;">Blog</a>
+        <a href="#">Marcas</a>
+      </nav>
+      <div class="header-actions">
+        <div class="search-pill">🔍 Busca un modelo, marca o Hz…</div>
+        <span class="lang-pill">ES</span>
+        <a href="#" class="btn btn-black btn-sm" onclick="go('vs');return false;">Comparar</a>
+      </div>
+      <div class="burger">☰</div>
+    </div>
+  </header>
+
+  <div class="wrap crumb"><a href="#" onclick="go('home');return false;">Inicio</a><span>/</span><a href="#">Monitores</a></div>
+
+  <div class="wrap page-head">
+    <span class="eyebrow">412 fichas técnicas</span>
+    <h1>Todos los monitores</h1>
+    <p class="count">Filtra por panel, resolución, tasa de refresco o funciones para encontrar el tuyo.</p>
+  </div>
+
+  <div class="wrap catalog-layout">
+    <aside class="filters">
+      <div class="filter-block">
+        <h5>Tipo de panel</h5>
+        <label class="filter-opt"><input type="checkbox" checked> IPS / Fast-IPS <span class="n">184</span></label>
+        <label class="filter-opt"><input type="checkbox"> OLED / QD-OLED <span class="n">56</span></label>
+        <label class="filter-opt"><input type="checkbox"> VA <span class="n">97</span></label>
+        <label class="filter-opt"><input type="checkbox"> TN <span class="n">40</span></label>
+        <label class="filter-opt"><input type="checkbox"> Mini-LED <span class="n">35</span></label>
+      </div>
+      <div class="filter-block">
+        <h5>Tasa de refresco mínima</h5>
+        <div class="range-track"><i></i><b style="left:20%"></b><b style="left:90%"></b></div>
+        <div style="display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:12px;color:var(--gray-500)"><span>60Hz</span><span>360Hz</span></div>
+      </div>
+      <div class="filter-block">
+        <h5>Resolución</h5>
+        <label class="filter-opt"><input type="checkbox"> Full HD <span class="n">88</span></label>
+        <label class="filter-opt"><input type="checkbox" checked> QHD <span class="n">201</span></label>
+        <label class="filter-opt"><input type="checkbox"> 4K UHD <span class="n">123</span></label>
+      </div>
+      <div class="filter-block">
+        <h5>Funciones</h5>
+        <label class="filter-opt"><input type="checkbox"> KVM integrado <span class="n">64</span></label>
+        <label class="filter-opt"><input type="checkbox"> VRR / G-Sync / FreeSync <span class="n">298</span></label>
+        <label class="filter-opt"><input type="checkbox"> Altavoces integrados <span class="n">150</span></label>
+      </div>
+      <div class="filter-block">
+        <h5>Marca</h5>
+        <label class="filter-opt"><input type="checkbox"> LG <span class="n">52</span></label>
+        <label class="filter-opt"><input type="checkbox"> ASUS <span class="n">61</span></label>
+        <label class="filter-opt"><input type="checkbox"> BenQ <span class="n">38</span></label>
+        <label class="filter-opt"><input type="checkbox"> Samsung <span class="n">47</span></label>
+      </div>
+      <button class="btn btn-outline-k btn-sm" style="width:100%">Limpiar filtros</button>
+    </aside>
+
+    <div>
+      <div class="toolbar">
+        <span style="font-size:13.5px;color:var(--gray-700)">Mostrando <b>1–12</b> de <b>412</b> resultados</span>
+        <div class="sort-pill">Ordenar por: <b>Mejor puntuación gaming</b> ⌄</div>
+      </div>
+
+      <div class="catalog-grid">
+
+        <a href="#" class="card prod-card" onclick="go('pdp');return false;">
+          <button class="compare-add" title="Añadir a comparativa" onclick="event.preventDefault();event.stopPropagation();">+</button>
+          <div class="ph"><span class="ph-label">LG UltraGear</span></div>
+          <div class="body"><div class="brand-r">LG</div><h4>UltraGear 27GP850-B</h4>
+            <div class="specs-row"><span class="chip">27" QHD</span><span class="chip"><b>165</b>Hz</span><span class="chip">1ms</span></div>
+            <div class="foot"><div class="mini-meter"><div class="bar"><i style="width:92%"></i></div><span>Gaming 92</span></div><span class="btn btn-outline-k btn-sm">Ver ficha</span></div>
+          </div>
+        </a>
+
+        <a href="#" class="card prod-card" onclick="go('pdp');return false;">
+          <button class="compare-add" title="Añadir a comparativa" onclick="event.preventDefault();event.stopPropagation();">+</button>
+          <div class="ph"><span class="ph-label">ASUS ROG Swift</span></div>
+          <div class="body"><div class="brand-r">ASUS</div><h4>ROG Swift PG27AQN</h4>
+            <div class="specs-row"><span class="chip">27" QHD</span><span class="chip"><b>360</b>Hz</span><span class="chip">0.5ms</span></div>
+            <div class="foot"><div class="mini-meter"><div class="bar"><i style="width:98%"></i></div><span>Gaming 98</span></div><span class="btn btn-outline-k btn-sm">Ver ficha</span></div>
+          </div>
+        </a>
+
+        <a href="#" class="card prod-card">
+          <button class="compare-add" title="Añadir a comparativa" onclick="event.preventDefault();event.stopPropagation();">+</button>
+          <div class="ph"><span class="ph-label">BenQ PD2700U</span></div>
+          <div class="body"><div class="brand-r">BENQ</div><h4>PD2700U</h4>
+            <div class="specs-row"><span class="chip">27" 4K</span><span class="chip">IPS</span><span class="chip">KVM</span></div>
+            <div class="foot"><div class="mini-meter"><div class="bar"><i style="width:88%"></i></div><span>Edición 88</span></div><span class="btn btn-outline-k btn-sm">Ver ficha</span></div>
+          </div>
+        </a>
+
+        <a href="#" class="card prod-card">
+          <button class="compare-add" title="Añadir a comparativa" onclick="event.preventDefault();event.stopPropagation();">+</button>
+          <div class="ph"><span class="ph-label">Samsung Odyssey</span></div>
+          <div class="body"><div class="brand-r">SAMSUNG</div><h4>Odyssey OLED G8</h4>
+            <div class="specs-row"><span class="chip">34" Ultrawide</span><span class="chip">QD-OLED</span></div>
+            <div class="foot"><div class="mini-meter"><div class="bar"><i style="width:95%"></i></div><span>Gaming 95</span></div><span class="btn btn-outline-k btn-sm">Ver ficha</span></div>
+          </div>
+        </a>
+
+        <a href="#" class="card prod-card">
+          <button class="compare-add" title="Añadir a comparativa" onclick="event.preventDefault();event.stopPropagation();">+</button>
+          <div class="ph"><span class="ph-label">Dell UltraSharp</span></div>
+          <div class="body"><div class="brand-r">DELL</div><h4>UltraSharp U2723QE</h4>
+            <div class="specs-row"><span class="chip">27" 4K</span><span class="chip">IPS Black</span></div>
+            <div class="foot"><div class="mini-meter"><div class="bar"><i style="width:90%"></i></div><span>Edición 90</span></div><span class="btn btn-outline-k btn-sm">Ver ficha</span></div>
+          </div>
+        </a>
+
+        <a href="#" class="card prod-card">
+          <button class="compare-add" title="Añadir a comparativa" onclick="event.preventDefault();event.stopPropagation();">+</button>
+          <div class="ph"><span class="ph-label">MSI MPG</span></div>
+          <div class="body"><div class="brand-r">MSI</div><h4>MPG 271QR</h4>
+            <div class="specs-row"><span class="chip">27" QHD</span><span class="chip"><b>240</b>Hz</span></div>
+            <div class="foot"><div class="mini-meter"><div class="bar"><i style="width:93%"></i></div><span>Gaming 93</span></div><span class="btn btn-outline-k btn-sm">Ver ficha</span></div>
+          </div>
+        </a>
+
+      </div>
+
+      <div class="pagination">
+        <a href="#">‹</a><a href="#" class="active">1</a><a href="#">2</a><a href="#">3</a><a href="#">…</a><a href="#">35</a><a href="#">›</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer-catalog"></div>
+</section>
+
+<!-- =========================================================
+     MONITOR DETAIL (PDP)
+     ========================================================= -->
+<section class="screen" id="pdp">
+
+  <header class="site-header">
+    <div class="wrap bar">
+      <a href="#" class="logo" onclick="go('home');return false;"><span class="dot"></span>vimovies</a>
+      <nav class="main-nav">
+        <a href="#" onclick="go('home');return false;">Inicio</a>
+        <a href="#" onclick="go('catalog');return false;">Monitores</a>
+        <a href="#" onclick="go('vs');return false;">Comparativas</a>
+        <a href="#" onclick="go('blog');return false;">Blog</a>
+        <a href="#">Marcas</a>
+      </nav>
+      <div class="header-actions">
+        <div class="search-pill">🔍 Busca un modelo, marca o Hz…</div>
+        <span class="lang-pill">ES</span>
+        <a href="#" class="btn btn-black btn-sm" onclick="go('vs');return false;">Comparar</a>
+      </div>
+      <div class="burger">☰</div>
+    </div>
+  </header>
+
+  <div class="wrap crumb"><a href="#" onclick="go('home');return false;">Inicio</a><span>/</span><a href="#" onclick="go('catalog');return false;">Monitores</a><span>/</span><a href="#">LG</a><span>/</span><span style="color:var(--ink)">UltraGear 27GP850-B</span></div>
+
+  <div class="wrap pdp-hero" id="pdp-top">
+    <div class="pdp-grid">
+      <div>
+        <div class="ph accent gallery-main bracket"><span class="ph-label" data-gallery-label>Imagen principal 1200×1200</span></div>
+        <div class="gallery-thumbs">
+          <div class="ph t active" data-thumb="Ángulo frontal"><span class="ph-label">1</span></div>
+          <div class="ph t" data-thumb="Vista lateral — grosor del panel"><span class="ph-label">2</span></div>
+          <div class="ph t" data-thumb="Puertos y conectividad trasera"><span class="ph-label">3</span></div>
+          <div class="ph t" data-thumb="Soporte y ajuste de altura"><span class="ph-label">4</span></div>
+        </div>
+      </div>
+
+      <div class="pdp-info">
+        <a href="#" class="brand-r">LG →</a>
+        <h1>UltraGear 27GP850-B</h1>
+        <div class="specs-row">
+          <span class="chip"><b>27"</b> QHD</span>
+          <span class="chip"><b>165</b>Hz</span>
+          <span class="chip"><b>1</b>ms GTG</span>
+          <span class="chip">Fast-IPS</span>
+          <span class="chip chip-red">HDR400</span>
+        </div>
+
+        <div class="pdp-meters">
+          <div class="meter win"><div class="ring" style="--pct:92"><span>92</span></div><div class="lbl">Gaming</div></div>
+          <div class="meter"><div class="ring" style="--pct:78"><span>78</span></div><div class="lbl">Oficina</div></div>
+          <div class="meter"><div class="ring" style="--pct:85"><span>85</span></div><div class="lbl">Edición</div></div>
+        </div>
+
+        <div class="pdp-cta" id="pdp-cta">
+          <a href="#" class="btn btn-red">Ver mejor oferta</a>
+          <a href="#" class="btn btn-outline-k" onclick="go('vs');return false;">+ Comparar con otro</a>
+        </div>
+        <span class="updated-note">Ficha verificada · actualizada el 20 mar 2026</span>
+      </div>
+    </div>
+  </div>
+
+  <nav class="subnav" data-scrollspy>
+    <div class="wrap">
+      <a href="#pdp-top" class="current">Resumen</a>
+      <a href="#spec-general">Especificaciones</a>
+      <a href="#spec-connectivity">Conectividad</a>
+      <a href="#spec-ergo">Ergonomía</a>
+      <a href="#pdp-compare">Comparativas</a>
+      <a href="#pdp-faq">Preguntas frecuentes</a>
+    </div>
+  </nav>
+
+  <div class="section" id="spec-general">
+    <div class="wrap">
+      <div class="section-head"><div><span class="eyebrow">Ficha completa</span><h2>Especificaciones técnicas</h2></div></div>
+      <div class="spec-groups">
+        <div class="spec-group">
+          <h5>General</h5>
+          <table class="spec-table">
+            <tr><th>Tamaño de pantalla</th><td>27"</td></tr>
+            <tr><th>Resolución</th><td>2560 × 1440</td></tr>
+            <tr><th>Relación de aspecto</th><td>16:9</td></tr>
+            <tr><th>Tipo de panel</th><td>Fast-IPS</td></tr>
+            <tr><th>Tasa de refresco</th><td>165 Hz</td></tr>
+            <tr><th>Tiempo de respuesta</th><td>1 ms GTG</td></tr>
+            <tr><th>HDR</th><td>HDR400</td></tr>
+          </table>
+        </div>
+        <div class="spec-group">
+          <h5>Color y brillo</h5>
+          <table class="spec-table">
+            <tr><th>Cobertura sRGB</th><td>98%</td></tr>
+            <tr><th>Cobertura DCI-P3</th><td>98%</td></tr>
+            <tr><th>Brillo</th><td>400 nits</td></tr>
+            <tr><th>Contraste estático</th><td>1000:1</td></tr>
+            <tr><th>VRR / Sync</th><td>G-Sync Compatible</td></tr>
+          </table>
+        </div>
+        <div class="spec-group" id="spec-connectivity">
+          <h5>Conectividad</h5>
+          <table class="spec-table">
+            <tr><th>HDMI</th><td>2× HDMI 2.0</td></tr>
+            <tr><th>DisplayPort</th><td>1× DP 1.4</td></tr>
+            <tr><th>USB</th><td>1 upstream + 2× USB-A 3.0</td></tr>
+            <tr><th>KVM integrado</th><td>No</td></tr>
+            <tr><th>Altavoces</th><td>No</td></tr>
+          </table>
+        </div>
+        <div class="spec-group" id="spec-ergo">
+          <h5>Ergonomía</h5>
+          <table class="spec-table">
+            <tr><th>Ajuste de altura</th><td>Sí</td></tr>
+            <tr><th>Giro (swivel)</th><td>90°</td></tr>
+            <tr><th>Inclinación</th><td>-5° a 15°</td></tr>
+            <tr><th>Pivote (pivot)</th><td>Sí</td></tr>
+            <tr><th>VESA</th><td>100×100</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section paper" id="pdp-compare">
+    <div class="wrap">
+      <div class="section-head"><div><span class="eyebrow">Frente a frente</span><h2>Comparativas con este monitor</h2></div></div>
+      <div class="hscroll">
+        <a href="#" class="vs-mini" style="width:420px" onclick="go('vs');return false;">
+          <div class="side"><div class="ph"></div><h4>27GP850-B</h4><div class="brand-r">LG</div></div>
+          <div class="mid">VS</div>
+          <div class="side b"><div class="ph"></div><h4>PG27AQN</h4><div class="brand-r">ASUS</div></div>
+        </a>
+        <a href="#" class="vs-mini" style="width:420px" onclick="go('vs');return false;">
+          <div class="side"><div class="ph"></div><h4>27GP850-B</h4><div class="brand-r">LG</div></div>
+          <div class="mid">VS</div>
+          <div class="side b"><div class="ph"></div><h4>MPG 271QR</h4><div class="brand-r">MSI</div></div>
+        </a>
+        <a href="#" class="vs-mini vs-mini-add" style="width:220px" onclick="go('vs');return false;">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--gray-500)">
+            <span style="font-size:22px;line-height:1">+</span>
+            <span style="font-size:12.5px;font-weight:600">Comparar con otro modelo</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="pdp-faq">
+    <div class="wrap">
+      <div class="section-head"><div><span class="eyebrow">Dudas frecuentes</span><h2>Preguntas sobre este monitor</h2></div></div>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary>¿El 27GP850-B sirve para trabajo de diseño, no solo gaming?</summary>
+          <p>Sí, aunque no es su punto fuerte. Con 98% de cobertura DCI-P3 y un panel Fast-IPS cubre bien retoque casual, pero para calibración profesional un panel como el BenQ PD2700U ofrece mejor precisión de fábrica.</p>
+        </details>
+        <details class="faq-item">
+          <summary>¿Necesito una tarjeta gráfica potente para aprovechar los 165 Hz?</summary>
+          <p>Para sostener 165 fps de forma constante en QHD conviene al menos una gama media-alta (RTX 4060 Ti o superior). Con una GPU más modesta seguirás notando mejoras frente a 60 Hz, aunque sin tocar el techo del panel.</p>
+        </details>
+        <details class="faq-item">
+          <summary>¿Trae altavoces o KVM integrado?</summary>
+          <p>No. Este modelo no incluye altavoces ni conmutador KVM; si necesitas alguna de las dos funciones, revisa alternativas como el ASUS PG27AQN en la sección de comparativas.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="wrap">
+      <div class="section-head"><div><span class="eyebrow">Relacionado</span><h2>Artículos que mencionan este monitor</h2></div></div>
+      <div class="grid-3">
+        <a href="#" class="card post-card" onclick="go('article');return false;">
+          <div class="ph"><span class="ph-label">Foto de guía</span></div>
+          <div class="body"><span class="tag tag-guide">Guía</span><h4>¿Cuántos Hz necesitas para jugar competitivamente?</h4><div class="meta"><span>5 min</span><span>01 Feb 2026</span></div></div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer-pdp"></div>
+
+  <div class="buy-bar" data-buy-bar>
+    <div class="wrap">
+      <div class="who">
+        <div class="sc"></div>
+        <div>
+          <h6>LG UltraGear 27GP850-B</h6>
+          <span>92 / 100 · Gaming</span>
+        </div>
+      </div>
+      <div class="actions">
+        <a href="#" class="btn btn-outline-w btn-sm" onclick="go('vs');return false;">Comparar</a>
+        <a href="#" class="btn btn-red btn-sm">Ver mejor oferta</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     COMPARISON (VS)
+     ========================================================= -->
+<section class="screen" id="vs">
+
+  <header class="site-header">
+    <div class="wrap bar">
+      <a href="#" class="logo" onclick="go('home');return false;"><span class="dot"></span>vimovies</a>
+      <nav class="main-nav">
+        <a href="#" onclick="go('home');return false;">Inicio</a>
+        <a href="#" onclick="go('catalog');return false;">Monitores</a>
+        <a href="#" class="current">Comparativas</a>
+        <a href="#" onclick="go('blog');return false;">Blog</a>
+        <a href="#">Marcas</a>
+      </nav>
+      <div class="header-actions">
+        <div class="search-pill">🔍 Busca un modelo, marca o Hz…</div>
+        <span class="lang-pill">ES</span>
+        <a href="#" class="btn btn-black btn-sm">Comparar</a>
+      </div>
+      <div class="burger">☰</div>
+    </div>
+  </header>
+
+  <div class="wrap crumb"><a href="#" onclick="go('home');return false;">Inicio</a><span>/</span><a href="#" onclick="go('vs');return false;">Comparativas</a><span>/</span><span style="color:var(--ink)">LG vs ASUS</span></div>
+
+  <div class="vs-hero scanlines">
+    <div class="wrap">
+      <div class="vs-title"><h1>LG UltraGear 27GP850-B <b>vs</b> ASUS ROG Swift PG27AQN</h1></div>
+      <div class="vs-stage">
+        <div class="vs-monitor">
+          <div class="ph dark bracket on-dark"><span class="ph-label">Imagen A</span></div>
+          <div class="brand-r">LG</div>
+          <h3>UltraGear 27GP850-B</h3>
+          <div class="specs-row"><span class="chip vs-chip">27" QHD</span><span class="chip vs-chip">165Hz</span><span class="chip vs-chip">Fast-IPS</span></div>
+        </div>
+        <div class="vs-badge">VS</div>
+        <div class="vs-monitor b">
+          <div class="ph dark bracket on-dark"><span class="ph-label">Imagen B</span></div>
+          <div class="brand-r">ASUS</div>
+          <h3>ROG Swift PG27AQN</h3>
+          <div class="specs-row"><span class="chip vs-chip">27" QHD</span><span class="chip vs-chip">360Hz</span><span class="chip vs-chip">Fast-IPS</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="vs-mini-bar" data-vs-mini-bar>
+      <span class="nm">LG 27GP850-B <span class="sc">92</span></span>
+      <span class="x">vs</span>
+      <span class="nm">ASUS PG27AQN <span class="sc">98</span></span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="wrap">
+      <div class="section-head"><div><span class="eyebrow">Resultado</span><h2>Ganador por perfil de uso</h2></div></div>
+      <div class="profile-compare">
+        <div class="profile-cell">
+          <h5>Gaming</h5>
+          <div class="two-meters">
+            <div class="meter"><div class="ring" style="--pct:92"><span>92</span></div><div class="lbl">LG</div></div>
+            <div class="meter win"><div class="ring" style="--pct:98"><span>98</span></div><div class="lbl">ASUS ✓</div></div>
+          </div>
+          <div class="delta">Δ 5.6 puntos</div>
+        </div>
+        <div class="profile-cell">
+          <h5>Oficina</h5>
+          <div class="two-meters">
+            <div class="meter win"><div class="ring" style="--pct:78"><span>78</span></div><div class="lbl">LG ✓</div></div>
+            <div class="meter"><div class="ring" style="--pct:65"><span>65</span></div><div class="lbl">ASUS</div></div>
+          </div>
+          <div class="delta">Δ 12.9 puntos</div>
+        </div>
+        <div class="profile-cell">
+          <h5>Edición</h5>
+          <div class="two-meters">
+            <div class="meter win"><div class="ring" style="--pct:85"><span>85</span></div><div class="lbl">LG ✓</div></div>
+            <div class="meter"><div class="ring" style="--pct:72"><span>72</span></div><div class="lbl">ASUS</div></div>
+          </div>
+          <div class="delta">Δ 13.1 puntos</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section paper">
+    <div class="wrap">
+      <div class="section-head"><div><span class="eyebrow">Ficha contra ficha</span><h2>Tabla comparativa completa</h2></div></div>
+      <div class="card" style="overflow-x:auto">
+        <table class="compare-table">
+          <thead><tr><th>Especificación</th><th>LG 27GP850-B</th><th>ASUS PG27AQN</th></tr></thead>
+          <tbody>
+            <tr><td>Panel</td><td>Fast-IPS</td><td>Fast-IPS</td></tr>
+            <tr><td>Tasa de refresco</td><td>165 Hz</td><td class="win">360 Hz</td></tr>
+            <tr><td>Tiempo de respuesta</td><td class="win">1 ms</td><td>0.5 ms</td></tr>
+            <tr><td>Brillo</td><td>400 nits</td><td class="win">450 nits</td></tr>
+            <tr><td>Cobertura DCI-P3</td><td class="win">98%</td><td>95%</td></tr>
+            <tr><td>KVM integrado</td><td>No</td><td>No</td></tr>
+            <tr><td>Altavoces</td><td>No</td><td>No</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="wrap" style="max-width:820px">
+      <div class="ai-card" style="margin-bottom:20px">
+        <div class="ic">✦</div>
+        <div>
+          <h5>Resumen generado con IA</h5>
+          <p>El ASUS ROG Swift PG27AQN gana en velocidad pura gracias a sus 360 Hz, mientras que el LG 27GP850-B ofrece mejor relación calidad-precio para QHD 165 Hz.</p>
+        </div>
+      </div>
+      <div class="verdict-box">
+        <h5>Veredicto</h5>
+        <p>Elige el ASUS si buscas rendimiento eSports extremo; elige el LG si quieres un panel equilibrado para gaming y productividad.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section paper">
+    <div class="wrap">
+      <div class="section-head"><div><span class="eyebrow">Sigue comparando</span><h2>Otras comparativas con estos monitores</h2></div></div>
+      <div class="grid-3">
+        <a href="#" class="vs-mini">
+          <div class="side"><div class="ph"></div><h4>27GP850-B</h4><div class="brand-r">LG</div></div>
+          <div class="mid">VS</div>
+          <div class="side b"><div class="ph"></div><h4>MPG 271QR</h4><div class="brand-r">MSI</div></div>
+        </a>
+        <a href="#" class="vs-mini">
+          <div class="side"><div class="ph"></div><h4>PG27AQN</h4><div class="brand-r">ASUS</div></div>
+          <div class="mid">VS</div>
+          <div class="side b"><div class="ph"></div><h4>Odyssey G8</h4><div class="brand-r">SAMSUNG</div></div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer-vs"></div>
+</section>
+
+<!-- =========================================================
+     BLOG
+     ========================================================= -->
+<section class="screen" id="blog">
+
+  <header class="site-header">
+    <div class="wrap bar">
+      <a href="#" class="logo" onclick="go('home');return false;"><span class="dot"></span>vimovies</a>
+      <nav class="main-nav">
+        <a href="#" onclick="go('home');return false;">Inicio</a>
+        <a href="#" onclick="go('catalog');return false;">Monitores</a>
+        <a href="#" onclick="go('vs');return false;">Comparativas</a>
+        <a href="#" class="current">Blog</a>
+        <a href="#">Marcas</a>
+      </nav>
+      <div class="header-actions">
+        <div class="search-pill">🔍 Busca un modelo, marca o Hz…</div>
+        <span class="lang-pill">ES</span>
+        <a href="#" class="btn btn-black btn-sm" onclick="go('vs');return false;">Comparar</a>
+      </div>
+      <div class="burger">☰</div>
+    </div>
+  </header>
+
+  <div class="wrap crumb"><a href="#" onclick="go('home');return false;">Inicio</a><span>/</span><span style="color:var(--ink)">Blog</span></div>
+
+  <div class="wrap page-head">
+    <span class="eyebrow">86 artículos</span>
+    <h1>Guías, reviews y noticias</h1>
+    <p class="count">Todo lo que necesitas entender antes de elegir tu próximo monitor.</p>
+  </div>
+
+  <div class="wrap" style="padding-bottom:90px">
+    <div class="blog-filters" data-blog-filters>
+      <button class="active" data-filter="all">Todas</button>
+      <button data-filter="guide">Guías</button>
+      <button data-filter="review">Reviews</button>
+      <button data-filter="news">Noticias</button>
+      <button data-filter="faq">FAQ</button>
+    </div>
+
+    <a href="#" class="featured-post" onclick="go('article');return false;">
+      <div class="ph"><span class="ph-label">Imagen destacada</span></div>
+      <div class="body">
+        <span class="tag tag-guide">Guía</span>
+        <h2>¿Cuántos Hz necesitas para jugar competitivamente?</h2>
+        <p>Desde 60 Hz hasta 360 Hz: te explicamos cuánta tasa de refresco realmente necesitas según tu género de juego y presupuesto.</p>
+        <div class="meta" style="display:flex;gap:16px;font-family:var(--font-mono);font-size:12px;color:var(--gray-500)"><span>Por el equipo de Vimovies</span><span>5 min de lectura</span><span>01 Feb 2026</span></div>
+      </div>
+    </a>
+
+    <div class="grid-3" data-blog-grid>
+      <a href="#" class="card post-card" data-cat="review">
+        <button class="save" title="Guardar artículo" onclick="event.preventDefault();event.stopPropagation();this.classList.toggle('saved');">☆</button>
+        <div class="ph"><span class="ph-label">Foto</span></div>
+        <div class="body"><span class="tag tag-review">Review</span><h4>Probamos el Samsung Odyssey OLED G8 durante 30 días</h4><p>Brillo, quemado de píxeles y rendimiento real en uso diario.</p><div class="meta"><span>8 min</span><span>22 Ene 2026</span></div></div>
+      </a>
+      <a href="#" class="card post-card" data-cat="faq">
+        <button class="save" title="Guardar artículo" onclick="event.preventDefault();event.stopPropagation();this.classList.toggle('saved');">☆</button>
+        <div class="ph"><span class="ph-label">Foto</span></div>
+        <div class="body"><span class="tag tag-faq">FAQ</span><h4>IPS vs VA vs OLED: diferencias que sí importan</h4><p>Tiempos de respuesta, contraste y ángulos de visión explicados sin tecnicismos.</p><div class="meta"><span>6 min</span><span>14 Ene 2026</span></div></div>
+      </a>
+      <a href="#" class="card post-card" data-cat="news">
+        <button class="save" title="Guardar artículo" onclick="event.preventDefault();event.stopPropagation();this.classList.toggle('saved');">☆</button>
+        <div class="ph"><span class="ph-label">Foto</span></div>
+        <div class="body"><span class="tag tag-news">Noticia</span><h4>ASUS anuncia el sucesor del PG27AQN con 500Hz</h4><p>El nuevo panel promete la mayor tasa de refresco jamás vista en un monitor de consumo.</p><div class="meta"><span>3 min</span><span>10 Ene 2026</span></div></div>
+      </a>
+      <a href="#" class="card post-card" data-cat="guide">
+        <button class="save" title="Guardar artículo" onclick="event.preventDefault();event.stopPropagation();this.classList.toggle('saved');">☆</button>
+        <div class="ph"><span class="ph-label">Foto</span></div>
+        <div class="body"><span class="tag tag-guide">Guía</span><h4>KVM integrado: qué es y cuándo lo necesitas</h4><p>La función que te permite controlar dos ordenadores con un solo teclado y ratón.</p><div class="meta"><span>4 min</span><span>02 Ene 2026</span></div></div>
+      </a>
+      <a href="#" class="card post-card" data-cat="review">
+        <button class="save" title="Guardar artículo" onclick="event.preventDefault();event.stopPropagation();this.classList.toggle('saved');">☆</button>
+        <div class="ph"><span class="ph-label">Foto</span></div>
+        <div class="body"><span class="tag tag-review">Review</span><h4>BenQ PD2700U: el monitor favorito de los diseñadores</h4><p>Calibración de fábrica y Eye-Care puestos a prueba en una jornada de 8 horas.</p><div class="meta"><span>7 min</span><span>28 Dic 2025</span></div></div>
+      </a>
+      <a href="#" class="card post-card" data-cat="guide">
+        <button class="save" title="Guardar artículo" onclick="event.preventDefault();event.stopPropagation();this.classList.toggle('saved');">☆</button>
+        <div class="ph"><span class="ph-label">Foto</span></div>
+        <div class="body"><span class="tag tag-guide">Guía</span><h4>Ultrawide vs doble monitor: qué conviene para trabajar</h4><p>Comparamos productividad, precio y ergonomía entre ambos formatos.</p><div class="meta"><span>6 min</span><span>20 Dic 2025</span></div></div>
+      </a>
+    </div>
+
+    <div class="pagination">
+      <a href="#">‹</a><a href="#" class="active">1</a><a href="#">2</a><a href="#">3</a><a href="#">…</a><a href="#">15</a><a href="#">›</a>
+    </div>
+  </div>
+
+  <div id="footer-blog"></div>
+</section>
+
+<!-- =========================================================
+     ARTICLE
+     ========================================================= -->
+<section class="screen" id="article">
+
+  <header class="site-header">
+    <div class="wrap bar">
+      <a href="#" class="logo" onclick="go('home');return false;"><span class="dot"></span>vimovies</a>
+      <nav class="main-nav">
+        <a href="#" onclick="go('home');return false;">Inicio</a>
+        <a href="#" onclick="go('catalog');return false;">Monitores</a>
+        <a href="#" onclick="go('vs');return false;">Comparativas</a>
+        <a href="#" onclick="go('blog');return false;">Blog</a>
+        <a href="#">Marcas</a>
+      </nav>
+      <div class="header-actions">
+        <div class="search-pill">🔍 Busca un modelo, marca o Hz…</div>
+        <span class="lang-pill">ES</span>
+        <a href="#" class="btn btn-black btn-sm" onclick="go('vs');return false;">Comparar</a>
+      </div>
+      <div class="burger">☰</div>
+    </div>
+  </header>
+
+  <div class="wrap crumb"><a href="#" onclick="go('home');return false;">Inicio</a><span>/</span><a href="#" onclick="go('blog');return false;">Blog</a><span>/</span><span style="color:var(--ink)">Guía de Hz</span></div>
+
+  <div class="wrap article-head">
+    <span class="tag tag-guide">Guía</span>
+    <h1>¿Cuántos Hz necesitas para jugar competitivamente?</h1>
+    <div class="article-meta">
+      <span>Por el equipo de Vimovies</span><span>·</span><span>01 Feb 2026</span><span>·</span><span>5 min de lectura</span>
+    </div>
+  </div>
+
+  <div class="wrap"><div class="ph article-cover"><span class="ph-label">Imagen destacada del artículo</span></div></div>
+
+  <div class="wrap article-layout">
+    <article class="prose">
+      <p>La tasa de refresco es uno de los factores que más impacta la fluidez percibida de un monitor, pero no todos los jugadores necesitan el mismo número. Antes de pagar de más por 360 Hz, vale la pena entender qué gana realmente cada salto.</p>
+
+      <h2>60 Hz vs 144 Hz</h2>
+      <p>El salto de 60 a 144 Hz es el que más se nota para cualquier persona, independientemente del género que juegue. La imagen deja de sentirse "pegajosa" durante los giros de cámara rápidos.</p>
+
+      <table>
+        <thead><tr><th>Género</th><th>Mínimo recomendado</th><th>Ideal</th></tr></thead>
+        <tbody>
+          <tr><td>MOBA / RTS</td><td>60 Hz</td><td>144 Hz</td></tr>
+          <tr><td>FPS competitivo</td><td>144 Hz</td><td>240+ Hz</td></tr>
+          <tr><td>Carreras / simuladores</td><td>144 Hz</td><td>240 Hz</td></tr>
+        </tbody>
+      </table>
+
+      <div class="pull-quote">"Por encima de 240 Hz, la mejora ya depende más de tu reacción que de tus ojos."</div>
+
+      <h2>¿Vale la pena pagar por 360 Hz?</h2>
+      <p>Solo si compites a nivel serio en shooters rápidos y ya tienes una GPU capaz de sostener esos fotogramas. Para el resto de perfiles, 165 Hz sigue siendo el punto dulce entre precio y fluidez.</p>
+    </article>
+
+    <aside>
+      <div class="sidebar-box toc">
+        <h5>En este artículo</h5>
+        <a href="#">60 Hz vs 144 Hz</a>
+        <a href="#">Tabla por género de juego</a>
+        <a href="#">¿Vale la pena 360 Hz?</a>
+      </div>
+      <div class="sidebar-box">
+        <h5>Monitores mencionados</h5>
+        <a href="#" class="related-mini" onclick="go('pdp');return false;">
+          <div class="ph"></div>
+          <div><h6>LG UltraGear 27GP850-B</h6><span>165Hz · QHD · Gaming 92</span></div>
+        </a>
+        <a href="#" class="related-mini">
+          <div class="ph"></div>
+          <div><h6>ASUS ROG Swift PG27AQN</h6><span>360Hz · QHD · Gaming 98</span></div>
+        </a>
+      </div>
+      <div class="sidebar-box" style="background:var(--black);border-color:var(--black)">
+        <h5 style="color:rgba(255,255,255,.5)">Compara ahora</h5>
+        <p style="color:#fff;font-size:13.5px;margin-bottom:14px">¿Dudas entre estos dos monitores? Míralos cara a cara.</p>
+        <a href="#" class="btn btn-red btn-sm" style="width:100%" onclick="go('vs');return false;">Ver comparativa →</a>
+      </div>
+    </aside>
+  </div>
+
+  <div id="footer-article"></div>
+</section>
+
+<template id="footer-tpl">
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <a href="#" class="logo" style="color:#fff"><span class="dot"></span>vimovies</a>
+          <p style="color:rgba(255,255,255,.5);font-size:13.5px;margin-top:16px;max-width:240px;">Base de datos independiente de monitores: fichas técnicas, puntuaciones y comparativas verificadas.</p>
+        </div>
+        <div>
+          <h5>Monitores</h5>
+          <ul><li><a href="#">Gaming</a></li><li><a href="#">Diseño y edición</a></li><li><a href="#">Ultrawide</a></li><li><a href="#">4K</a></li></ul>
+        </div>
+        <div>
+          <h5>Comparativas</h5>
+          <ul><li><a href="#">LG vs ASUS</a></li><li><a href="#">Samsung vs BenQ</a></li><li><a href="#">Ver todas</a></li></ul>
+        </div>
+        <div>
+          <h5>Compañía</h5>
+          <ul><li><a href="#">Metodología</a></li><li><a href="#">Sobre Vimovies</a></li><li><a href="#">Contacto</a></li><li><a href="#">Privacidad</a></li></ul>
+        </div>
+        <div>
+          <h5>Newsletter</h5>
+          <div class="footer-newsletter">
+            <input type="text" placeholder="tu@email.com">
+            <button class="btn btn-red btn-sm" style="width:100%">Suscribirme</button>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Vimovies. Todos los derechos reservados.</span>
+        <span>Hecho con datos, no con humo.</span>
+      </div>
+    </div>
+  </footer>
+</template>
+
+<script>
+  // Inyecta el mismo footer en cada screen
+  document.querySelectorAll('[id^="footer-"]').forEach(function(el){
+    var tpl = document.getElementById('footer-tpl');
+    el.replaceWith(tpl.content.cloneNode(true));
+  });
+
+  function go(id){
+    document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('active'); });
+    document.getElementById(id).classList.add('active');
+    document.querySelectorAll('.proto-bar button').forEach(function(b){
+      b.classList.toggle('active', b.dataset.target === id);
+    });
+    window.scrollTo({top:0, behavior:'instant'});
+  }
+
+  document.querySelectorAll('.proto-bar button').forEach(function(btn){
+    btn.addEventListener('click', function(){ go(btn.dataset.target); });
+  });
+</script>
+
+</body>
+</html>

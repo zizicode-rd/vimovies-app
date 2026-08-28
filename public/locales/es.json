@@ -1,0 +1,248 @@
+{
+  "brand": "vimovies",
+  "topBar": {
+    "text": "{monitors} monitores analizados · {comparisons} comparativas · datos verificados cada semana",
+    "cta": "Ver catálogo"
+  },
+  "nav": {
+    "home": "Inicio",
+    "monitors": "Monitores",
+    "comparisons": "Comparativas",
+    "blog": "Blog",
+    "compare": "Comparar"
+  },
+  "footer": {
+    "tagline": "Comparamos monitores con especificaciones verificadas y puntuaciones reales por uso, para que elijas con criterio y no con marketing.",
+    "rights": "Todos los derechos reservados."
+  },
+  "hero": {
+    "eyebrow": "Base de datos independiente de monitores",
+    "titleStart": "Elige tu monitor con",
+    "titleEmphasis": "datos",
+    "titleEnd": ", no con marketing.",
+    "lead": "Fichas técnicas verificadas, puntuaciones por perfil de uso y comparativas cara a cara — para elegir el monitor correcto a la primera.",
+    "searchPlaceholder": "Ej. LG UltraGear, 27 pulgadas, 165Hz…",
+    "searchCta": "Buscar",
+    "chips": [
+      { "label": "144Hz+", "href": "/es/monitores?min_hz=144" },
+      { "label": "OLED", "href": "/es/monitores?panel=OLED" },
+      { "label": "4K", "href": "/es/monitores?resolution=4K" },
+      { "label": "Ultrawide", "href": "/es/monitores?format=Ultrawide" },
+      { "label": "Bajo presupuesto", "href": "/es/monitores?budget=low" },
+      { "label": "Para gaming", "href": "/es/monitores?use=gaming" },
+      { "label": "Curvo", "href": "/es/monitores?curved=true" }
+    ],
+    "statMonitors": "Monitores en base de datos",
+    "statVerified": "Fichas verificadas este mes",
+    "statComparisons": "Comparativas cara a cara",
+    "calibrated": "Calibrado",
+    "meters": {
+      "gaming": "Gaming",
+      "office": "Oficina",
+      "editing": "Edición"
+    }
+  },
+  "featured": {
+    "eyebrow": "Puntuación por perfil",
+    "title": "Monitores destacados esta semana",
+    "subtitle": "Ranking calculado a partir de specs verificadas: panel, respuesta, cobertura de color y ergonomía.",
+    "seeAll": "Ver todos",
+    "viewSheet": "Ver ficha",
+    "empty": "No se encontraron monitores destacados"
+  },
+  "comparisons": {
+    "eyebrow": "Cara a cara",
+    "title": "Comparativas populares",
+    "seeAll": "Ver todas",
+    "empty": "No hay comparativas disponibles",
+    "notFound": "Comparativa no encontrada",
+    "vs": "vs",
+    "scoresByProfile": "Puntuación por perfil",
+    "specsTable": "Comparativa de especificaciones",
+    "spec": "Especificación",
+    "winner": "Ganador",
+    "tie": "Empate",
+    "profilesWon": "Perfiles ganados",
+    "specScore": "Puntuación por specs",
+    "byProfiles": "Por perfiles",
+    "bySpecs": "Por especificaciones",
+    "aiSummary": "Análisis comparativo",
+    "noSummary": "No hay resumen disponible.",
+    "technical": "TÉCNICO & INSIGHTS",
+    "recommendationTitle": "¿Cuál deberías comprar?",
+    "bestOverall": "Mejor elección global",
+    "forGaming": "Para competitivo / esports",
+    "forEditing": "Para creación de contenido / edición",
+    "tieReason": "Ambos monitores están muy igualados en este apartado.",
+    "subtitle": "Elige dos monitores y descubre cuál gana en gaming, oficina y edición.",
+    "latest": "Últimas comparaciones",
+    "selectA": "Monitor A",
+    "selectB": "Monitor B",
+    "compare": "Comparar",
+    "builderHelp": "Selecciona dos monitores y descubre cuál es mejor para ti.",
+    "same": "No puedes comparar el mismo monitor.",
+    "seeCompare": "Ver comparativa",
+    "verdict": "Veredicto",
+    "heroTitle": "Comparador cara a cara de monitores",
+    "heroLead": "Selecciona dos modelos y compara sus especificaciones, rendimiento y veredicto final.",
+    "latestPopular": "Comparativas recientes y populares",
+    "seeFull": "Ver comparativa completa →",
+    "compareNow": "Comparar ahora"
+  },
+  "blog": {
+    "eyebrow": "Blog",
+    "title": "Guías y análisis de monitores",
+    "lead": "Guías técnicas y comparativas para elegir el monitor que mejor se ajusta a tu uso.",
+    "readMore": "Leer más",
+    "empty": "No hay artículos disponibles.",
+    "filterAll": "Todas",
+    "filterGuide": "Guías",
+    "filterReview": "Reviews",
+    "filterNews": "Noticias",
+    "filterFaq": "FAQ",
+    "saveAria": "Guardar",
+    "mostRead": "Lo más leído",
+    "quickCompare": "Comparador rápido",
+    "quickCompareText": "Compara monitores cara a cara según tu perfil de uso.",
+    "compareNow": "Comparar ahora",
+    "author": "Vimovies",
+    "by": "Por",
+    "minRead": "{min} min de lectura"
+  },
+  "guides": {
+    "eyebrow": "Aprende",
+    "title": "Últimas guías",
+    "seeAll": "Ir al blog",
+    "reading": "de lectura",
+    "empty": "No hay guías disponibles"
+  },
+  "why": {
+    "eyebrow": "Metodología",
+    "title": "Por qué confiar en Vimovies",
+    "methodologyCta": "Cómo calibramos",
+    "methodologyHref": "/es/metodologia",
+    "items": {
+      "data": {
+        "label": "DATOS",
+        "title": "Specs verificadas",
+        "text": "Cada ficha se contrasta contra la hoja técnica oficial del fabricante antes de publicarse."
+      },
+      "fair": {
+        "label": "IMPARCIAL",
+        "title": "Sin marcas patrocinadas",
+        "text": "El ranking se calcula con la misma fórmula para todos los modelos, sin excepciones."
+      },
+      "fresh": {
+        "label": "VIVO",
+        "title": "Actualizado semanalmente",
+        "text": "Precios, disponibilidad y nuevos lanzamientos se revisan cada semana."
+      }
+    }
+  },
+  "categories": {
+    "eyebrow": "Explora",
+    "title": "¿Para qué vas a usar el monitor?",
+    "models": "modelos",
+    "seeHub": "Ver selección",
+    "fallback": {
+      "gaming": "Gaming",
+      "design": "Diseño y edición",
+      "office": "Oficina",
+      "ultrawide": "Ultrawide",
+      "4k": "Alta resolución"
+    }
+  },
+  "monitor": {
+    "scoreExcellent": "Excelente",
+    "scoreGood": "Bueno",
+    "scoreFair": "Aceptable",
+    "specs": "Especificaciones",
+    "verdict": "Veredicto",
+    "alternatives": "Alternativas",
+    "compareCta": "Comparar contra otro monitor",
+    "buyCta": "Ver precio / Dónde comprar",
+    "specsTitle": "Especificaciones técnicas",
+    "screenAndImage": "Pantalla e Imagen",
+    "colorAndGamut": "Color y Gama",
+    "connectivityAndPorts": "Conectividad y Puertos",
+    "technologies": "Tecnologías",
+    "videoReview": "Video review",
+    "verdictFallback": "Una opción sólida para uso {profile_top}, con panel {panel} y {refreshRate}Hz de tasa de refresco.",
+    "portFallback": "puerto",
+    "yes": "Sí",
+    "no": "No",
+    "flat": "Plano",
+    "labels": {
+      "inches": "Pulgadas",
+      "resolution": "Resolución",
+      "refreshRate": "Tasa de refresco",
+      "panel": "Panel",
+      "responseTime": "Tiempo de respuesta",
+      "hdr": "HDR",
+      "brightness": "Brillo",
+      "contrast": "Contraste",
+      "dciP3": "DCI-P3",
+      "srgb": "sRGB",
+      "colorDepth": "Profundidad de color",
+      "curvature": "Curvatura",
+      "usbPd": "USB-PD",
+      "speakers": "Altavoces",
+      "kvm": "KVM",
+      "vesa": "VESA",
+      "ports": "Puertos",
+      "vrr": "VRR",
+      "adaptiveSync": "Adaptive Sync"
+    },
+    "profiles": {
+      "gaming": "Gaming",
+      "office": "Oficina",
+      "editing": "Edición"
+    }
+  },
+  "hubs": {
+    "eyebrow": "Hub",
+    "found": "monitores encontrados",
+    "empty": "No se encontraron monitores para este hub."
+  },
+  "notFound": {
+    "title": "Página no encontrada",
+    "message": "Lo sentimos, la página que buscas no existe.",
+    "cta": "Volver al inicio",
+    "alsoAvailable": "También disponible en",
+    "lang": {
+      "es": "Español",
+      "en": "English"
+    }
+  },
+  "catalog": {
+    "eyebrow": "Catálogo",
+    "title": "Catálogo de monitores",
+    "results": "resultados",
+    "view": "Ver ficha",
+    "compareAdd": "Añadir a comparativa",
+    "empty": "No se encontraron monitores con esos filtros",
+    "perPage": "por página",
+    "filters": {
+      "title": "Filtros",
+      "close": "Cerrar",
+      "brands": "Marca",
+      "panel": "Panel",
+      "resolution": "Resolución",
+      "refresh": "Tasa de refresco",
+      "use": "Uso"
+    },
+    "sort": {
+      "relevance": "Relevancia",
+      "gaming": "Gaming",
+      "editing": "Edición",
+      "office": "Oficina"
+    },
+    "pagination": "Paginación",
+    "prev": "Anterior",
+    "next": "Siguiente"
+  },
+  "language": {
+    "es": "ES",
+    "en": "EN"
+  }
+}

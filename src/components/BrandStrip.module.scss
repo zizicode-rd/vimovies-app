@@ -1,0 +1,121 @@
+@use "../styles/_variables.scss" as vars;
+
+.brandStrip {
+  background: var(--color-white);
+  border-top: 1px solid var(--color-line);
+  border-bottom: 1px solid var(--color-line);
+  padding: 34px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.brandStrip::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 90px;
+  background: linear-gradient(90deg, var(--color-white) 0%, transparent 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.brandStrip::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 90px;
+  background: linear-gradient(270deg, var(--color-white) 0%, transparent 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding: 10px 18px;
+  color: var(--color-gray-500);
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  text-decoration: none;
+  transition: color 0.2s vars.$ease, transform 0.2s vars.$ease;
+  position: relative;
+
+  &:hover {
+    color: var(--color-ink);
+    transform: translateY(-3px);
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--color-red);
+    transform: translateX(-50%);
+    transition: width 0.25s vars.$ease;
+  }
+
+  &:hover::after {
+    width: 24px;
+  }
+}
+
+.label {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: #{vars.$bp-xl}) {
+  .inner {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    justify-content: flex-start;
+    padding: 0 20px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .brandStrip {
+    padding: 0;
+  }
+
+  .brandStrip .container {
+    padding: 0;
+    max-width: 100%;
+  }
+
+  .brand {
+    flex: none;
+    scroll-snap-align: start;
+    font-size: 20px;
+    padding: 28px 22px;
+  }
+
+  .brandStrip::before,
+  .brandStrip::after {
+    width: 60px;
+  }
+}
+
+@media (max-width: #{vars.$bp-md}) {
+  .brand {
+    font-size: 18px;
+    padding: 24px 20px;
+  }
+}

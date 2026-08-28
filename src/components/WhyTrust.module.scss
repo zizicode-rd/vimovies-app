@@ -1,0 +1,83 @@
+@use "../styles/_variables.scss" as vars;
+
+.section {
+  padding: 76px 0;
+  background: var(--color-white);
+}
+
+.whyGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.cell {
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-m);
+  padding: 32px;
+  background: var(--color-white);
+  transition: border-color 0.2s vars.$ease, box-shadow 0.2s vars.$ease, transform 0.2s vars.$ease;
+
+  &:hover {
+    border-color: var(--color-line-strong);
+    box-shadow: var(--shadow-m);
+    transform: translateY(-3px);
+  }
+}
+
+.num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--color-red);
+  margin-bottom: 16px;
+}
+
+.cellTitle {
+  font-size: 18px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--color-ink);
+  margin: 0 0 8px;
+}
+
+.cellText {
+  font-size: 14px;
+  color: var(--color-gray-700);
+  line-height: 1.55;
+}
+
+.whyCta {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.methodologyLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 999px;
+  border: 1px solid var(--color-ink);
+  color: var(--color-ink);
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  transition: background .15s var(--ease), color .15s var(--ease);
+}
+
+.methodologyLink:hover {
+  background: var(--color-ink);
+  color: #fff;
+}
+
+@media (max-width: #{vars.$bp-md}) {
+  .whyGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .cell {
+    padding: 24px;
+  }
+}
