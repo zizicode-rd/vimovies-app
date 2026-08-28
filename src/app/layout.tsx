@@ -30,13 +30,11 @@ export const metadata: Metadata = {
     siteName: "Vimovies",
     title: "Vimovies — Elige monitor con datos, no con marketing",
     description: "Comparador de monitores con especificaciones verificadas y puntuaciones reales por uso. Encuentra el mejor monitor para gaming, oficina o edición.",
-    images: ["/og.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Vimovies — Elige monitor con datos, no con marketing",
     description: "Comparador de monitores con especificaciones verificadas y puntuaciones reales por uso. Encuentra el mejor monitor para gaming, oficina o edición.",
-    images: ["/og.png"],
   },
   robots: { index: true, follow: true },
   alternates: {
