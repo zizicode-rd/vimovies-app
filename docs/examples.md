@@ -1,4 +1,4 @@
-# Ejemplos de datos — Vimovies API
+# Ejemplos de datos — Vimonitors API
 
 Documento con JSONs realistas para entender la estructura de datos que viaja por la API en producción. Se dividen en **payloads de ingesta** (lo que envía la IA/scripts al backend) y **respuestas públicas** (lo que recibe Next.js para renderizar).
 
@@ -10,7 +10,7 @@ Documento con JSONs realistas para entender la estructura de datos que viaja por
 {
   "name": "LG",
   "slug": "lg",
-  "logo_url": "https://cdn.vimovies.com/brands/lg-logo.svg",
+  "logo_url": "https://cdn.vimonitors.com/brands/lg-logo.svg",
   "description": "Marca surcoreana líder en monitores gaming y profesionales.",
   "website_url": "https://www.lg.com",
   "i18n": {
@@ -69,7 +69,7 @@ Documento con JSONs realistas para entender la estructura de datos que viaja por
       "crosshair": true
     }
   },
-  "main_image_url": "https://cdn.vimovies.com/monitors/lg-ultragear-27gp850-b.jpg",
+  "main_image_url": "https://cdn.vimonitors.com/monitors/lg-ultragear-27gp850-b.jpg",
   "is_published": true,
   "seo": {
     "meta_title": "LG UltraGear 27GP850-B | Análisis y ficha técnica 2026",
@@ -127,7 +127,7 @@ Documento con JSONs realistas para entender la estructura de datos que viaja por
       "usb": "4 x USB 3.1"
     }
   },
-  "main_image_url": "https://cdn.vimovies.com/monitors/benq-pd2700u.jpg",
+  "main_image_url": "https://cdn.vimonitors.com/monitors/benq-pd2700u.jpg",
   "is_published": true,
   "seo": {
     "meta_title": "BenQ PD2700U | Monitor 4K para diseño y productividad",
@@ -206,7 +206,7 @@ Documento con JSONs realistas para entender la estructura de datos que viaja por
       }
     ]
   },
-  "featured_image_url": "https://cdn.vimovies.com/posts/hz-gaming-guide.jpg",
+  "featured_image_url": "https://cdn.vimonitors.com/posts/hz-gaming-guide.jpg",
   "related_monitor_slugs": [
     "lg-ultragear-27gp850-b",
     "asus-rog-swift-pg27aqn"
@@ -279,7 +279,7 @@ Documento con JSONs realistas para entender la estructura de datos que viaja por
       "id": "11111111-2222-3333-4444-555555555555",
       "name": "LG",
       "slug": "lg",
-      "logo_url": "https://cdn.vimovies.com/brands/lg-logo.svg",
+      "logo_url": "https://cdn.vimonitors.com/brands/lg-logo.svg",
       "description": "Marca surcoreana líder en monitores.",
       "website_url": "https://www.lg.com",
       "i18n": {
@@ -318,7 +318,7 @@ Documento con JSONs realistas para entender la estructura de datos que viaja por
       "office": 78.3,
       "editing": 85.1
     },
-    "main_image_url": "https://cdn.vimovies.com/monitors/lg-ultragear-27gp850-b.jpg",
+    "main_image_url": "https://cdn.vimonitors.com/monitors/lg-ultragear-27gp850-b.jpg",
     "meta_title": "LG UltraGear 27GP850-B | Análisis y ficha técnica 2026",
     "meta_description": "Monitor gaming 27\" QHD 165 Hz Fast-IPS con 1 ms GTG.",
     "i18n": {
@@ -350,7 +350,7 @@ Documento con JSONs realistas para entender la estructura de datos que viaja por
         "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         "slug": "lg-ultragear-27gp850-b",
         "model_name": "LG UltraGear 27GP850-B",
-        "main_image_url": "https://cdn.vimovies.com/monitors/lg-ultragear-27gp850-b.jpg",
+        "main_image_url": "https://cdn.vimonitors.com/monitors/lg-ultragear-27gp850-b.jpg",
         "scores": { "gaming": 92.5, "office": 78.3, "editing": 85.1 },
         "meta_title": "LG UltraGear 27GP850-B | Análisis y ficha técnica 2026",
         "brand_name": "LG",
@@ -360,7 +360,7 @@ Documento con JSONs realistas para entender la estructura de datos que viaja por
         "id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
         "slug": "lg-27ul850-w",
         "model_name": "LG 27UL850-W",
-        "main_image_url": "https://cdn.vimovies.com/monitors/lg-27ul850-w.jpg",
+        "main_image_url": "https://cdn.vimonitors.com/monitors/lg-27ul850-w.jpg",
         "scores": { "gaming": 55.2, "office": 91.0, "editing": 88.4 },
         "meta_title": "LG 27UL850-W | Monitor 4K USB-C para Mac y oficina",
         "brand_name": "LG",
@@ -446,13 +446,13 @@ Documento con JSONs realistas para entender la estructura de datos que viaja por
         { "type": "table", "headers": ["Género", "Mínimo recomendado", "Ideal"], "rows": [["MOBA / RTS", "60 Hz", "144 Hz"], ["FPS competitivo", "144 Hz", "240+ Hz"]] }
       ]
     },
-    "featured_image_url": "https://cdn.vimovies.com/posts/hz-gaming-guide.jpg",
+    "featured_image_url": "https://cdn.vimonitors.com/posts/hz-gaming-guide.jpg",
     "related_monitors": [
       {
         "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         "slug": "lg-ultragear-27gp850-b",
         "model_name": "LG UltraGear 27GP850-B",
-        "main_image_url": "https://cdn.vimovies.com/monitors/lg-ultragear-27gp850-b.jpg",
+        "main_image_url": "https://cdn.vimonitors.com/monitors/lg-ultragear-27gp850-b.jpg",
         "scores": { "gaming": 92.5, "office": 78.3, "editing": 85.1 },
         "meta_title": "LG UltraGear 27GP850-B | Análisis y ficha técnica 2026",
         "brand_name": "LG",
@@ -462,7 +462,7 @@ Documento con JSONs realistas para entender la estructura de datos que viaja por
         "id": "d4e5f6a7-b8c9-0123-def1-234567890123",
         "slug": "asus-rog-swift-pg27aqn",
         "model_name": "ASUS ROG Swift PG27AQN",
-        "main_image_url": "https://cdn.vimovies.com/monitors/asus-rog-swift-pg27aqn.jpg",
+        "main_image_url": "https://cdn.vimonitors.com/monitors/asus-rog-swift-pg27aqn.jpg",
         "scores": { "gaming": 98.1, "office": 65.4, "editing": 72.0 },
         "meta_title": "ASUS ROG Swift PG27AQN | Review 360 Hz 1440p",
         "brand_name": "ASUS",
@@ -529,7 +529,7 @@ Documento con JSONs realistas para entender la estructura de datos que viaja por
         "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         "slug": "lg-ultragear-27gp850-b",
         "model_name": "LG UltraGear 27GP850-B",
-        "main_image_url": "https://cdn.vimovies.com/monitors/lg-ultragear-27gp850-b.jpg",
+        "main_image_url": "https://cdn.vimonitors.com/monitors/lg-ultragear-27gp850-b.jpg",
         "scores": { "gaming": 92.5, "office": 78.3, "editing": 85.1 },
         "meta_title": "LG UltraGear 27GP850-B | Análisis y ficha técnica 2026",
         "brand_name": "LG",
@@ -550,7 +550,7 @@ Documento con JSONs realistas para entender la estructura de datos que viaja por
       "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
       "slug": "lg-ultragear-27gp850-b",
       "model_name": "LG UltraGear 27GP850-B",
-      "main_image_url": "https://cdn.vimovies.com/monitors/lg-ultragear-27gp850-b.jpg",
+      "main_image_url": "https://cdn.vimonitors.com/monitors/lg-ultragear-27gp850-b.jpg",
       "scores": { "gaming": 92.5, "office": 78.3, "editing": 85.1 },
       "meta_title": "LG UltraGear 27GP850-B | Análisis y ficha técnica 2026",
       "brand_name": "LG",
@@ -570,15 +570,15 @@ Documento con JSONs realistas para entender la estructura de datos que viaja por
 <?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <sitemap>
-    <loc>https://vimovies.com/sitemaps/monitors-1.xml</loc>
+    <loc>https://vimonitors.com/sitemaps/monitors-1.xml</loc>
     <lastmod>2026-03-20T14:30:00.000Z</lastmod>
   </sitemap>
   <sitemap>
-    <loc>https://vimovies.com/sitemaps/comparisons-1.xml</loc>
+    <loc>https://vimonitors.com/sitemaps/comparisons-1.xml</loc>
     <lastmod>2026-03-20T14:30:00.000Z</lastmod>
   </sitemap>
   <sitemap>
-    <loc>https://vimovies.com/sitemaps/posts-1.xml</loc>
+    <loc>https://vimonitors.com/sitemaps/posts-1.xml</loc>
     <lastmod>2026-03-20T14:30:00.000Z</lastmod>
   </sitemap>
 </sitemapindex>
@@ -590,13 +590,13 @@ Documento con JSONs realistas para entender la estructura de datos que viaja por
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://vimovies.com/monitores/lg/lg-ultragear-27gp850-b</loc>
+    <loc>https://vimonitors.com/monitores/lg/lg-ultragear-27gp850-b</loc>
     <lastmod>2026-03-20T14:30:00.000Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://vimovies.com/monitores/benq/benq-pd2700u</loc>
+    <loc>https://vimonitors.com/monitores/benq/benq-pd2700u</loc>
     <lastmod>2026-03-18T11:20:00.000Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>

@@ -25,7 +25,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function HomeEN() {
-  const breadcrumb = jsonLdBreadcrumb([{ name: 'Home', url: 'https://vimovies.com/en' }]);
+  const breadcrumb = jsonLdBreadcrumb([{ name: 'Home', url: 'https://vimonitors.com/en' }]);
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumb }} />

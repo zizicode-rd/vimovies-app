@@ -135,7 +135,7 @@ export default async function BlogList({
                       <h2 className={styles.featuredTitle}>{featured.title}</h2>
                       <p className={styles.featuredSummary}>{featured.summary}</p>
                       <div className={styles.featuredMeta}>
-                        <span className={styles.metaItem}>{t(translations, 'blog.author', 'Vimovies')}</span>
+                        <span className={styles.metaItem}>{t(translations, 'blog.author', 'Vimonitors')}</span>
                         <span className={styles.metaDot}>•</span>
                         <span className={styles.metaItem}>{readTime(featured.summary, locale, translations)}</span>
                         <span className={styles.metaDot}>•</span>

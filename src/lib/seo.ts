@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
-export const siteName = 'Vimovies';
-export const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://vimovies.com';
+export const siteName = 'Vimonitors';
+export const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://vimonitors.com';
 
 export type SeoPage = {
   locale: 'es' | 'en';
@@ -26,7 +26,7 @@ export function buildMetadata({
   type = 'website',
   noIndex,
 }: SeoPage): Metadata {
-  const site = locale === 'en' ? 'Vimovies' : 'Vimovies';
+  const site = locale === 'en' ? 'Vimonitors' : 'Vimonitors';
   const fullTitle = title.toLowerCase().includes(site.toLowerCase()) ? title : `${title} — ${site}`;
   const canonical = `${baseUrl}${path}`;
   const ogImage = image ?? `${baseUrl}/opengraph-image.png`;
@@ -72,7 +72,7 @@ export function jsonLdWebsite(): string {
   return JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'Vimovies',
+    name: 'Vimonitors',
     url: baseUrl,
     potentialAction: {
       '@type': 'SearchAction',
@@ -86,11 +86,11 @@ export function jsonLdOrganization(): string {
   return JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'Vimovies',
+    name: 'Vimonitors',
     url: baseUrl,
     sameAs: [
-      'https://www.tiktok.com/@vimovies',
-      'https://www.instagram.com/vimovies',
+      'https://www.tiktok.com/@vimonitors',
+      'https://www.instagram.com/vimonitors',
     ],
   });
 }

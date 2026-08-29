@@ -41,7 +41,7 @@ function buildMonitorMeta(monitor: MonitorPublic, brand: string, locale: 'es' | 
       ? `Technical specs of the ${b} ${model}: ${inches}" ${panel}, ${hz} Hz, ${nits} nits and more.`
       : `Ficha técnica del ${b} ${model}: ${inches}" ${panel}, ${hz} Hz, ${nits} nits y más.`;
   }
-  if (!description) description = locale === 'en' ? `Specs and scores for ${b} ${model} at Vimovies.` : `Ficha técnica y puntuaciones de ${b} ${model} en Vimovies.`;
+  if (!description) description = locale === 'en' ? `Specs and scores for ${b} ${model} at Vimonitors.` : `Ficha técnica y puntuaciones de ${b} ${model} en Vimonitors.`;
   if (description.length > 160) description = `${description.slice(0, 157)}…`;
   if (description.length < 70) description = locale === 'en' ? `${description} Discover all the technical details and benchmark scores.` : `${description} Descubre todos los detalles técnicos y puntuaciones.`;
 
@@ -58,7 +58,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       locale: 'en',
       path: `/en/monitores/${brand}/${slug}`,
       title: 'Monitor spec sheet',
-      description: 'Monitor spec sheet at Vimovies.',
+      description: 'Monitor spec sheet at Vimonitors.',
       type: 'website',
       noIndex: true,
     });
@@ -82,9 +82,9 @@ export default async function MonitorPage({ params }: PageProps) {
   const name = monitor ? `${monitor.brand?.name ?? brand} ${monitor.model_name}` : slug.replace(/-/g, ' ');
 
   const breadcrumb = jsonLdBreadcrumb([
-    { name: 'Home', url: 'https://vimovies.com/en' },
-    { name: 'Monitors', url: 'https://vimovies.com/en/monitores' },
-    { name: name, url: `https://vimovies.com/en/monitores/${brand}/${slug}` },
+    { name: 'Home', url: 'https://vimonitors.com/en' },
+    { name: 'Monitors', url: 'https://vimonitors.com/en/monitores' },
+    { name: name, url: `https://vimonitors.com/en/monitores/${brand}/${slug}` },
   ]);
 
   const image = monitor?.main_image_url ?? monitor?.media?.[0]?.cdn_url ?? monitor?.media?.[0] as unknown as string ?? undefined;
@@ -99,7 +99,7 @@ export default async function MonitorPage({ params }: PageProps) {
       '@type': 'Brand',
       name: monitor?.brand?.name ?? brand,
     },
-    url: `https://vimovies.com/en/monitores/${brand}/${slug}`,
+    url: `https://vimonitors.com/en/monitores/${brand}/${slug}`,
     description: monitor?.meta_description,
     offers: {
       '@type': 'Offer',
@@ -115,7 +115,7 @@ export default async function MonitorPage({ params }: PageProps) {
     },
     review: {
       '@type': 'Review',
-      author: { '@type': 'Organization', name: 'Vimovies' },
+      author: { '@type': 'Organization', name: 'Vimonitors' },
       reviewRating: {
         '@type': 'Rating',
         ratingValue: bestScore.toFixed(1),

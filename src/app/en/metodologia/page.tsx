@@ -20,10 +20,10 @@ export default async function MethodologyPage() {
       <Header locale="en" />
       <main className="container" style={{ padding: '64px 0 120px' }}>
         <span className="eyebrow">Methodology</span>
-        <h1 className="section-title" style={{ marginBottom: 24 }}>How Vimovies works</h1>
+        <h1 className="section-title" style={{ marginBottom: 24 }}>How Vimonitors works</h1>
         <div className="prose" style={{ maxWidth: 720 }}>
           <p style={{ fontSize: '17px', lineHeight: 1.7, color: 'var(--color-gray-700)', marginBottom: 32 }}>
-            Every Vimovies monitor sheet starts from the manufacturer&apos;s official spec sheet. We cross-check resolution, refresh rate, panel type, brightness, connectivity and other key specs to catch errors or inflated claims.
+            Every Vimonitors monitor sheet starts from the manufacturer&apos;s official spec sheet. We cross-check resolution, refresh rate, panel type, brightness, connectivity and other key specs to catch errors or inflated claims.
           </p>
           <h2 style={{ fontSize: '22px', marginTop: 40, marginBottom: 16 }}>Profile scores</h2>
           <p style={{ fontSize: '16px', lineHeight: 1.7, color: 'var(--color-gray-700)', marginBottom: 24 }}>

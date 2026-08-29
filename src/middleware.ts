@@ -29,7 +29,7 @@ export function middleware(req: NextRequest) {
   }
 
   // Resolve language from cookie (optional) or Accept-Language header
-  const cookieLang = req.cookies.get('vimovies_locale')?.value;
+  const cookieLang = req.cookies.get('vimonitors_locale')?.value;
   if (cookieLang && SUPPORTED_LOCALES.includes(cookieLang)) {
     url.pathname = `/${cookieLang}${pathname}`;
     url.search = search;

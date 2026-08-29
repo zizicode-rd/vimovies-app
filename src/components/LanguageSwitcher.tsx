@@ -11,7 +11,7 @@ export default function LanguageSwitcher({ initial = undefined }: { initial?: 'e
   useEffect(() => {
     if (!initial) {
       try {
-        const match = document.cookie.match(/(^|;)\s*vimovies_locale=([^;]+)/);
+        const match = document.cookie.match(/(^|;)\s*vimonitors_locale=([^;]+)/);
         const cookie = match ? match[2] : undefined;
         if (cookie === 'es' || cookie === 'en') setLang(cookie);
         else {
@@ -27,7 +27,7 @@ export default function LanguageSwitcher({ initial = undefined }: { initial?: 'e
 
   function setLocaleCookie(l: 'es' | 'en') {
     const maxAge = 60 * 60 * 24 * 365;
-    document.cookie = `vimovies_locale=${l}; Path=/; max-age=${maxAge}; SameSite=Lax`;
+    document.cookie = `vimonitors_locale=${l}; Path=/; max-age=${maxAge}; SameSite=Lax`;
   }
 
   function buildTargetPathForLocale(l: 'es' | 'en') {

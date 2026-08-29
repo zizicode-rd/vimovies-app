@@ -12,7 +12,7 @@ export const metadata: Metadata = buildMetadata({
   locale: 'es',
   path: '/es/blog',
   title: 'Blog y guías de monitores gaming, oficina y edición',
-  description: 'Guías técnicas, análisis, reviews y comparativas de monitores. Aprende a elegir el mejor monitor según tu uso con Vimovies.',
+  description: 'Guías técnicas, análisis, reviews y comparativas de monitores. Aprende a elegir el mejor monitor según tu uso con Vimonitors.',
   type: 'website',
 });
 

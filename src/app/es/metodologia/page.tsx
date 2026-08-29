@@ -20,10 +20,10 @@ export default async function MethodologyPage() {
       <Header locale="es" />
       <main className="container" style={{ padding: '64px 0 120px' }}>
         <span className="eyebrow">Metodología</span>
-        <h1 className="section-title" style={{ marginBottom: 24 }}>Cómo trabajamos en Vimovies</h1>
+        <h1 className="section-title" style={{ marginBottom: 24 }}>Cómo trabajamos en Vimonitors</h1>
         <div className="prose" style={{ maxWidth: 720 }}>
           <p style={{ fontSize: '17px', lineHeight: 1.7, color: 'var(--color-gray-700)', marginBottom: 32 }}>
-            Cada ficha de monitor en Vimovies parte de la hoja técnica oficial del fabricante. Contrastamos resolución, tasa de refresco, panel, brillo, conectividad y otras especificaciones clave para detectar errores o exageraciones.
+            Cada ficha de monitor en Vimonitors parte de la hoja técnica oficial del fabricante. Contrastamos resolución, tasa de refresco, panel, brillo, conectividad y otras especificaciones clave para detectar errores o exageraciones.
           </p>
           <h2 style={{ fontSize: '22px', marginTop: 40, marginBottom: 16 }}>Puntuaciones por perfil</h2>
           <p style={{ fontSize: '16px', lineHeight: 1.7, color: 'var(--color-gray-700)', marginBottom: 24 }}>

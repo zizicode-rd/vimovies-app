@@ -4,7 +4,7 @@ import path from 'path';
 export const locales = ['es', 'en'] as const;
 export type Locale = typeof locales[number];
 export const defaultLocale: Locale = 'es';
-export const cookieName = 'vimovies_locale';
+export const cookieName = 'vimonitors_locale';
 
 export function isSupportedLocale(l: string | undefined): l is Locale {
   return l === 'es' || l === 'en';

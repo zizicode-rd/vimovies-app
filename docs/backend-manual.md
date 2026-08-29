@@ -1,4 +1,4 @@
-# 📘 Manual del Backend — Vimovies API
+# 📘 Manual del Backend — Vimonitors API
 
 > **Rol:** guía de construcción del backend. Define qué tecnología se usa, cómo se organizan las carpetas, cómo se comunica la API con los datos, qué endpoints existen, cuáles son públicos, cuáles requieren token y cómo se generan los sitemaps para un frontend Next.js orientado a velocidad y SEO.
 
@@ -26,7 +26,7 @@ pnpm add -D @types/node tsx typescript
 ## 2. Estructura de carpetas
 
 ```
-vimovies-api/
+vimonitors-api/
 ├── src/
 │   ├── index.ts              # entry point: crea app Hono y monta routers
 │   ├── types.ts              # contrato de comunicación API ↔ datos (ya creado)
@@ -265,7 +265,7 @@ async function buildSitemapIndex() {
 - **Incluir el índice en `robots.txt`:**
 
 ```txt
-Sitemap: https://vimovies.com/sitemaps/index.xml
+Sitemap: https://vimonitors.com/sitemaps/index.xml
 ```
 
 ---
@@ -276,7 +276,7 @@ Sitemap: https://vimovies.com/sitemaps/index.xml
 
 ```ts
 // app/monitores/[brand]/[slug]/page.tsx
-import type { MonitorPublic, ApiResponse } from "@vimovies/types";
+import type { MonitorPublic, ApiResponse } from "@vimonitors/types";
 
 export async function generateStaticParams() {
   const res = await fetch(`${API_URL}/api/v1/monitors?limit=5000`);
@@ -294,7 +294,7 @@ export async function generateStaticParams() {
 El backend no genera JSON-LD; el frontend lo arma en Server Components a partir de los datos ya validados:
 
 ```ts
-import type { JsonLdProduct, MonitorPublic } from "@vimovies/types";
+import type { JsonLdProduct, MonitorPublic } from "@vimonitors/types";
 
 function monitorJsonLd(m: MonitorPublic): JsonLdProduct {
   return {
@@ -334,8 +334,8 @@ SUPABASE_ANON_KEY=xxx               # lecturas públicas
 INGEST_TOKEN=xxx                    # header Authorization: Bearer <INGEST_TOKEN>
 
 # URLs
-API_BASE_URL=https://api.vimovies.com
-NEXT_SITE_URL=https://vimovies.com
+API_BASE_URL=https://api.vimonitors.com
+NEXT_SITE_URL=https://vimonitors.com
 ```
 
 ---
@@ -467,8 +467,8 @@ En los endpoints con token, el payload puede incluir un objeto `i18n` junto a lo
 
 ```xml
 <url>
-  <loc>https://vimovies.com/es/monitores/benq/pd2700u</loc>
-  <xhtml:link rel="alternate" hreflang="en" href="https://vimovies.com/en/monitors/benq/pd2700u"/>
+  <loc>https://vimonitors.com/es/monitores/benq/pd2700u</loc>
+  <xhtml:link rel="alternate" hreflang="en" href="https://vimonitors.com/en/monitors/benq/pd2700u"/>
 </url>
 ```
 

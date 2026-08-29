@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       locale: 'en',
       path: `/en/article/${slug}`,
       title: 'Article',
-      description: 'Technical guide and analysis at Vimovies.',
+      description: 'Technical guide and analysis at Vimonitors.',
       type: 'article',
       noIndex: true,
     });
@@ -66,13 +66,13 @@ export default async function ArticlePage({ params }: PageProps) {
     description: post.meta_description || post.summary,
     image: post.featured_image_url || undefined,
     datePublished: post.published_at,
-    author: { '@type': 'Organization', name: 'Vimovies' },
+    author: { '@type': 'Organization', name: 'Vimonitors' },
   }) : '';
 
   const breadcrumb = post ? jsonLdBreadcrumb([
-    { name: 'Home', url: 'https://vimovies.com/en' },
-    { name: 'Blog', url: 'https://vimovies.com/en/blog' },
-    { name: post.title, url: `https://vimovies.com/en/article/${slug}` },
+    { name: 'Home', url: 'https://vimonitors.com/en' },
+    { name: 'Blog', url: 'https://vimonitors.com/en/blog' },
+    { name: post.title, url: `https://vimonitors.com/en/article/${slug}` },
   ]) : '';
 
   return (

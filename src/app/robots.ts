@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/api'],
     },
-    sitemap: 'https://vimovies.com/sitemap.xml',
+    sitemap: 'https://vimonitors.com/sitemap.xml',
   };
 }

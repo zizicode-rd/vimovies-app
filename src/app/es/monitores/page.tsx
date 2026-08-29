@@ -18,8 +18,8 @@ export const metadata: Metadata = buildMetadata({
 
 export default async function CatalogES({ searchParams }: PageProps) {
   const breadcrumb = jsonLdBreadcrumb([
-    { name: 'Inicio', url: 'https://vimovies.com/es' },
-    { name: 'Monitores', url: 'https://vimovies.com/es/monitores' },
+    { name: 'Inicio', url: 'https://vimonitors.com/es' },
+    { name: 'Monitores', url: 'https://vimonitors.com/es/monitores' },
   ]);
   return (
     <>

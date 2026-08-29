@@ -8,7 +8,7 @@ import type {
   PostPublic,
 } from '@/types/api';
 
-export interface VimoviesState {
+export interface VimonitorsState {
   brands: BrandPublic[];
   monitors: MonitorListItem[];
   selectedMonitor: MonitorPublic | null;
@@ -30,7 +30,7 @@ export interface VimoviesState {
   clearAll: () => void;
 }
 
-export const useVimoviesStore = create<VimoviesState>((set) => ({
+export const useVimonitorsStore = create<VimonitorsState>((set) => ({
   brands: [],
   monitors: [],
   selectedMonitor: null,

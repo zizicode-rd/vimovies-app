@@ -6,7 +6,7 @@
 // Mixin para media queries mobile-first
 @mixin up($bp) {
   // obtener el mapa de breakpoints una vez
-  $bps: map.get($vimovies-tokens, breakpoints);
+  $bps: map.get($vimonitors-tokens, breakpoints);
 
   @if $bp == xs {
     @media (min-width: #{map.get($bps, xs)}) { @content; }

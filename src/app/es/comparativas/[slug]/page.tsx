@@ -54,7 +54,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       locale: 'es',
       path: `/es/comparativas/${slug}`,
       title: `${aName} vs ${bName}`,
-      description: `Comparativa cara a cara: ${aName} frente a ${bName}. Puntuaciones por perfil y veredicto en Vimovies.`,
+      description: `Comparativa cara a cara: ${aName} frente a ${bName}. Puntuaciones por perfil y veredicto en Vimonitors.`,
       type: 'website',
       noIndex: true,
     });
@@ -64,7 +64,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     locale: 'es',
     path: `/es/comparativas/${slug}`,
     title: 'Comparativa de monitores',
-    description: 'Comparativa cara a cara de monitores en Vimovies.',
+    description: 'Comparativa cara a cara de monitores en Vimonitors.',
     type: 'website',
     noIndex: true,
   });
@@ -77,9 +77,9 @@ export default async function ComparisonPage({ params }: PageProps) {
   const bName = c ? c.monitor_b.model_name : 'B';
 
   const breadcrumb = jsonLdBreadcrumb([
-    { name: 'Inicio', url: 'https://vimovies.com/es' },
-    { name: 'Comparativas', url: 'https://vimovies.com/es/comparativas' },
-    { name: `${aName} vs ${bName}`, url: `https://vimovies.com/es/comparativas/${slug}` },
+    { name: 'Inicio', url: 'https://vimonitors.com/es' },
+    { name: 'Comparativas', url: 'https://vimonitors.com/es/comparativas' },
+    { name: `${aName} vs ${bName}`, url: `https://vimonitors.com/es/comparativas/${slug}` },
   ]);
 
   return (

@@ -22,34 +22,34 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Vimovies — Elige monitor con datos, no con marketing",
+  title: "Vimonitors — Elige monitor con datos, no con marketing",
   description: "Comparador de monitores con especificaciones verificadas y puntuaciones reales por uso. Encuentra el mejor monitor para gaming, oficina o edición.",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://vimovies.com"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://vimonitors.com"),
   openGraph: {
     type: "website",
-    siteName: "Vimovies",
-    title: "Vimovies — Elige monitor con datos, no con marketing",
+    siteName: "Vimonitors",
+    title: "Vimonitors — Elige monitor con datos, no con marketing",
     description: "Comparador de monitores con especificaciones verificadas y puntuaciones reales por uso. Encuentra el mejor monitor para gaming, oficina o edición.",
-    images: [{ url: "/opengraph-image.png", width: 1200, height: 630, alt: "Vimovies" }],
+    images: [{ url: "/opengraph-image.png", width: 1200, height: 630, alt: "Vimonitors" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Vimovies — Elige monitor con datos, no con marketing",
+    title: "Vimonitors — Elige monitor con datos, no con marketing",
     description: "Comparador de monitores con especificaciones verificadas y puntuaciones reales por uso. Encuentra el mejor monitor para gaming, oficina o edición.",
     images: ["/twitter-image.png"],
   },
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "Vimovies",
+    title: "Vimonitors",
   },
   robots: { index: true, follow: true },
   alternates: {
-    canonical: "https://vimovies.com",
+    canonical: "https://vimonitors.com",
     languages: {
-      "x-default": "https://vimovies.com",
-      es: "https://vimovies.com/es",
-      en: "https://vimovies.com/en",
+      "x-default": "https://vimonitors.com",
+      es: "https://vimonitors.com/es",
+      en: "https://vimonitors.com/en",
     },
   },
 };

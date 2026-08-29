@@ -1,4 +1,4 @@
-// Vimovies design tokens (replicado y reorganizado a partir de docs/example.html)
+// Vimonitors design tokens (replicado y reorganizado a partir de docs/example.html)
 // Uso: importar _variables.scss al inicio de tu globals.scss o componentes SCSS
 
 // Colors
@@ -51,7 +51,7 @@ $container-padding: 32px;
 $focus-ring-color: $red;
 
 // Export a map for programmatic access if needed
-$vimovies-tokens: (
+$vimonitors-tokens: (
   colors: (
     white: $white,
     black: $black,

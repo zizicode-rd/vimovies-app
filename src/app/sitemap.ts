@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next';
 import { apiFetch } from '@/lib/api';
 import type { MonitorListItem, PaginatedResponse, PostPublic, ComparisonPublic, PseoHubPublic, BrandPublic } from '@/types/api';
 
-const base = 'https://vimovies.com';
+const base = 'https://vimonitors.com';
 const locales = ['es', 'en'] as const;
 
 async function fetchAll<T>(path: string, limit: number): Promise<T[]> {

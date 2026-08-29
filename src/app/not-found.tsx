@@ -8,7 +8,7 @@ import type { Locale } from '@/lib/i18n';
 
 function getLocaleFromCookie(cookie: string | null): Locale | null {
   if (!cookie) return null;
-  const match = cookie.match(/(?:^|; )vimovies_locale=([^;]+)/);
+  const match = cookie.match(/(?:^|; )vimonitors_locale=([^;]+)/);
   const v = match?.[1];
   return v === 'es' || v === 'en' ? v : null;
 }

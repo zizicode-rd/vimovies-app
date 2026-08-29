@@ -1,4 +1,4 @@
-# Guía de consumo frontend — Vimovies API
+# Guía de consumo frontend — Vimonitors API
 
 Este documento muestra cómo Next.js App Router consume los endpoints públicos que acabamos de crear: fichas técnicas de monitores y páginas de comparativas (VS).
 

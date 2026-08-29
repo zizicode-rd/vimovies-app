@@ -12,7 +12,7 @@ export const metadata: Metadata = buildMetadata({
   locale: 'en',
   path: '/en/blog',
   title: 'Monitor guides, reviews and comparisons blog',
-  description: 'Technical guides, reviews and monitor comparisons for gaming, office and content creation. Learn how to choose the best monitor with Vimovies.',
+  description: 'Technical guides, reviews and monitor comparisons for gaming, office and content creation. Learn how to choose the best monitor with Vimonitors.',
   type: 'website',
 });
 

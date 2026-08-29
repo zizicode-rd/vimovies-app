@@ -76,10 +76,10 @@ export default function HeaderClient({
           <div className={styles.topLine}>
             <span className={styles.eyebrow}>{topBarText}</span>
             <div className={styles.topActions}>
-              <a href="https://www.tiktok.com/@vimovies" target="_blank" rel="noreferrer" className={styles.social}>
+              <a href="https://www.tiktok.com/@vimonitors" target="_blank" rel="noreferrer" className={styles.social}>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.53V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52V7.32a4.86 4.86 0 0 1-1.04-.63z" /></svg>
               </a>
-              <a href="https://www.instagram.com/vimovies" target="_blank" rel="noreferrer" className={styles.social}>
+              <a href="https://www.instagram.com/vimonitors" target="_blank" rel="noreferrer" className={styles.social}>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" /></svg>
               </a>
             </div>
@@ -87,7 +87,7 @@ export default function HeaderClient({
 
           <div className={styles.main}>
             <Link href={`${base}/`} className={styles.logo} translate="no">
-              {translations.brand ?? 'vimovies'}
+              {translations.brand ?? 'vimonitors'}
             </Link>
 
             <nav className={styles.mainNav}>
@@ -139,7 +139,7 @@ export default function HeaderClient({
         <div className={styles.drawerInner}>
           <div className={styles.drawerHead}>
             <Link href={`${base}/`} className={styles.logo} onClick={() => setMenuOpen(false)} translate="no">
-              {translations.brand ?? 'vimovies'}
+              {translations.brand ?? 'vimonitors'}
             </Link>
             <button className={styles.drawerClose} onClick={() => setMenuOpen(false)} aria-label="Close">&times;</button>
           </div>

@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     locale: 'en',
     path: `/en/hubs/${slug}`,
     title: hub?.meta_title ?? slug,
-    description: hub?.meta_description ?? `Best monitors for ${slug} at Vimovies.`,
+    description: hub?.meta_description ?? `Best monitors for ${slug} at Vimonitors.`,
     type: 'website',
   });
 }
@@ -75,9 +75,9 @@ export default async function HubPage({ params, searchParams }: PageProps) {
   const translations = await getTranslations('en');
 
   const breadcrumb = jsonLdBreadcrumb([
-    { name: 'Home', url: 'https://vimovies.com/en' },
-    { name: 'Hubs', url: 'https://vimovies.com/en/hubs' },
-    { name: hub.title, url: `https://vimovies.com/en/hubs/${slug}` },
+    { name: 'Home', url: 'https://vimonitors.com/en' },
+    { name: 'Hubs', url: 'https://vimonitors.com/en/hubs' },
+    { name: hub.title, url: `https://vimonitors.com/en/hubs/${slug}` },
   ]);
 
   const collectionLd = JSON.stringify({
@@ -85,13 +85,13 @@ export default async function HubPage({ params, searchParams }: PageProps) {
     '@type': 'CollectionPage',
     name: hub.title,
     description: hub.meta_description,
-    url: `https://vimovies.com/en/hubs/${slug}`,
+    url: `https://vimonitors.com/en/hubs/${slug}`,
     mainEntity: {
       '@type': 'ItemList',
       itemListElement: monitors.slice(0, 20).map((m, i) => ({
         '@type': 'ListItem',
         position: i + 1,
-        url: `https://vimovies.com/en/monitores/${m.brand_slug}/${m.slug}`,
+        url: `https://vimonitors.com/en/monitores/${m.brand_slug}/${m.slug}`,
       })),
     },
   });

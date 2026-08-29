@@ -1,5 +1,5 @@
 {
-  "brand": "vimovies",
+  "brand": "vimonitors",
   "topBar": {
     "text": "{monitors} monitores · {comparisons} comparativas · Datos verificados",
     "cta": "Ver catálogo"
@@ -12,9 +12,9 @@
     "compare": "Comparar"
   },
   "metadata": {
-    "title": "Comparador de Monitores y Fichas Técnicas | Vimovies",
+    "title": "Comparador de Monitores y Fichas Técnicas | Vimonitors",
     "description": "Compara specs reales, test de rendimiento y encuentra el mejor monitor para gaming, trabajo o edición.",
-    "og_title": "El Comparador de Monitores Definitivo | Vimovies",
+    "og_title": "El Comparador de Monitores Definitivo | Vimonitors",
     "og_description": "Análisis técnico, comparativas VS y especificaciones verificadas en un solo lugar."
   },
   "home": {
@@ -114,7 +114,7 @@
     "quickCompare": "Comparador rápido",
     "quickCompareText": "Compara monitores cara a cara según tu perfil de uso.",
     "compareNow": "Comparar ahora",
-    "author": "Vimovies",
+    "author": "Vimonitors",
     "by": "Por",
     "minRead": "{min} min de lectura"
   },
@@ -127,7 +127,7 @@
   },
   "why": {
     "eyebrow": "Metodología",
-    "title": "Por qué confiar en Vimovies",
+    "title": "Por qué confiar en Vimonitors",
     "methodologyCta": "Cómo calibramos",
     "methodologyHref": "/es/metodologia",
     "items": {

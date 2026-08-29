@@ -111,7 +111,7 @@ export default function PostView({
           <h1 className={styles.heroTitle}>{post.title}</h1>
           <p className={styles.heroSummary}>{post.summary}</p>
           <div className={styles.heroMeta}>
-            <span>{t(translations, 'blog.by', 'By')} {post.author || t(translations, 'blog.author', 'Vimovies')}</span>
+            <span>{t(translations, 'blog.by', 'By')} {post.author || t(translations, 'blog.author', 'Vimonitors')}</span>
             <span className={styles.heroDot}>&middot;</span>
             <span>{formatDate(post.published_at || post.created_at, locale)}</span>
           </div>

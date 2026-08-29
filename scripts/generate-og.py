@@ -33,7 +33,7 @@ try:
 except:
     font = ImageFont.load_default()
 
-text = 'vimovies'
+text = 'vimonitors'
 bbox = draw.textbbox((0, 0), text, font=font)
 text_w = bbox[2] - bbox[0]
 text_h = bbox[3] - bbox[1]
