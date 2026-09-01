@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { headers, cookies } from "next/headers";
 import "./globals.css";
 import "../styles/globals.scss";
 import { jsonLdOrganization, jsonLdWebsite } from "@/lib/seo";
@@ -63,9 +64,20 @@ export const viewport = {
 
 export const themeColor = "#000000";
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+function getLocaleFromRequest(h: Awaited<ReturnType<typeof headers>>, cookieStore: Awaited<ReturnType<typeof cookies>>): 'es' | 'en' {
+  const headerLocale = h.get('x-vimonitors-locale');
+  if (headerLocale === 'en' || headerLocale === 'es') return headerLocale;
+  const cookie = cookieStore.get('vimonitors_locale')?.value;
+  if (cookie === 'en' || cookie === 'es') return cookie;
+  return 'es';
+}
+
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const h = await headers();
+  const cookieStore = await cookies();
+  const locale = getLocaleFromRequest(h, cookieStore);
   return (
-    <html lang="en" data-scroll-behavior="smooth" className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
+    <html lang={locale} data-scroll-behavior="smooth" className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{

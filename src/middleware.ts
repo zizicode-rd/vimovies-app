@@ -25,7 +25,9 @@ export function middleware(req: NextRequest) {
   // If path already has a locale prefix, do nothing
   const segments = pathname.split('/');
   if (segments[1] && SUPPORTED_LOCALES.includes(segments[1])) {
-    return NextResponse.next();
+    const response = NextResponse.next();
+    response.headers.set('x-vimonitors-locale', segments[1]);
+    return response;
   }
 
   // Resolve language from cookie (optional) or Accept-Language header

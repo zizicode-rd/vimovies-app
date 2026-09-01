@@ -26,8 +26,9 @@ export function buildMetadata({
   type = 'website',
   noIndex,
 }: SeoPage): Metadata {
-  const site = locale === 'en' ? 'Vimonitors' : 'Vimonitors';
-  const fullTitle = title.toLowerCase().includes(site.toLowerCase()) ? title : `${title} — ${site}`;
+  const site = 'Vimonitors';
+  const cleanTitle = title.replace(/Vimovies/g, 'Vimonitors');
+  const fullTitle = cleanTitle.toLowerCase().includes(site.toLowerCase()) ? cleanTitle : `${cleanTitle} — ${site}`;
   const canonical = `${baseUrl}${path}`;
   const ogImage = image ?? `${baseUrl}/opengraph-image.png`;
 
