@@ -90,6 +90,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
             __html: `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-WPYBE6LB6M');`,
           }}
         />
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4873617134006059" crossOrigin="anonymous" />
         <link rel="manifest" href="/site.webmanifest" />
         <script
           type="application/ld+json"
