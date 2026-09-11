@@ -7,11 +7,20 @@ import styles from './MonitorCatalog.module.scss';
 import { pickI18n } from '@/lib/i18n-utils';
 import type { MonitorListItem, BrandPublic } from '@/types/api';
 
-function FilterGroup({ title, children }: { title: string; children: ReactNode }) {
+function FilterGroup({ title, children, open = true, onToggle }: { title: string; children: ReactNode; open?: boolean; onToggle?: () => void }) {
   return (
     <div className={styles.filterBlock}>
-      <h5>{title}</h5>
-      {children}
+      <h5
+        className={onToggle ? styles.filterHeader : undefined}
+        role={onToggle ? 'button' : undefined}
+        tabIndex={onToggle ? 0 : undefined}
+        onClick={onToggle}
+        onKeyDown={onToggle ? (e) => { if (e.key === 'Enter' || e.key === ' ') onToggle(); } : undefined}
+      >
+        {title}
+        {onToggle && <span className={styles.filterToggle}>{open ? '−' : '+'}</span>}
+      </h5>
+      {open && <div className={styles.filterContent}>{children}</div>}
     </div>
   );
 }
@@ -180,6 +189,16 @@ export default function MonitorCatalogClient({
 
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
 
+  const activeFilterGroup = [
+    { key: 'brand', active: !!filters.brand },
+    { key: 'panel', active: !!filters.panel_type },
+    { key: 'resolution', active: !!filters.resolution },
+    { key: 'refresh', active: !!filters.min_hz },
+    { key: 'use', active: !!filters.profile },
+  ].find((g) => g.active)?.key ?? 'brand';
+
+  const [openFilter, setOpenFilter] = useState(activeFilterGroup);
+
   return (
     <div className="container">
       <div className={styles.pageHead}>
@@ -219,32 +238,52 @@ export default function MonitorCatalogClient({
 
       <div className={styles.catalogLayout}>
         <aside className={styles.filters}>
-          <FilterGroup title={t(translations, 'catalog.filters.brands')}>
+          <FilterGroup
+            title={t(translations, 'catalog.filters.brands')}
+            open={openFilter === 'brand'}
+            onToggle={() => setOpenFilter(openFilter === 'brand' ? '' : 'brand')}
+          >
             {brands.map((b) => {
               const brand = pickI18n<BrandPublic>(b, locale);
               return <FilterButton key={brand.slug} k="brand" value={brand.slug} filters={filters} toggle={toggle}>{brand.name}</FilterButton>;
             })}
           </FilterGroup>
 
-          <FilterGroup title={t(translations, 'catalog.filters.panel')}>
+          <FilterGroup
+            title={t(translations, 'catalog.filters.panel')}
+            open={openFilter === 'panel'}
+            onToggle={() => setOpenFilter(openFilter === 'panel' ? '' : 'panel')}
+          >
             {panels.map((p) => (
               <FilterButton key={p} k="panel_type" value={p} filters={filters} toggle={toggle}>{p}</FilterButton>
             ))}
           </FilterGroup>
 
-          <FilterGroup title={t(translations, 'catalog.filters.resolution')}>
+          <FilterGroup
+            title={t(translations, 'catalog.filters.resolution')}
+            open={openFilter === 'resolution'}
+            onToggle={() => setOpenFilter(openFilter === 'resolution' ? '' : 'resolution')}
+          >
             {resolutions.map((r) => (
               <FilterButton key={r} k="resolution" value={r} filters={filters} toggle={toggle}>{r}</FilterButton>
             ))}
           </FilterGroup>
 
-          <FilterGroup title={t(translations, 'catalog.filters.refresh')}>
+          <FilterGroup
+            title={t(translations, 'catalog.filters.refresh')}
+            open={openFilter === 'refresh'}
+            onToggle={() => setOpenFilter(openFilter === 'refresh' ? '' : 'refresh')}
+          >
             {refreshRates.map((hz) => (
               <FilterButton key={hz} k="min_hz" value={hz} filters={filters} toggle={toggle}>{hz}Hz+</FilterButton>
             ))}
           </FilterGroup>
 
-          <FilterGroup title={t(translations, 'catalog.filters.use', 'Uso')}>
+          <FilterGroup
+            title={t(translations, 'catalog.filters.use', 'Uso')}
+            open={openFilter === 'use'}
+            onToggle={() => setOpenFilter(openFilter === 'use' ? '' : 'use')}
+          >
             {profiles.map((profile) => (
               <FilterButton key={profile.key} k="profile" value={profile.key} filters={filters} toggle={toggle}>{profile.label}</FilterButton>
             ))}

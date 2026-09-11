@@ -403,7 +403,13 @@ export default async function MonitorDetail({
           </div>
 
           <div id="verdict" className={styles.verdict}>
-            <h3 className={styles.verdictTitle}>{sections.verdict}</h3>
+            <h3 className={styles.verdictTitle}>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <circle cx="12" cy="8" r="7" />
+                <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" />
+              </svg>
+              {sections.verdict}
+            </h3>
             <p className={styles.verdictText}>
               {monitor.meta_description ? `${monitor.meta_description} ${verdictFallback}` : verdictFallback}
             </p>
