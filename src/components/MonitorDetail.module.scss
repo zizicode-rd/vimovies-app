@@ -239,28 +239,34 @@
 }
 
 .specCards {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1px;
+  columns: 3 280px;
+  column-gap: 8px;
+  column-rule: 1px solid rgba(255, 255, 255, 0.08);
   min-width: 0;
   width: 100%;
-  background: rgba(255, 255, 255, 0.10);
+  background: #111216;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 24px;
+  padding: 24px;
   overflow: hidden;
 }
 
 .specCard {
-  background: #111216;
-  padding: 28px 30px;
+  break-inside: avoid;
+  background: #0b0c0f;
+  margin-bottom: 8px;
+  padding: 22px 24px;
   min-width: 0;
   width: 100%;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
   overflow: hidden;
-  transition: background .18s var(--ease);
+  transition: background .18s var(--ease), border-color .18s var(--ease);
 }
 
 .specCard:hover {
-  background: #181920;
+  background: #141519;
+  border-color: rgba(255, 255, 255, 0.12);
 }
 
 .specCard:hover {
@@ -274,8 +280,8 @@
   font-size: 12px;
   font-weight: 800;
   color: #fff;
-  margin-bottom: 22px;
-  padding-bottom: 14px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -286,9 +292,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
   background: var(--color-red);
   flex: none;
 }
@@ -303,8 +309,8 @@
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  gap: 16px;
-  padding: 11px 0;
+  gap: 12px;
+  padding: 9px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
@@ -317,19 +323,20 @@
   font-size: 12px;
   color: #94a3b8;
   font-weight: 500;
-  flex: none;
+  flex: 1 1 auto;
   word-break: break-word;
   overflow-wrap: break-word;
 }
 
 .specValue {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   color: #fff;
   text-align: right;
   word-break: break-word;
   overflow-wrap: break-word;
   min-width: 0;
+  flex: 0 1 auto;
 }
 
 .verdict {
@@ -373,12 +380,13 @@
 
 @media (max-width: 1024px) {
   .specCards {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    columns: 2 260px;
     border-radius: 20px;
+    padding: 20px;
   }
 
   .specCard {
-    padding: 22px 24px;
+    padding: 20px 22px;
   }
 }
 
@@ -414,7 +422,8 @@
   }
 
   .specCards {
-    grid-template-columns: 1fr;
+    columns: 1;
+    padding: 18px;
   }
 
   .buyBox,
