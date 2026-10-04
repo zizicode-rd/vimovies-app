@@ -5,31 +5,30 @@ import styles from './AppPreloader.module.scss';
 
 export default function AppPreloader() {
   const [ready, setReady] = useState(false);
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    document.body.style.overflow = 'hidden';
-    let holdTimer: ReturnType<typeof setTimeout>;
-
-    const onComplete = () => {
-      holdTimer = setTimeout(() => setReady(true), 1900);
-    };
-
-    if (document.readyState === 'complete') {
-      onComplete();
-    } else {
-      window.addEventListener('load', onComplete, { once: true });
+    // Solo mostrar en la primera visita de la sesión
+    const hasSeenPreloader = typeof window !== 'undefined' && sessionStorage.getItem('vim_preloader_seen');
+    if (hasSeenPreloader) {
+      return;
     }
+
+    setVisible(true);
+    document.body.style.overflow = 'hidden';
+    const holdTimer = setTimeout(() => setReady(true), 800);
 
     return () => {
       clearTimeout(holdTimer);
-      window.removeEventListener('load', onComplete);
     };
   }, []);
 
   useEffect(() => {
     if (ready) {
       document.body.style.overflow = '';
+      if (typeof window !== 'undefined') {
+        sessionStorage.setItem('vim_preloader_seen', 'true');
+      }
       const t = setTimeout(() => setVisible(false), 550);
       return () => clearTimeout(t);
     }

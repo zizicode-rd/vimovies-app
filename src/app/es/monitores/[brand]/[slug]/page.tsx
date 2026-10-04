@@ -2,23 +2,12 @@ import type { Metadata } from 'next';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import MonitorDetail from '@/components/MonitorDetail';
-import { apiFetch } from '@/lib/api';
 import { buildMetadata, baseUrl } from '@/lib/seo';
 import { generateMonitorJsonLd } from '@/lib/jsonld';
-import { pickI18n } from '@/lib/i18n-utils';
-import { normalizeMonitor } from '@/lib/monitor';
+import { getCachedMonitor } from '@/lib/api-cache';
 import type { MonitorPublic } from '@/types/api';
 
 interface PageProps { params: Promise<{ brand: string; slug: string }> }
-
-async function loadMonitor(slug: string) {
-  try {
-    const data = await apiFetch<any>(`/api/v1/monitors/${slug}`, { lang: 'es' });
-    return pickI18n<MonitorPublic>(normalizeMonitor(data), 'es');
-  } catch {
-    return null;
-  }
-}
 
 function buildMonitorMeta(monitor: MonitorPublic, brand: string, locale: 'es' | 'en') {
   const b = monitor.brand?.name ?? brand;
@@ -51,7 +40,7 @@ function buildMonitorMeta(monitor: MonitorPublic, brand: string, locale: 'es' | 
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { brand, slug } = await params;
-  const monitor = await loadMonitor(slug);
+  const monitor = await getCachedMonitor(slug, 'es');
   if (!monitor) {
     return buildMetadata({
       locale: 'es',
@@ -78,7 +67,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function MonitorPage({ params }: PageProps) {
   const { brand, slug } = await params;
-  const monitor = await loadMonitor(slug);
+  const monitor = await getCachedMonitor(slug, 'es');
 
   const canonicalUrl = `https://vimonitors.com/es/monitores/${brand}/${slug}`;
   const { breadcrumb, product } = monitor

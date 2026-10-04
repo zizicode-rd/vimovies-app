@@ -4,7 +4,6 @@ import { headers, cookies } from "next/headers";
 import "./globals.css";
 import "../styles/globals.scss";
 import { jsonLdOrganization, jsonLdWebsite } from "@/lib/seo";
-import GlobalLoader from "@/components/GlobalLoader";
 import AppPreloader from "@/components/AppPreloader";
 
 interface LayoutProps<T = string> {
@@ -111,7 +110,6 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
           />
         </noscript>
         <AppPreloader />
-        <GlobalLoader />
         <div className="app-root">
           {children}
         </div>

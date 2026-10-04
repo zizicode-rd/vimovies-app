@@ -4,20 +4,11 @@ import Footer from '@/components/Footer';
 import PostView from '@/components/PostView';
 import { apiFetch } from '@/lib/api';
 import { buildMetadata, jsonLdBreadcrumb } from '@/lib/seo';
-import { pickI18n } from '@/lib/i18n-utils';
+import { getCachedPost } from '@/lib/api-cache';
 import { getTranslations } from '@/lib/i18n';
 import type { PostPublic, MonitorListItem, PaginatedResponse } from '@/types/api';
 
 interface PageProps { params: Promise<{ slug: string }> }
-
-async function loadPost(slug: string) {
-  try {
-    const data = await apiFetch<PostPublic>(`/api/v1/posts/${slug}`, { lang: 'es' });
-    return pickI18n<PostPublic>(data, 'es');
-  } catch {
-    return null;
-  }
-}
 
 async function loadAllMonitors() {
   try {
@@ -30,7 +21,7 @@ async function loadAllMonitors() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post = await loadPost(slug);
+  const post = await getCachedPost(slug, 'es');
   const alternatesByLocale = {
     es: `/es/articulos/${slug}`,
     en: `/en/articles/${slug}`,

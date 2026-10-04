@@ -1,0 +1,161 @@
+// Skeleton UI tokens — fallback values work in light and dark modes
+$skeleton-bg: var(--color-surface-variant, #1b222d);
+$shimmer-base: var(--color-bg-subtle, #161b22);
+$shimmer-highlight: var(--color-border-subtle, #2d3748);
+$border-color: var(--color-border, #21262d);
+$border-subtle: var(--color-border-subtle, #30363d);
+
+@keyframes shimmerWave {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.shimmerBase {
+  position: relative;
+  overflow: hidden;
+  background-color: $shimmer-base;
+  border-radius: 6px;
+
+  &::after {
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background-image: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0,
+      rgba(255, 255, 255, 0.05) 20%,
+      rgba(255, 255, 255, 0.1) 60%,
+      rgba(255, 255, 255, 0)
+    );
+    animation: shimmerWave 1.6s infinite;
+    content: '';
+  }
+}
+
+// Catalog grid
+.catalogGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.monitorCard {
+  background: $skeleton-bg;
+  border-radius: 12px;
+  padding: 1.25rem;
+  border: 1px solid $border-color;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.imagePlaceholder {
+  @extend .shimmerBase;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 8px;
+}
+
+.badgeGroup {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.badge {
+  @extend .shimmerBase;
+  height: 22px;
+  width: 65px;
+  border-radius: 12px;
+}
+
+.titleLine {
+  @extend .shimmerBase;
+  height: 20px;
+  width: 85%;
+}
+
+.subtitleLine {
+  @extend .shimmerBase;
+  height: 14px;
+  width: 50%;
+}
+
+.specRow {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid $border-subtle;
+}
+
+.specItem {
+  @extend .shimmerBase;
+  height: 16px;
+  width: 70px;
+}
+
+// Compare table
+.compareTable {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid $border-color;
+  border-radius: 12px;
+  overflow: hidden;
+  background: $skeleton-bg;
+
+  th, td {
+    padding: 1.25rem;
+    border-bottom: 1px solid $border-subtle;
+    border-right: 1px solid $border-subtle;
+
+    &:last-child { border-right: none; }
+  }
+
+  tr:last-child td { border-bottom: none; }
+}
+
+.headerCell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+// Detail grid
+.detailGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1.2fr 1fr;
+  }
+}
+
+.mainImage {
+  @extend .shimmerBase;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+}
+
+.specsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.specBlock {
+  @extend .shimmerBase;
+  height: 48px;
+  width: 100%;
+  border-radius: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shimmerBase::after {
+    animation: none;
+  }
+}

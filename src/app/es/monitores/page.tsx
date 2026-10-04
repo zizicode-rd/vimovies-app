@@ -1,7 +1,9 @@
+import { Suspense } from 'react';
 import type { Metadata } from 'next';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import MonitorCatalog from '@/components/MonitorCatalog';
+import { MonitorCatalogSkeleton } from '@/components/ui/skeletons/MonitorCatalogSkeleton';
 import { buildMetadata, jsonLdBreadcrumb } from '@/lib/seo';
 
 interface PageProps {
@@ -26,7 +28,9 @@ export default async function CatalogES({ searchParams }: PageProps) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumb }} />
       <Header locale="es" />
       <main>
-        <MonitorCatalog locale="es" searchParams={searchParams} />
+        <Suspense fallback={<MonitorCatalogSkeleton count={8} />}>
+          <MonitorCatalog locale="es" searchParams={searchParams} />
+        </Suspense>
       </main>
       <Footer locale="es" />
     </>
