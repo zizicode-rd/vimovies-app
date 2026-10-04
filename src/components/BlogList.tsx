@@ -69,6 +69,7 @@ export default async function BlogList({
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   const base = locale === 'en' ? '/en' : '/es';
+  const articleSegment = locale === 'en' ? 'articles' : 'articulos';
   const translations = await getTranslations(locale);
   const raw = await searchParams;
   const category = ((Array.isArray(raw.category) ? raw.category[0] : raw.category) || '').toLowerCase();
@@ -122,7 +123,7 @@ export default async function BlogList({
             <div className={styles.layout}>
               <div className={styles.main}>
                 {featured && (
-                  <Link href={`${base}/article/${featured.slug}`} className={styles.featured}>
+                  <Link href={`${base}/${articleSegment}/${featured.slug}`} className={styles.featured}>
                     <div className={styles.featuredMedia}>
                       {featured.featured_image_url ? (
                         <img src={featured.featured_image_url} alt={featured.title} className={styles.featuredImage} />
@@ -150,7 +151,7 @@ export default async function BlogList({
                     {feed.map((post) => (
                       <Link
                         key={post.id}
-                        href={`${base}/article/${post.slug}`}
+                        href={`${base}/${articleSegment}/${post.slug}`}
                         className={styles.card}
                       >
                         <div className={styles.imageWrap}>
@@ -203,7 +204,7 @@ export default async function BlogList({
                     {topPosts.map((post, i) => (
                       <li key={post.id} className={styles.topItem}>
                         <span className={styles.topRank}>{i + 1}</span>
-                        <Link href={`${base}/article/${post.slug}`} className={styles.topLink}>
+                        <Link href={`${base}/${articleSegment}/${post.slug}`} className={styles.topLink}>
                           <span className={styles.topTitle}>{post.title}</span>
                           <span className={styles.topReads}>{readTime(post.summary, locale, translations)}</span>
                         </Link>

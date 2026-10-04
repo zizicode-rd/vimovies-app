@@ -3,7 +3,8 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import MonitorDetail from '@/components/MonitorDetail';
 import { apiFetch } from '@/lib/api';
-import { buildMetadata, jsonLdBreadcrumb } from '@/lib/seo';
+import { buildMetadata, baseUrl } from '@/lib/seo';
+import { generateMonitorJsonLd } from '@/lib/jsonld';
 import { pickI18n } from '@/lib/i18n-utils';
 import { normalizeMonitor } from '@/lib/monitor';
 import type { MonitorPublic } from '@/types/api';
@@ -45,9 +46,7 @@ function buildMonitorMeta(monitor: MonitorPublic, brand: string, locale: 'es' | 
   if (description.length > 160) description = `${description.slice(0, 157)}…`;
   if (description.length < 70) description = locale === 'en' ? `${description} Discover all the technical details and benchmark scores.` : `${description} Descubre todos los detalles técnicos y puntuaciones.`;
 
-  const image = monitor.main_image_url ?? monitor.media?.[0]?.cdn_url ?? monitor.media?.[0] as unknown as string ?? undefined;
-
-  return { title, description, image };
+  return { title, description };
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -64,7 +63,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     });
   }
 
-  const { title, description, image } = buildMonitorMeta(monitor, brand, 'es');
+  const { title, description } = buildMonitorMeta(monitor, brand, 'es');
+  const image = `${baseUrl}/es/monitores/${brand}/${slug}/opengraph-image.png`;
 
   return buildMetadata({
     locale: 'es',
@@ -79,57 +79,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function MonitorPage({ params }: PageProps) {
   const { brand, slug } = await params;
   const monitor = await loadMonitor(slug);
-  const name = monitor ? `${monitor.brand?.name ?? brand} ${monitor.model_name}` : slug.replace(/-/g, ' ');
 
-  const breadcrumb = jsonLdBreadcrumb([
-    { name: 'Inicio', url: 'https://vimonitors.com/es' },
-    { name: 'Monitores', url: 'https://vimonitors.com/es/monitores' },
-    { name: name, url: `https://vimonitors.com/es/monitores/${brand}/${slug}` },
-  ]);
-
-  const image = monitor?.main_image_url ?? monitor?.media?.[0]?.cdn_url ?? monitor?.media?.[0] as unknown as string ?? undefined;
-  const scores = monitor?.scores ?? { gaming: 0, office: 0, editing: 0 };
-  const bestScore = Math.max(scores.gaming, scores.office, scores.editing);
-  const productLd = JSON.stringify({
-    '@context': 'https://schema.org',
-    '@type': 'Product',
-    name,
-    image,
-    brand: {
-      '@type': 'Brand',
-      name: monitor?.brand?.name ?? brand,
-    },
-    url: `https://vimonitors.com/es/monitores/${brand}/${slug}`,
-    description: monitor?.meta_description,
-    offers: {
-      '@type': 'Offer',
-      availability: 'https://schema.org/InStock',
-      priceCurrency: 'USD',
-    },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: bestScore.toFixed(1),
-      bestRating: '100',
-      worstRating: '0',
-      reviewCount: '1',
-    },
-    review: {
-      '@type': 'Review',
-      author: { '@type': 'Organization', name: 'Vimonitors' },
-      reviewRating: {
-        '@type': 'Rating',
-        ratingValue: bestScore.toFixed(1),
-        bestRating: '100',
-        worstRating: '0',
-      },
-      reviewBody: monitor?.meta_description,
-    },
-  });
+  const canonicalUrl = `https://vimonitors.com/es/monitores/${brand}/${slug}`;
+  const { breadcrumb, product } = monitor
+    ? generateMonitorJsonLd(monitor, 'es', canonicalUrl)
+    : { breadcrumb: null, product: null };
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumb }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: productLd }} />
+      {breadcrumb && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />}
+      {product && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(product) }} />}
       <Header locale="es" />
       <main>
         {monitor ? (

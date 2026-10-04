@@ -22,6 +22,34 @@ export function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
+  // Redirect legacy article routes to localized semantic paths
+  const legacyArticle = pathname.match(/^\/(es|en)\/article\/(.+)$/);
+  if (legacyArticle) {
+    const [, articleLocale, slug] = legacyArticle;
+    const segment = articleLocale === 'en' ? 'articles' : 'articulos';
+    url.pathname = `/${articleLocale}/${segment}/${slug}`;
+    return NextResponse.redirect(url, 301);
+  }
+  if (pathname.startsWith('/article/')) {
+    const slug = pathname.replace('/article/', '');
+    url.pathname = `/es/articulos/${slug}`;
+    return NextResponse.redirect(url, 301);
+  }
+
+  // Redirect legacy brand query parameters to clean canonical paths
+  const legacyBrand = pathname.match(/^\/(es|en)\/monitores$/);
+  if (legacyBrand) {
+    const [, monitorLocale] = legacyBrand;
+    const brand = url.searchParams.get('brand');
+    if (brand) {
+      const segment = monitorLocale === 'en' ? 'brands' : 'marcas';
+      url.searchParams.delete('brand');
+      url.pathname = `/${monitorLocale}/monitores/${segment}/${brand}`;
+      url.search = url.searchParams.toString();
+      return NextResponse.redirect(url, 301);
+    }
+  }
+
   // If path already has a locale prefix, do nothing
   const segments = pathname.split('/');
   if (segments[1] && SUPPORTED_LOCALES.includes(segments[1])) {

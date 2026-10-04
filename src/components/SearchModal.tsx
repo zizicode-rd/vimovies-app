@@ -92,6 +92,7 @@ export default function SearchModal({
   const router = useRouter();
 
   const base = locale === 'en' ? '/en' : '/es';
+  const articleSegment = locale === 'en' ? 'articles' : 'articulos';
 
   const monitors = results?.monitors ?? [];
   const articles = results?.posts ?? [];
@@ -188,7 +189,7 @@ export default function SearchModal({
       router.push(`${base}/monitores/${m.brand_slug}/${m.slug}`);
     } else if (tab === 'articles') {
       const p = item as PostPublic;
-      router.push(`${base}/article/${p.slug}`);
+      router.push(`${base}/${articleSegment}/${p.slug}`);
     } else {
       const c = item as ComparisonPublic;
       router.push(`${base}/comparativas/${c.slug}`);
@@ -304,7 +305,7 @@ export default function SearchModal({
                   key={p.id}
                   id={`search-item-${i}`}
                   data-index={i}
-                  href={`${base}/article/${p.slug}`}
+                  href={`${base}/${articleSegment}/${p.slug}`}
                   className={`${styles.item} ${selectedIndex === i ? styles.active : ''}`}
                   onClick={onClose}
                   onMouseEnter={() => setSelectedIndex(i)}

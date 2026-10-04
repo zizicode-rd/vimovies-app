@@ -27,6 +27,7 @@ async function loadGuides(locale: 'es' | 'en') {
 
 export default async function LatestGuides({ locale }: { locale: 'es' | 'en' }) {
   const base = locale === 'en' ? '/en' : '/es';
+  const articleSegment = locale === 'en' ? 'articles' : 'articulos';
   const translations = await getTranslations(locale);
   const posts = await loadGuides(locale);
 
@@ -54,7 +55,7 @@ export default async function LatestGuides({ locale }: { locale: 'es' | 'en' }) 
               return (
                 <Link
                   key={post.slug}
-                  href={`${base}/article/${post.slug}`}
+                  href={`${base}/${articleSegment}/${post.slug}`}
                   className="card post-card"
                 >
                   <div className="ph">

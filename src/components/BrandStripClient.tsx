@@ -12,6 +12,7 @@ export default function BrandStripClient({
   base: string;
 }) {
   const listRef = useRef<HTMLDivElement>(null);
+  const segment = base === '/en' ? 'brands' : 'marcas';
 
   const scroll = (direction: number) => {
     if (!listRef.current) return;
@@ -38,7 +39,7 @@ export default function BrandStripClient({
             {brands.map((brand, i) => (
               <Link
                 key={brand.slug}
-                href={`${base}/monitores?brand=${brand.slug}`}
+                href={`${base}/monitores/${segment}/${brand.slug}`}
                 className={styles.brand}
                 style={{ '--i': i } as React.CSSProperties}
               >

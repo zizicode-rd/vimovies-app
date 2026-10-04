@@ -15,6 +15,11 @@ export type SeoPage = {
   noIndex?: boolean;
 };
 
+function cleanPath(path: string): string {
+  const withoutLocale = path.replace(/^\/(es|en)/, '');
+  return withoutLocale || '';
+}
+
 export function buildMetadata({
   locale,
   path,
@@ -29,15 +34,16 @@ export function buildMetadata({
   const site = 'Vimonitors';
   const cleanTitle = title.replace(/Vimovies/g, 'Vimonitors');
   const fullTitle = cleanTitle.toLowerCase().includes(site.toLowerCase()) ? cleanTitle : `${cleanTitle} — ${site}`;
-  const canonical = `${baseUrl}${path}`;
+  const route = cleanPath(path);
+  const canonical = `${baseUrl}/${locale}${route}`;
   const ogImage = image ?? `${baseUrl}/opengraph-image.png`;
 
   const alternates: Metadata['alternates'] = {
     canonical,
     languages: {
-      'x-default': `${baseUrl}${path}`,
-      es: `${baseUrl}/es${path.replace(/^\/(es|en)/, '') || ''}`,
-      en: `${baseUrl}/en${path.replace(/^\/(es|en)/, '') || ''}`,
+      'x-default': `${baseUrl}/es${route}`,
+      'es-ES': `${baseUrl}/es${route}`,
+      'en-US': `${baseUrl}/en${route}`,
     },
   };
 
