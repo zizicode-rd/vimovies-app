@@ -1,9 +1,16 @@
-import type { MetadataRoute } from 'next';
+import { NextResponse } from 'next/server';
 import { apiFetch } from '@/lib/api';
 import type { MonitorListItem, PaginatedResponse, PostPublic, ComparisonPublic, PseoHubPublic, BrandPublic } from '@/types/api';
 
 const base = 'https://vimonitors.com';
 const locales = ['es', 'en'] as const;
+
+type SitemapEntry = {
+  url: string;
+  lastModified: Date;
+  changeFrequency: 'daily' | 'weekly';
+  priority: number;
+};
 
 async function fetchAll<T>(path: string, limit: number): Promise<T[]> {
   try {
@@ -21,24 +28,15 @@ async function fetchAll<T>(path: string, limit: number): Promise<T[]> {
   }
 }
 
-export async function generateSitemaps() {
-  return [
-    { id: 'static' },
-    ...locales.map((l) => ({ id: `monitors-${l}` })),
-    ...locales.map((l) => ({ id: `brands-${l}` })),
-    ...locales.map((l) => ({ id: `articles-${l}` })),
-    ...locales.map((l) => ({ id: `comparisons-${l}` })),
-    ...locales.map((l) => ({ id: `hubs-${l}` })),
-  ];
-}
-
 function localePath(locale: 'es' | 'en', segments: string[]): string {
   return `/${locale}/${segments.join('/')}`;
 }
 
-export default async function sitemap({ id }: { id: Promise<string> }): Promise<MetadataRoute.Sitemap> {
-  const idValue = await id;
-  if (idValue === 'static') {
+async function getEntries(id: string): Promise<SitemapEntry[]> {
+  const raw = id.replace(/\.xml$/, '');
+  const [type, locale] = raw.split('-') as [string, 'es' | 'en'];
+
+  if (type === 'static') {
     const staticRoutes = [
       '/es', '/en',
       '/es/monitores', '/en/monitores',
@@ -52,8 +50,6 @@ export default async function sitemap({ id }: { id: Promise<string> }): Promise<
       priority: path === '/es' || path === '/en' ? 1 : 0.8,
     }));
   }
-
-  const [type, locale] = idValue.split('-') as [string, 'es' | 'en'];
 
   if (type === 'monitors') {
     const monitors = await fetchAll<MonitorListItem>('/api/v1/monitors', 1000);
@@ -108,4 +104,25 @@ export default async function sitemap({ id }: { id: Promise<string> }): Promise<
   }
 
   return [];
+}
+
+export async function GET(_request: Request, { params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const entries = await getEntries(id);
+
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${entries
+  .map(
+    (e) =>
+      `  <url>\n    <loc>${e.url}</loc>\n    <lastmod>${e.lastModified.toISOString()}</lastmod>\n    <changefreq>${e.changeFrequency}</changefreq>\n    <priority>${e.priority}</priority>\n  </url>`
+  )
+  .join('\n')}
+</urlset>`;
+
+  return new NextResponse(xml, {
+    headers: {
+      'Content-Type': 'application/xml',
+    },
+  });
 }
