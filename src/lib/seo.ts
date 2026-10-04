@@ -13,11 +13,20 @@ export type SeoPage = {
   image?: string;
   type?: 'website' | 'article';
   noIndex?: boolean;
+  /**
+   * Usar obligatoriamente si el path varía entre idiomas.
+   * Ej: { es: '/es/articulos/slug', en: '/en/articles/slug' }
+   */
+  alternatesByLocale?: { es: string; en: string };
 };
 
 function cleanPath(path: string): string {
   const withoutLocale = path.replace(/^\/(es|en)/, '');
-  return withoutLocale || '';
+  return withoutLocale.startsWith('/') ? withoutLocale : `/${withoutLocale}`;
+}
+
+function resolveUrl(value: string): string {
+  return value.startsWith('http') ? value : `${baseUrl}${value}`;
 }
 
 export function buildMetadata({
@@ -30,48 +39,58 @@ export function buildMetadata({
   image,
   type = 'website',
   noIndex,
+  alternatesByLocale,
 }: SeoPage): Metadata {
-  const site = 'Vimonitors';
   const cleanTitle = title.replace(/Vimovies/g, 'Vimonitors');
-  const fullTitle = cleanTitle.toLowerCase().includes(site.toLowerCase()) ? cleanTitle : `${cleanTitle} — ${site}`;
-  const route = cleanPath(path);
-  const canonical = `${baseUrl}/${locale}${route}`;
-  const ogImage = image ?? `${baseUrl}/opengraph-image.png`;
+  const fullTitle = cleanTitle.toLowerCase().includes(siteName.toLowerCase())
+    ? cleanTitle
+    : `${cleanTitle} — ${siteName}`;
+
+  // Resolución exacta de URLs de alternancia
+  const esUrl = alternatesByLocale
+    ? resolveUrl(alternatesByLocale.es)
+    : `${baseUrl}/es${cleanPath(path)}`;
+
+  const enUrl = alternatesByLocale
+    ? resolveUrl(alternatesByLocale.en)
+    : `${baseUrl}/en${cleanPath(path)}`;
+
+  const canonical = locale === 'es' ? esUrl : enUrl;
 
   const alternates: Metadata['alternates'] = {
     canonical,
     languages: {
-      'x-default': `${baseUrl}/es${route}`,
-      'es-ES': `${baseUrl}/es${route}`,
-      'en-US': `${baseUrl}/en${route}`,
+      'es-ES': esUrl,
+      'en-US': enUrl,
+      'x-default': esUrl,
     },
   };
 
-  const og: Metadata['openGraph'] = {
-    type,
-    locale: locale === 'en' ? 'en_US' : 'es_ES',
-    url: canonical,
-    siteName,
-    title: ogTitle ?? fullTitle,
-    description: ogDescription ?? description,
-    images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
-  };
-
-  const twitter: Metadata['twitter'] = {
-    card: 'summary_large_image',
-    title: ogTitle ?? fullTitle,
-    description: ogDescription ?? description,
-    images: [ogImage],
-  };
+  const ogImage = image ?? `${baseUrl}/opengraph-image.png`;
 
   return {
     title: fullTitle,
     description,
     metadataBase: new URL(baseUrl),
     alternates,
-    robots: noIndex ? { index: false, follow: false } : { index: true, follow: true },
-    openGraph: og,
-    twitter,
+    robots: noIndex
+      ? { index: false, follow: false }
+      : { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 },
+    openGraph: {
+      type,
+      locale: locale === 'en' ? 'en_US' : 'es_ES',
+      url: canonical,
+      siteName,
+      title: ogTitle ?? fullTitle,
+      description: ogDescription ?? description,
+      images: [{ url: ogImage, width: 1200, height: 630, alt: fullTitle }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: ogTitle ?? fullTitle,
+      description: ogDescription ?? description,
+      images: [ogImage],
+    },
   };
 }
 

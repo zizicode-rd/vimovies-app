@@ -14,8 +14,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return buildMetadata({
     locale: 'en',
     path: `/en/monitores/brands/${brand}`,
-    title: `${brand} Monitors — Full Catalog`,
-    description: `Discover every ${brand} monitor with verified specs, scores and comparisons at Vimonitors.`,
+    alternatesByLocale: {
+      es: `/es/monitores/marcas/${brand}`,
+      en: `/en/monitores/brands/${brand}`,
+    },
+    title: `${brand.toUpperCase()} Monitors — Full Catalog & Reviews`,
+    description: `Explore all ${brand} monitors with detailed specs, ratings, and comparisons on Vimonitors.`,
     type: 'website',
   });
 }

@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 
+export const revalidate = 86400;
+
 const sitemaps = [
   'static',
   'monitors-es',

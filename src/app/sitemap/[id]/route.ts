@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 import { apiFetch } from '@/lib/api';
+
+export const revalidate = 86400;
 import type { MonitorListItem, PaginatedResponse, PostPublic, ComparisonPublic, PseoHubPublic, BrandPublic } from '@/types/api';
 
 const base = 'https://vimonitors.com';

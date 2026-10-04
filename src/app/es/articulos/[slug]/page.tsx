@@ -31,10 +31,16 @@ async function loadAllMonitors() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const post = await loadPost(slug);
+  const alternatesByLocale = {
+    es: `/es/articulos/${slug}`,
+    en: `/en/articles/${slug}`,
+  };
+
   if (!post) {
     return buildMetadata({
       locale: 'es',
       path: `/es/articulos/${slug}`,
+      alternatesByLocale,
       title: 'Artículo',
       description: 'Guía técnica y análisis en Vimonitors.',
       type: 'article',
@@ -45,6 +51,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return buildMetadata({
     locale: 'es',
     path: `/es/articulos/${slug}`,
+    alternatesByLocale,
     title: post.meta_title || post.title,
     description: post.meta_description || post.summary,
     type: 'article',

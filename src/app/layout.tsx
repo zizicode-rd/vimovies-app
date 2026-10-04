@@ -46,11 +46,11 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true },
   alternates: {
-    canonical: "https://vimonitors.com",
+    canonical: "https://vimonitors.com/es",
     languages: {
-      "x-default": "https://vimonitors.com",
-      es: "https://vimonitors.com/es",
-      en: "https://vimonitors.com/en",
+      "x-default": "https://vimonitors.com/es",
+      "es-ES": "https://vimonitors.com/es",
+      "en-US": "https://vimonitors.com/en",
     },
   },
 };
