@@ -1,9 +1,8 @@
-// Skeleton UI tokens — fallback values work in light and dark modes
-$skeleton-bg: var(--color-surface-variant, #1b222d);
-$shimmer-base: var(--color-bg-subtle, #161b22);
-$shimmer-highlight: var(--color-border-subtle, #2d3748);
-$border-color: var(--color-border, #21262d);
-$border-subtle: var(--color-border-subtle, #30363d);
+// Skeleton UI tokens — aligned with the project's light theme
+$skeleton-bg: var(--color-white, #ffffff);
+$shimmer-base: var(--color-paper, #f4f4f6);
+$border-color: var(--color-line, #e3e3e7);
+$border-subtle: var(--color-line, #e3e3e7);
 
 @keyframes shimmerWave {
   0% { transform: translateX(-100%); }
@@ -23,8 +22,8 @@ $border-subtle: var(--color-border-subtle, #30363d);
     background-image: linear-gradient(
       90deg,
       rgba(255, 255, 255, 0) 0,
-      rgba(255, 255, 255, 0.05) 20%,
-      rgba(255, 255, 255, 0.1) 60%,
+      rgba(255, 255, 255, 0.55) 20%,
+      rgba(255, 255, 255, 0.75) 60%,
       rgba(255, 255, 255, 0)
     );
     animation: shimmerWave 1.6s infinite;
@@ -32,14 +31,7 @@ $border-subtle: var(--color-border-subtle, #30363d);
   }
 }
 
-// Catalog grid
-.catalogGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
-  width: 100%;
-}
-
+// Catalog grid reuses the global .grid-4 class for matching breakpoints
 .monitorCard {
   background: $skeleton-bg;
   border-radius: 12px;

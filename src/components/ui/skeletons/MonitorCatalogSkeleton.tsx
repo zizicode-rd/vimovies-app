@@ -6,7 +6,7 @@ interface MonitorCatalogSkeletonProps {
 
 export function MonitorCatalogSkeleton({ count = 8 }: MonitorCatalogSkeletonProps) {
   return (
-    <div className={styles.catalogGrid} aria-busy="true" aria-label="Cargando catálogo de monitores">
+    <div className="grid-4" aria-busy="true" aria-label="Cargando catálogo de monitores">
       {Array.from({ length: count }).map((_, i) => (
         <article key={i} className={styles.monitorCard}>
           <div className={styles.imagePlaceholder} />
